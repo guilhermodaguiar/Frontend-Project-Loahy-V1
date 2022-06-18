@@ -3,6 +3,13 @@ import './ShoppingCart.css';
 
 
 function ShoppingCart(){
+    return(
+        <>
+            <div>
+
+            </div>
+        </>
+    )
 
 }
 

@@ -1,47 +1,48 @@
-import React, {useState} from "react";
-
+import React from "react";
+import {ReactComponent as InstagramIcon} from "../../assets/icons/instagram-svgrepo-com-3.svg";
+import {ReactComponent as FacebookIcon} from "../../assets/icons/facebook-svgrepo-com-2.svg";
+import {useState} from "react";
 
 function ContactInfo() {
+    const [messageValue, setMessageValue] = useState('');
 
-    const [messageValue, setMessageValue] = useState();
-    const [checkedTerms, toggleCheckedTerms] = useState();
-
-
-    function sendForm() {
-
-    }
     return(
-        <form>
-            <input
-                type="text"
-                placeholder="Typ hier jouw bericht"
-                name="message"
-                className={messageValue.length > 20 ? 'input-error' : ''}
-                value={messageValue}
-                onChange={(e) => setMessageValue(e.target.value)}
-            />
-            {messageValue.length > 20 && <p className="error-message">Dit bericht is te lang!</p>}
-
-            <label htmlFor="terms-and-conditions">
-                <input
-                    type="checkbox"
-                    name="terms-and-conditions"
-                    id="terms-and-conditions"
-                    checked={checkedTerms}
-                    onChange={() => toggleCheckedTerms(!checkedTerms)}
-                />
-
-                Ik ga akkoord met de algemene voorwaarden
-            </label>
-
-            <button
-                type="submit"
-                disabled={!checkedTerms}
-                onClick={sendForm}
-            >
-                Verstuur
-            </button>
-        </form>
+        <>
+            <div>
+                <div>
+                    <h2>Contact</h2>
+                    <h3>Wil je meer weten over de producten of heb je andere vragen? Laat gerust een bericht achter!</h3>
+                    <h3>KVK: 	82072272</h3>
+                    <h3> Gevestigd te: Utrecht</h3>
+                </div>
+                <div>
+                    <InstagramIcon className="social-media-icon" />
+                    <FacebookIcon className="social-media-icon" />
+                </div>
+                <div>
+                    <div>
+                        <ul>
+                            <li>Naam</li>
+                            <li>E-mailadress</li>
+                            <li>Telefoonnummer</li>
+                            <li>Onderwerp</li>
+                            <form>
+                                <label htmlFor="form-message">
+                                    bericht
+                                    <input
+                                        id="form-message"
+                                        name="message"
+                                        value={messageValue}
+                                        placeholder="Laat hier je bericht achter"
+                                        onChange={(e) => setMessageValue(e.target.value)}
+                                    />
+                                </label>
+                            </form>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </>
     )
 }
 
