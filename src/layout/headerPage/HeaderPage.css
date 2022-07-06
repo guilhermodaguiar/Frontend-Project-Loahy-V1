@@ -1,0 +1,5 @@
+.header-name {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+}
