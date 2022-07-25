@@ -1,5 +1,4 @@
 import React, {useEffect} from "react";
-import NavBar from "../navBar/NavBar";
 import axios from "axios";
 
 function HeaderPage() {

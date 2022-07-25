@@ -1,15 +1,40 @@
-import React, {createContext, useState} from "react";
+import React, {useEffect, createContext, useState} from "react";
 import {useHistory} from "react-router-dom";
 import jwtDecode from "jwt-decode";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 export const UserAuthContext = createContext({});
 
 function UserAuthContextProvider({ children }) {
-    const [Auth, toggleAuth] = useState({
+    const [auth, toggleAuth] = useState({
         isAuth: false,
         user: null,
     });
     const history = useHistory();
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        //console.log(token);
+        if(token) {
+            async function getData() {
+            const decodedToken = jwt_decode(token);
+            try{
+                const response = await axios.get(`http://localhost:3000/600/users/${decodedToken.sub}`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+            } catch(e) {
+                console.error(e);
+            }
+        }
+
+        } else {
+
+        }
+    }, []);
 
     function login(token) {
         console.log(token);
@@ -40,7 +65,8 @@ function UserAuthContextProvider({ children }) {
     }
 
     const contextData = {
-        isAuth: Auth.isAuth,
+        isAuth: auth.isAuth,
+        user: auth.user,
         login: login,
         logout: logout,
     };

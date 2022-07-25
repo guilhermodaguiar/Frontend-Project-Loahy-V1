@@ -51,7 +51,6 @@ function ShoppingCart(){
                                 </td>
                                 <td className="product-subtotal"></td>
                             </tr>
-
                             </tbody>
                         </table>
 

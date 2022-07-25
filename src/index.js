@@ -8,20 +8,22 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import ShoppingCartProvider from "./context/ShoppingCartContext";
 import UserAuthContextProvider from "./context/UserAuthContext";
+import AdminAuthContextProvider from "./context/AdminAuthContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
+    <React.StrictMode>
+        <Router>
         <ShoppingCartProvider>
-            <UserAuthContextProvider>
-                <React.StrictMode>
-                    <Router>
+                <UserAuthContextProvider>
+                <AdminAuthContextProvider>
                         <App />
-                    </Router>
-                </React.StrictMode>
+                </AdminAuthContextProvider>
             </UserAuthContextProvider>
         </ShoppingCartProvider>
-
+        </Router>
+    </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
