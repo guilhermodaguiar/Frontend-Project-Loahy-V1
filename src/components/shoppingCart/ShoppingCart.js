@@ -1,20 +1,21 @@
 import React, {useEffect} from "react";
 import './ShoppingCart.css';
 import {IoCloseSharp} from "react-icons/io5";
+import NavBar from "../../layout/navBar/NavBar";
 
 
 
 
 function ShoppingCart(){
 
-    useEffect(() => {
-
-    }, []);
 
     return(
         <>
-            <div className="content-for-shopping-cart" id="content">
-                <h1>Winkelwagen</h1>
+            <NavBar/>
+            <div className="shopping-cart-header">
+                <h1 className="shopping-cart-header-name">Winkelwagen</h1>
+            </div>
+            <div className="content-for-shopping-cart" id="shopping-cart">
                 <p>Je winkelwagen is momenteel leeg</p>
                 <p>terug naar winkel</p>
             </div>
@@ -26,7 +27,7 @@ function ShoppingCart(){
                             <tr>
                                 <th className="product remove"></th>
                                 <th className="product-thumbnail"></th>
-                                <th className="product-name">Product</th>
+                                <th className="product-name-name">Product</th>
                                 <th className="product-price">Prijs</th>
                                 <th className="product-quantity">Aantal</th>
                                 <th className="product-subtotal">Subtotaal</th>
@@ -36,7 +37,7 @@ function ShoppingCart(){
                             <tr className="form-cart-item">
                                 <td className="product remove"><IoCloseSharp/></td>
                                 <td className="product-thumbnail">thumbnail-image</td>
-                                <td className="product-name">product-naam</td>
+                                <td className="product-name-name">product-naam</td>
                                 <td className="product-price">product prijs</td>
                                 <td className="product-quantity">
                                     <input

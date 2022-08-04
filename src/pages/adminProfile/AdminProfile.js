@@ -3,6 +3,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {AdminAuthContext} from "../../context/AdminAuthContext";
 import axios from "axios";
 import UploadImage from "../../helpers/UploadImage";
+import { HashLink as Link } from "react-router-hash-link";
 
 function AdminProfile() {
     const [products, setProducts] = useState([]);
@@ -15,7 +16,6 @@ function AdminProfile() {
     const [productPrice, setProductPrice] = useState('');
     const [brandTitle, setBrandTitle] = useState('');
     const [brandStory, setBrandStory] = useState('')
-    const [agreeOnUpdate, toggleAgreeOnUpdate] = useState(false);
 
 
     const { user } = useContext(AdminAuthContext);
@@ -101,95 +101,136 @@ function AdminProfile() {
 
 
     return (
-        <div>
-            <h1>Admin profiel pagina</h1>
-            <p>Hoi {user.userEmail}</p>
+        <>
+            <div>
+                <nav className="admin-nav">
+                    <ul>
+                        <li>
+                            <Link to="#products">
+                                Producten
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="#new-products">
+                                Product toevoegen
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="#all-costumers">
+                                Alle klanten
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="#open-orders">
+                                Open Orders
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="#orders">
+                                Orders
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="#contact-remarks">
+                                Contact Ons
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="#about-us">
+                                Over Ons
+                            </Link>
+                        </li>
+                    </ul>
+                </nav>
 
-            <section>
-                <h2>Gegevens</h2>
-                <p><strong>Gebruikersnaam</strong> {user.userName}</p>
-                <p><strong>Email:</strong>{user.userEmail}</p>
-            </section>
-            {Object.keys(users).length > 0 &&
+                <h1>Admin profiel pagina</h1>
+                <p>Hoi {user.userEmail}</p>
+
                 <section>
-                    <h2>Strikt geheime admin-content</h2>
-                    <h3>{users.title}</h3>
-                    <p>{users.content}</p>
-                </section>}
-            <section className="admin-field">
-                <div className="products-overview">
-                    <h1>Producten</h1>
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>ProductNumber</th>
-                            <th>Foto</th>
-                            <th>Naam</th>
-                            <th>Informatie</th>
-                            <th>Hoeveelheid</th>
-                            <th>Prijs</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {products.map((product) => {
-                            return <tr key={product.productNumber}>
-                                <td>{product.productNumber}</td>
-                                <td>{product.file && <img src={product.file.url} alt={product.name}/>}</td>
-                                <td>{product.productName}</td>
-                                <td>{product.productInformation}</td>
-                                <td>{product.productQuantity}</td>
-                                <td>{product.productPrice}</td>
+                    <h2>Gegevens</h2>
+                    <p><strong>Gebruikersnaam</strong> {user.userName}</p>
+                    <p><strong>Email:</strong>{user.userEmail}</p>
+                </section>
+                {Object.keys(users).length > 0 &&
+                    <section>
+                        <h2>Strikt geheime admin-content</h2>
+                        <h3>{users.title}</h3>
+                        <p>{users.content}</p>
+                    </section>}
+                <section className="admin-field">
+                    <div className="products-overview" id="products">
+                        <h1>Producten</h1>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>ProductNumber</th>
+                                <th>Foto</th>
+                                <th>Naam</th>
+                                <th>Informatie</th>
+                                <th>Hoeveelheid</th>
+                                <th>Prijs</th>
                             </tr>
-                        })}
-                        </tbody>
-                    </table>
-                </div>
-                <div className="add new product">Nieuw product toevoegen
-                    {addSucces === true && <p>Product is toegevoegd!</p>}
-                   <form onSubmit={addProduct}>
-                       <label htmlFor="image-field">
-                           <UploadImage/>
-                       </label>
-                       <label htmlFor="product-name">
-                           Product Naam
-                           <input
-                               type="text"
-                               name="product-name-field"
-                               id="product-name"
-                               value={productName}
-                               onChange={(e) => setProductName(e.target.value)}/>
-                       </label>
-                       <label htmlFor="product-information">
-                           Product informatie
-                           <input
-                               type="text"
-                               name="product-information-field"
-                               id="product-information"
-                               value={productInfo}
-                               onChange={(e) => setProductInfo(e.target.value)}/>
-                       </label>
-                       <label htmlFor="product-quantity">
-                           Product hoeveelheid
-                           <input
-                               id="number"
-                               name="product-quantity"
-                               value={productQuantity}
-                               onChange={(e) => setProductQuantity(e.target.value)}/>
-                       </label>
-                       <label>
-                           <input
-                               id="price"
-                               name="product-price"
-                               value={productPrice}
-                               onChange={(e) => setProductPrice(e.target.value)}
-                           />
-                       </label>
-                       <button type="submit">
-                           Voeg Product toe
-                       </button>
-                   </form>
-                </div>
-                <div className="registered-users">Klanten
+                            </thead>
+                            <tbody>
+                            {products.map((product) => {
+                                return <tr key={product.productId}>
+                                    <td>{product.productId}</td>
+                                    <td>{product.file && <img src={product.file.url} alt={product.name}/>}</td>
+                                    <td>{product.productName}</td>
+                                    <td>{product.productInformation}</td>
+                                    <td>{product.productQuantity}</td>
+                                    <td>{product.productPrice}</td>
+                                </tr>
+                            })}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className="add new product" id="new-products">Nieuw product toevoegen
+                        {addSucces === true && <p>Product is toegevoegd!</p>}
+                        <form onSubmit={addProduct}>
+                            <label htmlFor="image-field">
+                                <UploadImage/>
+                            </label>
+                            <label htmlFor="product-name">
+                                Product Naam
+                                <input
+                                    type="text"
+                                    name="product-name-field"
+                                    id="product-name"
+                                    value={productName}
+                                    onChange={(e) => setProductName(e.target.value)}/>
+                            </label>
+                            <label htmlFor="product-information">
+                                Product informatie
+                                <input
+                                    type="text"
+                                    name="product-information-field"
+                                    id="product-information"
+                                    value={productInfo}
+                                    onChange={(e) => setProductInfo(e.target.value)}/>
+                            </label>
+                            <label htmlFor="product-quantity">
+                                Product hoeveelheid
+                                <input
+                                    id="number"
+                                    name="product-quantity"
+                                    value={productQuantity}
+                                    onChange={(e) => setProductQuantity(e.target.value)}/>
+                            </label>
+                            <label>
+                                <input
+                                    id="price"
+                                    name="product-price"
+                                    value={productPrice}
+                                    onChange={(e) => setProductPrice(e.target.value)}
+                                />
+                            </label>
+                            <button type="submit">
+                                Voeg Product toe
+                            </button>
+                        </form>
+                    </div>
+                    <div className="registered-users" id="all-costumers">Klanten
                         <form>
                             <h1>Alle klanten</h1>
                             <table className="costumer-data-table">
@@ -215,7 +256,7 @@ function AdminProfile() {
                             </table>
                         </form>
                     </div>
-                <div className="open-orders">Open Orders
+                    <div className="open-orders" id="open-orders">Open Orders
                         <form>
                             <table>
                                 <thead>
@@ -237,7 +278,7 @@ function AdminProfile() {
                             </table>
                         </form>
                     </div>
-                <div className="history-orders">History Orders
+                    <div className="history-orders" id="orders">History Orders
                         <form>
                             <table>
                                 <thead>
@@ -257,7 +298,7 @@ function AdminProfile() {
                             </table>
                         </form>
                     </div>
-                <div className="contact-page">Contact-formulier
+                    <div className="contact-page" id="contact-remarks">Contact-formulier
                         <form>
                             <table>
                                 <thead>
@@ -284,56 +325,43 @@ function AdminProfile() {
                             </table>
                         </form>
                     </div>
-                <div className="about-us-page">
-                    <form onSubmit={handleBrandSubmit}>
-                        <section>
-                            <label htmlFor="about-us-title">
-                            Titel:
-                            <input
-                                type="text"
-                                id="about-us-title"
-                                placeholder="type je titel"
-                                value={brandTitle}
-                                onChange={(e) => setBrandTitle(e.target.value)}
-                            />
-                        </label>
-                            <label htmlFor="about-us-story">
-                                <input
-                                    type="text"
-                                    id="about-us-story"
-                                    placeholder="type je verhaal"
-                                    value={brandStory}
-                                    onChange={(e) => setBrandStory(e.target.value)}
-                                />
-                            </label>
-                        </section>
-                        <section>
-                            <label htmlFor="about-us-image">
-                                <UploadImage/>
-                            </label>
-                        </section>
-                        <section>
-                            <input
-                                type="checkbox"
-                                name="agree-on-changes"
-                                id="agree-field"
-                                value={agreeOnUpdate}
-                                onChange={(e) => toggleAgreeOnUpdate(e.target.checked)}
-                            />
-                            <label htmlFor="agree-field">Ik ga akkoord met de voorwaarden</label>
-                        </section>
-                        {updateSucces === true && <p>Jou Over ons pagina is up to date!</p>}
-                        <button type="submit">Update</button>
-                    </form>
-                </div>
-            </section>
-            <section>
-                <p> hier uitloggen</p>
-                <button type="button" onClick={ user.logout }>
-                    Uitloggen
-                </button>
-            </section>
-        </div>
+                    <div className="about-us-page" id="about-us">
+                        <form onSubmit={handleBrandSubmit}>
+                            <section>
+                                <label htmlFor="about-us-title">
+                                    Titel:
+                                    <input
+                                        type="text"
+                                        id="about-us-title"
+                                        placeholder="type je titel"
+                                        value={brandTitle}
+                                        onChange={(e) => setBrandTitle(e.target.value)}
+                                    />
+                                </label>
+                                <label htmlFor="about-us-story">
+                                    <input
+                                        type="text"
+                                        id="about-us-story"
+                                        placeholder="type je verhaal"
+                                        value={brandStory}
+                                        onChange={(e) => setBrandStory(e.target.value)}
+                                    />
+                                </label>
+                            </section>
+                            {updateSucces === true && <p>Je "Over Ons!" pagina is up to date!</p>}
+                            <button type="submit">Update</button>
+                        </form>
+                    </div>
+                </section>
+                <section>
+                    <p> hier uitloggen</p>
+                    <button type="button" onClick={ user.logout }>
+                        Uitloggen
+                    </button>
+                </section>
+            </div>
+        </>
+
     );
 }
 

@@ -1,8 +1,9 @@
 import './CostumorSignIn.css';
 import React, {useContext, useState} from "react";
-import {Link, useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import {UserAuthContext} from "../../context/UserAuthContext";
 import axios from "axios";
+import NavBar from "../../layout/navBar/NavBar";
 
 function CostumerSignIn() {
     const [name, setName] = useState('');
@@ -63,47 +64,50 @@ function CostumerSignIn() {
 
     return(
         <>
+            <NavBar/>
             <div className="inlog-page">
-                <h1>Inloggen</h1>
+                <h1 className="header-name">Inloggen</h1>
+            </div>
+            <div className="sign-in-body">
                 <div className="block-costumer-container">
-                    <form onSubmit={userLoginRequest}>
-                        <fieldset>
-                            <legend>Ik heb een Loahy account</legend>
-                            <div className="field-note">Meld je aan met je e-mailadres en wachtwoord</div>
+                <form onSubmit={userLoginRequest}>
+                    <fieldset>
+                        <legend>Ik heb een Loahy account</legend>
+                        <div className="field-note">Meld je aan met je e-mailadres en wachtwoord</div>
 
-                            <label htmlFor="email-field">
-                                E-mailadres *
-                                <input
-                                    type="email"
-                                    id="email-field"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
-                            </label>
+                        <label htmlFor="email-field">
+                            E-mailadres *
+                            <input
+                                type="email"
+                                id="email-field"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </label>
 
-                            <label htmlFor="password-field">
-                                Wachtwoord *
-                                <input
-                                    type="password"
-                                    id="password-field"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
-                            </label>
-                            {error && <p className="error">Combinatie van emailadres en wachtwoord is onjuist</p>}
-                            <button
-                                type="submit"
-                                className="form-button"
-                                >
-                                Inloggen
-                            </button>
-                        </fieldset>
-                    </form>
-                </div>
+                        <label htmlFor="password-field">
+                            Wachtwoord *
+                            <input
+                                type="password"
+                                id="password-field"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </label>
+                        {error && <p className="error">Combinatie van emailadres en wachtwoord is onjuist</p>}
+                        <button
+                            type="submit"
+                            className="form-button"
+                        >
+                            Inloggen
+                        </button>
+                    </fieldset>
+                </form>
+            </div>
                 <div className="block-costumer-container">
-                    <div className="block-customer-usps"></div>
-                    <div className="block-new-costumer">
-                        <form onSubmit={registerUser}>
+                <div className="block-customer-usps"></div>
+                <div className="block-new-costumer">
+                    <form onSubmit={registerUser}>
                         <fieldset>
                             <legend>Loahy account aanmaken</legend>
                             {addSucces === true && <p> Gelukt! Je kan nu inloggen</p>}
@@ -157,9 +161,9 @@ function CostumerSignIn() {
                                 Registreren
                             </button>
                         </fieldset>
-                        </form>
-                    </div>
+                    </form>
                 </div>
+            </div>
             </div>
         </>
     );

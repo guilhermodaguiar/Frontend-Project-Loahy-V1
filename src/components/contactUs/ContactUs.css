@@ -1,4 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.contact-us-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 48px;
+}
+
+
 .KvK-icon {
     width: 25px;
     height: 25px;
 }
+
+.contact-us-outer-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px;
+}
+
+.contact-us-outer-container-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.contact-us-outer-container-header, h1 {
+    font-size: 40px;
+    padding: 30px 0;
+    color: black;
+}
+.contact-us-inner-container {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: start;
+    padding: 30px;
+}
+
+.contact-us-icons {
+    color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    width: 20px;
+    height: 20px;
+    padding: 30px 100px;
+}
+
+.contact-us-feedback {
+    display: flex;
+    flex-direction: column;
+    padding: 0 30px;
+    font-family: "Poppins", sans-serif;
+    font-style: italic;
+}
+
+.contact-us-section-containers {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    padding: 5px 10px 0 0;
+}
+
+.section-email {
+    padding-left: 80px;
+}
+
+.section-organisation {
+    padding-left: 80px;
+}
+.contact-us-information-list, p {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-basis: fit-content;
+    padding: 5px 0;
+}
+
+.contact-us-information-list {
+    padding-top: 50px;
+}
+
+.contact-us-information {
+    padding-left: 100px;
+}
+
+input {
+    width: 100%;
+    padding: 6px 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    box-sizing: content-box;
+}
+
+textarea {
+    width: 100%;
+    padding: 6px 2px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+
+

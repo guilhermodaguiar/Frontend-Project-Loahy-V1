@@ -28,39 +28,40 @@ function AdminSignIn() {
 
     return (
         <>
-            <div>
-            <h1>Admin pagina</h1>
-            <form onSubmit={adminLoginRequest}>
-                <label htmlFor="email-field">
-                    Emailadres
-                    <input
-                        type="email"
-                        id="email-field"
-                        name="email"
-                        value={userEmail}
-                        onChange={(e) => setUserEmail(e.target.value)}
-                    />
-                </label>
-                <label htmlFor="password-field">
-                    wachtwoord
-                    <input
-                        type="password"
-                        id="password-field"
-                        name="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </label>
-                {error && <p className="error"> Combinatie van emailadres en wachtwoord is onjuist</p>}
+            <div className="outer-container">
+                <div className="inner-container-admin">
+                    <h1>Admin pagina</h1>
+                    <form className="form-container-admin" onSubmit={adminLoginRequest}>
+                        <label htmlFor="email-field">
+                            Emailadres
+                            <input
+                                type="email"
+                                id="email-field"
+                                name="email"
+                                value={userEmail}
+                                onChange={(e) => setUserEmail(e.target.value)}
+                            />
+                        </label>
+                        <label htmlFor="password-field">
+                            wachtwoord
+                            <input
+                                type="password"
+                                id="password-field"
+                                name="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </label>
+                        {error && <p className="error-admin-login"> Combinatie van emailadres en wachtwoord is onjuist</p>}
 
-                <button
-                    type="submit"
-                    className="form-button"
-                    >
-                    Inloggen
-                </button>
-            </form>
-
+                        <button
+                            type="submit"
+                            className="form-button"
+                        >
+                            Inloggen
+                        </button>
+                    </form>
+                </div>
         </div>
         </>
 

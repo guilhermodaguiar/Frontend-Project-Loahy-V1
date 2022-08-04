@@ -1,36 +1,52 @@
-form {
-    width: 500px;
-    margin: 20px 0;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-label, input, select {
-    display: block;
+body {
+    font-family: "Poppins", sans-serif;
 }
 
-label {
-    font-size: 12px;
-    margin: 20px 0;
+.inner-container {
+    flex-basis: 1200px;
+    align-items: center;
+    margin: 0 0;
 }
 
-input, select {
-    border: 1px solid #ededed;
-    border-radius: 4px;
-    padding: 12px;
-    font-size: 16px;
+.admin-nav {
+    display: flex;
+    justify-content: flex-start;
+    background-color:#e9b716;
+    padding: 100px;
+    height: 400px;
+    color: white;
+}
+
+.admin-title {
+    position: relative;
     width: 100%;
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url('../../assets/header-background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
 }
 
-select {
-    border: 1px solid #ededed;
-    border-radius: 4px;
-    padding: 8px;
-    font-size: 16px;
-    width: 100%;
+h1 {
+    font-size: 72px;
+    padding: 48px 0;
+    color: white;
 }
 
 button {
-    background-color: darkcyan;
-    font-family: 'Poppins', 'Arial', sans-serif;
+    background-color: #df7c6d;
+    font-family: 'Poppins', sans-serif;
     color: white;
     font-size: 16px;
     font-weight: 600;

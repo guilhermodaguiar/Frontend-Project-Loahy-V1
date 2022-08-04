@@ -2,6 +2,7 @@ import "./CostumerProfile.css";
 import React, {useContext, useEffect, useState} from "react";
 import {UserAuthContext} from "../../context/UserAuthContext";
 import axios from "axios";
+import NavBar from "../../layout/navBar/NavBar";
 
 function CostumerProfile() {
     const [userData, setUserData] = useState({});
@@ -29,7 +30,9 @@ function CostumerProfile() {
 
     return(
         <>
+            <NavBar/>
             <div>
+
                 <h1>
                     Profiel pagina
                 </h1>

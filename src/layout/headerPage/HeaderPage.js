@@ -1,5 +1,12 @@
 import React, {useEffect} from "react";
 import axios from "axios";
+import { HashLink as Link } from "react-router-hash-link";
+import ProductOverview from "../../components/productOverview/ProductOverview";
+import AboutUsPage from "../../components/aboutUsPage/AboutUsPage";
+import ContactUs from "../../components/contactUs/ContactUs";
+import NavBar from "../navBar/NavBar";
+import ScrollIndicator from "../../components/scrollIndicator/ScrollIndicator";
+import ScrollToTop from "../../components/scrollToTop/ScrollToTop";
 
 function HeaderPage() {
 
@@ -16,20 +23,37 @@ function HeaderPage() {
         fetchData();
     }, []);
 
+   window.scrollTo({
+      top:0,
+       behavior: 'smooth'
+   })
+
 
     return(
-        <header>
-            <div className="inner-container">
-                <div className="header-name">
-                    <h1 >Loahy</h1>
-                    <button
-                        type="button"
-                        //bij het clicken moet het Productpagina worden afgevuurd
-                        onClick={()=>console.log("Jij wil shoppen!")}
-                    >Shop nu</button>
+        <>
+            <ScrollIndicator/>
+            <ScrollToTop/>
+            <NavBar/>
+            <header>
+                <div className="inner-container">
+                    <div className="header-name" >
+                            <h1>Loahy</h1>
+                        <Link to="#products">
+                            <button
+                                type="button"
+                                //bij het clicken moet het Productpagina worden afgevuurd
+                                onClick={()=>console.log("Jij wil shoppen!")}
+                            >Shop nu
+                            </button>
+                        </Link>
+                    </div>
                 </div>
-            </div>
-        </header>
+            </header>
+            <ProductOverview/>
+            <AboutUsPage/>
+            <ContactUs/>
+        </>
+
     )
 }
 

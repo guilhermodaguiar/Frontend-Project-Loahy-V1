@@ -43,66 +43,93 @@ function ContactUs() {
 
     return(
         <>
-            <div>
-                <h1>Contact ons</h1>
-                <p>Wij houden van vragen en feedback - en we helpen iedereen zo graag! Hier zijn een aantal manieren om ons te bereiken.</p>
-                <div>
-                    <h1>Contact Informatie</h1>
-                    <p><KvK className="Kvk-icon"/>82072272</p>
-                    <p><HiLocationMarker/>Balistraat 42 3531PX Utrecht</p>
-                    <p><HiOutlineMail/>contact-ons@loahy.nl</p>
-                    <p><HiOutlinePhone/>+31-06-30399190</p>
-                </div>
-                <div>
-                    <FaInstagram/>
-                    <FaFacebook/>
-                </div>
-                <div>
-                    <div>
-                        <h2>Stuur ons een bericht</h2>
-                        <p>Stuur ons een bericht en we reageren binnen 24 uur</p>
-                        <form onSubmit={handleContactSubmit}>
-                            <section>
-                                Naam
-                                <input
-                                    type="text"
-                                    id="contact-fullName"
-                                    placeholder="Naam en achternaam"
-                                    value={contactName}
-                                    onChange={(e) => setContactName(e.target.value)}
-                                    required
-                                    />
-                            </section>
-                            <section>E-mailadres
-                                <input
-                                    type="email"
-                                    id="contact-email"
-                                    value={contactEmail}
-                                    onChange={(e) => setContactEmail(e.target.value)}
-                                    required
-                                    />
-                            </section>
-                            <section>Telefoonnummer
-                                <input
-                                    type="tel"
-                                    id="contact-phone"
-                                    value={contactPhone}
-                                    onChange={(e) => setContactPhone(e.target.value)}
-                                    pattern="[0-9]{10}"
-                                    required
-                                    />
-                            </section>
-                            <section>
-                                Organisatie
-                                <input
-                                    type="text"
-                                    id="contact-fullName"
-                                    placeholder="Optioneel"
-                                    value={contactOrg}
-                                    onChange={(e) => setContactOrg(e.target.value)}
-                                />
-                            </section>
-                            <section>
+            <main>
+                <div className="contact-us-outer-container">
+                    <div className="contact-us-outer-container-header">
+                        <h1>Contact ons</h1>
+                    </div>
+                    <div className="contact-us-feedback">
+                        <p>Wij houden van vragen en feedback - en we helpen iedereen zo graag! Hier zijn een aantal manieren om ons te bereiken.</p>
+                    </div>
+                    <div className="contact-us-inner-container">
+                        <div>
+                            <div className="contact-us-information">
+                                <h3>Contact Informatie</h3>
+                                <div className="contact-us-information-list">
+                                    <p><KvK className="Kvk-icon"/>82072272</p>
+                                    <p><HiLocationMarker/>Balistraat 42 3531PX Utrecht</p>
+                                    <p><HiOutlineMail/>contact-ons@loahy.nl</p>
+                                    <p><HiOutlinePhone/>+31-06-30399190</p>
+                                </div>
+                            </div>
+                            <div className="contact-us-icons">
+                                <div>
+                                    <a className="instagram-icon" href="https://www.instagram.com/loahytree/">
+                                        <FaInstagram/>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a className="facebook-icon" href="https://www.facebook.com/Loahytree-109562478288311/?notif_id=1655164686624838&notif_t=aymt_page_post_reminder_14d_notification&ref=notif">
+                                        <FaFacebook/>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="contact-us-contact-us">
+                            <div>
+                                <h3>Stuur ons een bericht</h3>
+                                <p>Stuur ons een bericht en we reageren binnen 24 uur</p>
+                                <form className="container-contact-form" onSubmit={handleContactSubmit}>
+                                    <div>
+                                        <div className="contact-us-section-containers">
+                                            <section>
+                                                <div>Naam</div>
+                                                <input
+                                                type="text"
+                                                id="contact-fullName"
+                                                placeholder="Naam en achternaam"
+                                                value={contactName}
+                                                onChange={(e) => setContactName(e.target.value)}
+                                                required
+                                            />
+                                        </section>
+                                            <section className="section-email">
+                                                <div>E-mailadres</div>
+                                                <input
+                                                    type="email"
+                                                    id="contact-email"
+                                                    value={contactEmail}
+                                                    onChange={(e) => setContactEmail(e.target.value)}
+                                                    required
+                                                />
+                                            </section>
+                                        </div>
+                                        <div className="contact-us-section-containers">
+                                            <section>
+                                                <div>Telefoonnummer</div>
+                                                <input
+                                                    type="tel"
+                                                    id="contact-phone"
+                                                    value={contactPhone}
+                                                    onChange={(e) => setContactPhone(e.target.value)}
+                                                    pattern="[0-9]{10}"
+                                                    required
+                                                />
+                                            </section>
+                                            <section className="section-organisation">
+                                                <div>Organisatie</div>
+                                                <input
+                                                    type="text"
+                                                    id="contact-fullName"
+                                                    placeholder="Optioneel"
+                                                    value={contactOrg}
+                                                    onChange={(e) => setContactOrg(e.target.value)}
+                                                />
+                                            </section>
+                                        </div>
+                                    </div>
+                                    <div className="contact-us-section-containers">
+                                        <section>
                                 <textarea
                                     name="remark"
                                     id="remark-field"
@@ -113,18 +140,23 @@ function ContactUs() {
                                     cols={50}
                                     required
                                 />
-                                </section>
-                            <button
-                                type="submit"
-                                className="form-button"
-                                disabled={ loading }
-                                >Verzend
-                                </button>
-                            {addSucces === true && <p>Bedankt voor je bericht! Wij reageren binnen 24 uur </p>}
-                            </form>
+                                        </section>
+                                    </div>
+                                    <button
+                                        type="submit"
+                                        className="form-button"
+                                        disabled={ loading }
+                                    >Verzend
+                                    </button>
+                                    {addSucces === true && <p>Bedankt voor je bericht! Wij reageren binnen 24 uur </p>}
+                                </form>
+                            </div>
+                        </div>
                     </div>
+
+
                 </div>
-            </div>
+            </main>
         </>
     )
 }

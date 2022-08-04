@@ -10,12 +10,31 @@ body {
     font-family: "Poppins", sans-serif;
 }
 
-.inlog-page {
-    display: inline-block;
-    justify-content: flex-start;
-    background-color:indianred;
-    padding: 100px;
-    height: 400px;
+.shopping-cart-header-name {
+    font-size: 72px;
+    padding: 48px 0;
     color: white;
 }
+
+.inlog-page {
+    padding: 100px;
+    color: white;
+    position: relative;
+    width: 100%;
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url('../../assets/winkel_wagen_background.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.sign-in-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 100px;
+}
+
 

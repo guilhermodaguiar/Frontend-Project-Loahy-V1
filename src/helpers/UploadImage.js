@@ -7,7 +7,7 @@ function UploadImage() {
 
   function handleImageChange(e) {
     const uploadedFile = e.target.files[0];
-
+    console.log(uploadedFile);
     setFile(uploadedFile);
     setPreviewUrl(URL.createObjectURL(uploadedFile));
   }
@@ -19,7 +19,7 @@ function UploadImage() {
     formData.append("file", file);
 
     try {
-      const result = await axios.post('http://localhost:8080/products/1000/image', formData,
+      const result = await axios.post(`http://localhost:8080/products/{product-id}/product-image`, formData,
           {
             headers: {
               "Content-Type": "multipart/form-data"

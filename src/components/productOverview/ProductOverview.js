@@ -26,15 +26,19 @@ function ProductOverview() {
     return (
         <>
             <main>
-                <div className="inner-container">
-                    <h1>Onze producten</h1>
-                    <div className="product-list">
-                        <li className="product-item-info">
-                            <div className="photo-wrapper"><Product/></div>
-                        </li>
+                <div className="outer-container">
+                    <div>
+                        <h1 className="title-products-header" id="products">Onze producten</h1>
+                        <div className="product-list">
+                            <li className="product-item-info">
+                                <div className="photo-wrapper">
+                                    <Product/>
+                                </div>
+                            </li>
+                        </div>
                     </div>
+                    {error && <p>{error}</p>}
                 </div>
-                {error && <p>{error}</p>}
             </main>
 
         </>
