@@ -12,7 +12,7 @@ function AboutUsPage() {
             const token = localStorage.getItem('token');
 
             try {
-                const response = await axios.get(`http://localhost:8080/company`, {
+                const response = await axios.get(`http://localhost:8080/about-loahy`, {
                     headers: {
                         "Content-Type": "application/json",
                         Authorization: `Bearer ${token}`,

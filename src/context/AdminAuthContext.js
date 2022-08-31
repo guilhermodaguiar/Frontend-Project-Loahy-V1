@@ -7,12 +7,13 @@ import axios from "axios";
 export const AdminAuthContext = createContext({});
 
 function AdminAuthContextProvider({ children }) {
+    const history = useHistory();
     const [auth, toggleAuth] = useState({
         isAuth: false,
         user: null,
         status:'pending',
     });
-    const history = useHistory();
+
 
     useEffect(() => {
         const token = localStorage.getItem('token');

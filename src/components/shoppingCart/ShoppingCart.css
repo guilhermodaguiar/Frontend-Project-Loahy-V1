@@ -33,6 +33,6 @@ body {
 .sign-in-body {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 100px;
 }

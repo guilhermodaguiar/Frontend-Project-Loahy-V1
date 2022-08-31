@@ -7,11 +7,12 @@ import jwt_decode from "jwt-decode";
 export const UserAuthContext = createContext({});
 
 function UserAuthContextProvider({ children }) {
+    const history = useHistory();
     const [auth, toggleAuth] = useState({
         isAuth: false,
         user: null,
     });
-    const history = useHistory();
+
 
     useEffect(() => {
         const token = localStorage.getItem('token');

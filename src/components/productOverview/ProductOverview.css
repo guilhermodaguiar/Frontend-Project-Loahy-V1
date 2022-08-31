@@ -119,3 +119,27 @@ main {
     color: red;
     font-size: 14px;
 }
+
+.product-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.photo-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.product-button {
+    background-color: #df7c6d;
+    font-family: 'Poppins', sans-serif;
+    color: whitesmoke;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    padding: 15px 27px;
+    cursor: pointer;
+}

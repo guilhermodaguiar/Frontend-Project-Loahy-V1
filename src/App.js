@@ -4,13 +4,14 @@ import HeaderPage from "./layout/headerPage/HeaderPage";
 import Footer from "./layout/footer/Footer";
 import CostumerSignIn from "./pages/customerSignIn/CostumerSignIn";
 import ShoppingCart from "./components/shoppingCart/ShoppingCart";
-import {BrowserRouter, Redirect, Route, Switch,} from "react-router-dom";
+import {BrowserRouter as Router, Redirect, Route, Switch,} from "react-router-dom";
 import React, {useContext} from "react";
-import {UserAuthContext} from "./context/UserAuthContext";
+import UserAuthContextProvider, {UserAuthContext} from "./context/UserAuthContext";
 import CostumerProfile from "./pages/costumerProfile/CostumerProfile";
 import AdminProfile from "./pages/adminProfile/AdminProfile";
-import {AdminAuthContext} from "./context/AdminAuthContext";
+import AdminAuthContextProvider, {AdminAuthContext} from "./context/AdminAuthContext";
 import AdminSignIn from "./pages/adminSignIn/AdminSignIn";
+import { Routes } from "./"
 
 
 function App() {
@@ -19,7 +20,18 @@ function App() {
 
     return (
       <>
-          <BrowserRouter>
+          <Router>
+              <AdminAuthContextProvider>
+                  <UserAuthContextProvider>
+                      <nav>
+
+                      </nav>
+                      <main>
+                        <Routes/>
+                      </main>
+                      <Footer/>
+                  </UserAuthContextProvider>
+              </AdminAuthContextProvider>
               <div className="inner-container">
                   <Switch>
                       <Route exact path="/">
@@ -42,7 +54,7 @@ function App() {
                       </Route>
                   </Switch>
               </div>
-          </BrowserRouter>
+          </Router>
           <Footer/>
       </>
 

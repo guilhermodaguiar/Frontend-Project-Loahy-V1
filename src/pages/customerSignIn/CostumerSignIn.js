@@ -27,13 +27,13 @@ function CostumerSignIn() {
         toggleLoading(true);
 
         try {
-            const result = await axios.post(`http://localhost:8080/users/login`, {
+            const result = await axios.post(`http://localhost:8080/users/${email}`, {
                 userEmail: email,
-                password: password,
+                userPassword: password,
             });
             console.log(result.data);
             login(result.data.accessToken);
-            history.push("/user/login")
+            history.push("/user")
         } catch (e) {
             console.error(e);
             toggleError(true);
@@ -105,8 +105,7 @@ function CostumerSignIn() {
                 </form>
             </div>
                 <div className="block-costumer-container">
-                <div className="block-customer-usps"></div>
-                <div className="block-new-costumer">
+                    <div className="block-new-costumer">
                     <form onSubmit={registerUser}>
                         <fieldset>
                             <legend>Loahy account aanmaken</legend>
@@ -163,7 +162,7 @@ function CostumerSignIn() {
                         </fieldset>
                     </form>
                 </div>
-            </div>
+                </div>
             </div>
         </>
     );

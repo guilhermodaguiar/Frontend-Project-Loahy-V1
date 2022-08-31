@@ -2,14 +2,14 @@ import "./Product.css";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 
-function Product({toggleProductFunction, submitValue, image, title, description}) {
+function Product({toggleProductFunction, submitValue, image, title, description, price}) {
     const [product, setProduct] = useState({});
     const [error, setError] = useState('');
 
     useEffect(() =>{
         const source = axios.CancelToken.source();
 
-        async function getProduct({image, title, despcription}) {
+        async function getProduct({image, title, despcription, price}) {
             setError('');
             try{
                 //akinan bo GET request endpoint
@@ -45,7 +45,8 @@ function Product({toggleProductFunction, submitValue, image, title, description}
                     <p className="product-description">
                         {product.description}
                     </p>
-                    <button type="button" onClick={() => toggleProductFunction(!submitValue)}>
+                    <p className="product-price">{product.price}</p>
+                    <button className="product-button" type="button" onClick={() => toggleProductFunction(!submitValue)}>
                         Toevoegen aan winkelwagen
                     </button>
                 </article>

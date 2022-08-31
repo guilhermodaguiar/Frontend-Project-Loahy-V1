@@ -34,7 +34,15 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 100px;
+    padding: 60px;
 }
 
+input {
+    width: 100%;
+    padding: 6px 40px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    display: block;
+}
 
