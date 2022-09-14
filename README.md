@@ -1,3 +1,34 @@
+![LoahyTree Logo](src/assets/Loahy_logo_DEF_dark_RGB.jpg \"LoahyTree Logo")
+
+
+Fragment uit
+The Markdown Guide
+Matt Cone
+Er zijn mogelijk auteursrechten op dit materiaal van toepassing.
+
+
+# Loahy | 2022 | Novi College | Eindopdracht Full Stack Developer
+
+Dit is de Frontend voor mijn applicatie "Loahy".
+
+[Mijn Github voor de BACK-END vind je hier]( https://github.com/guilhermodaguiar/Loahy-Backend-V1)
+
+[Mijn Github voor de FRONT-END vind je hier]( https://github.com/guilhermodaguiar/Loahy-Frontend-V1)
+
+
+## Applicatie starten
+
+Voor het clonen van de de repository voor Loahy wordt verwezen naar de links:
+
+- HTTPS: `https://github.com/guilhermodaguiar/Loahy-Frontend-V1.git`
+- SSH: `git@github.com:guilhermodaguiar/Loahy-Frontend-V3.git`
+
+---
+<i>Voordat de applicatie gebruikt kan worden dient deze eerst op een correcte wijze geïnstalleerd te worden.</br>
+Volg de stappen en run daarna de applicatie.</i>
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
