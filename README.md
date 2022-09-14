@@ -1,4 +1,4 @@
-![LoahyTree Logo](/src/assets/Loahy_logo_DEF_dark_RGB.jpg \"LoahyTree Logo")
+![LoahyTree Logo](/src/assets/Loahy_logo_DEF_dark_RGB.jpg)
 
 
 Fragment uit
