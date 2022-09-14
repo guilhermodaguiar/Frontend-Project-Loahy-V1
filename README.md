@@ -1,4 +1,5 @@
-![LoahyTree Logo](src/assets/Loahy_logo_DEF_dark_RGB.png \{height="36px" width="36px"})
+![LoahyTree Logo](src/assets/Loahy_logo_DEF_dark_RGB-min.png)
+![Novi-Hogeschool](src/assets/Novi_logo1.jpeg)
 
 # Loahy | 2022 | Novi College | Eindopdracht Full Stack Developer
 
@@ -63,4 +64,7 @@ Hieronder staan mappen structuur en een kort uitleg waarvoor ze gebruikt worden
 ### Components (Componenten)
 ### Helpers
 ### Routing
+
+
+###### Eindopdracht Full-Stack Developer NOVI College | Guilhermo d'Aguiar | Copyright © 2022 Loahy | Alle Rechten Voorbehouden.
  
