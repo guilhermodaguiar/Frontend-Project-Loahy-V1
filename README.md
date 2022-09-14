@@ -1,5 +1,5 @@
-![LoahyTree Logo](src/assets/Loahy_logo_DEF_dark_RGB Normaal.png)
-![Novi-Hogeschool](src/assets/novi_logo1 Normaal.png)
+![LoahyTree Logo](src/assets/Loahy_logo_DEF_dark_RGB%Normaal.png)
+![Novi-Hogeschool](src/assets/novi_logo1%Normaal.png)
 
 # Loahy | 2022 | Novi College | Eindopdracht Full Stack Developer
 
