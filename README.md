@@ -4,9 +4,9 @@
 
 Dit is de Frontend voor mijn applicatie "Loahy".
 
-[Mijn Github voor de BACK-END vind je hier]( https://github.com/guilhermodaguiar/Loahy-Backend-V1)
+[Github voor de FRONT-END van Loahy vind je hier]( https://github.com/guilhermodaguiar/Frontend-Project-Loahy-V1)
 
-[Mijn Github voor de FRONT-END vind je hier]( https://github.com/guilhermodaguiar/Loahy-Frontend-V1)
+[Github voor de BACK-END van Loahy vind je hier]( https://github.com/guilhermodaguiar/Backend-Project-Loahy-V1)
 
 
 ## Applicatie starten
