@@ -1,4 +1,4 @@
-![LoahyTree Logo](/src/assets/Loahy_logo_DEF_dark_RGB.jpg)
+![LoahyTree Logo](/src/assets/Loahy_logo_DEF_dark_RGB.jpg \ "LoahyTree logo")
 
 # Loahy | 2022 | Novi College | Eindopdracht Full Stack Developer
 
