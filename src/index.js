@@ -9,6 +9,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import ShoppingCartProvider from "./context/ShoppingCartContext";
 import UserAuthContextProvider from "./context/UserAuthContext";
 import AdminAuthContextProvider from "./context/AdminAuthContext";
+import WishlistProvider from "./context/WishlistContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,11 +17,13 @@ root.render(
     <React.StrictMode>
         <Router>
         <ShoppingCartProvider>
+            <WishlistProvider>
                 <UserAuthContextProvider>
-                <AdminAuthContextProvider>
+                    <AdminAuthContextProvider>
                         <App />
-                </AdminAuthContextProvider>
-            </UserAuthContextProvider>
+                    </AdminAuthContextProvider>
+                </UserAuthContextProvider>
+            </WishlistProvider>
         </ShoppingCartProvider>
         </Router>
     </React.StrictMode>

@@ -27,22 +27,27 @@ Voor het **clonen** van de repository voor Loahy wordt verwezen naar de links in
 >Voordat de applicatie gebruikt kan worden dient deze eerst op een correcte manier geïnstalleerd te worden.
 >Volg de stappen en run daarna de applicatie.
 
+Als je het project gecloned hebt naar jouw locale machine, installeer je eerst de node_modules door het volgende commando in de terminal te runnen:
 
-### Stap 1
-* `npm install` als eerste in je terminal.
-  
-### Stap 2
-* react-icons
-  `npm install react-icons`
+`npm install`
 
-### Stap 3
-* installeer react router dom
-  `npm install react-router-dom@5.2.0`. React router is __*deprecated*__ en er is geleerd om met deze versie te werken. 
+installeer ook react-icons:
+
+`npm install react-icons`
+
+installeer vervolgens react-router-dom:
+
+`npm install react-router-dom@5.2.0`. 
+
+> React router is __*deprecated*__ en er is geleerd om met deze versie te werken.
 Dit is de reden om de niet te werken met de nieuwe features van ***react-router-dom***.
-  
 
-### Stap 4
-* run de applicatie met `npm start` of met `npm run start`
+Wanneer alle packages geïnstalleerd zijn, kun je de applicatie starten met behulp van:
+
+`npm start`
+
+of gebruik de WebStorm knop (npm start). Open http://localhost:3000 om de pagina in de browser te bekijken
+
 ---
 
 ## Map Guide
