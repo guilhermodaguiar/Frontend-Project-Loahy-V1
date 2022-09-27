@@ -1,37 +1,14 @@
-import {createContext, useState} from "react";
+import React, {useState} from 'react';
 
-export const ShoppingCartContext = createContext({
+export const ShoppingCartContext = React.createContext();
 
-});
+export const ShoppingCartContextProvider = (props) => {
 
-//maak custom provider
-function ShoppingCartProvider({children}) {
-    //state aanmaken
-    //functies schrijven om die state te wijzigen\
-    //data object managen
-    const [amountOfProducts, setAmountOfProducts] = useState(0)
-
-    function addProduct() {
-        setAmountOfProducts(amountOfProducts+1);
-    }
-
-    function removeProduct() {
-        setAmountOfProducts(amountOfProducts -1);
-    }
-
-    const data = {
-        cart: amountOfProducts,
-        addToCArt: addProduct,
-        removeFromCart: removeProduct,
-    }
+    const [shoppingCart, setShoppingCart] = useState([])
 
     return (
-        <ShoppingCartContext.Provider value={data}>
-            {children}
+        <ShoppingCartContext.Provider value={[shoppingCart, setShoppingCart]}>
+            {props.children}
         </ShoppingCartContext.Provider>
     )
 }
-
-export default ShoppingCartProvider;
-
-

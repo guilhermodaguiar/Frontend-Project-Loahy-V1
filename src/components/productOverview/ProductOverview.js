@@ -1,27 +1,10 @@
 import './ProductOverview.css';
-import axios from "axios";
-import React, {useEffect, useState} from "react";
+import React from "react";
 
-import Product from "../product/Product";
+import Product from "../products/Product";
 
 
 function ProductOverview() {
-
-    const[error, setError] = useState('');
-
-    useEffect(() => {
-        async function fetchData() {
-            setError('');
-            try{
-                const response = await axios.get(`https://api.chucknorris.io/jokes/random`);
-                console.log(response);
-            } catch(e) {
-                console.error(e);
-            }
-        }
-        fetchData();
-    }, []);
-
 
     return (
         <>
@@ -39,10 +22,8 @@ function ProductOverview() {
                             </li>
                         </div>
                     </div>
-                    {error && <p>{error}</p>}
                 </div>
             </main>
-
         </>
     );
 }

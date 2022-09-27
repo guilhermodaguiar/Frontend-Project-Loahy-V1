@@ -22,10 +22,13 @@ function AboutUsPage() {
             } catch (e) {
                 console.error(e);
             }
-        }
+            fetchBrandStory();
 
-        fetchBrandStory();
-    }, [])
+            return function cleanup() {
+                token.cancel();
+            }
+        }
+    }, []);
 
     return (
         <>
@@ -37,6 +40,7 @@ function AboutUsPage() {
                     <div className="inner-container-about-us">
                         <article>
                             <p>
+                                {}
                                 Loahy staat voor duurzaam en creatieve producten voor kinderen van alle leeftijden. Speelgoed om kinderen te stimuleren hun fantasie te gebruiken en hun vaardigheden te ontwikkelen.
 
                                 Na de geboorte van zijn zoon Felipe in 2017, besloot oprichter Guilhermo om op zoek te gaan naar de leukste kinderproducten die er zijn. Zo ontstond Loahy. De producten zijn met zorg geselecteerd en worden internationaal ingekocht. Mis je nog iets op de website? Laat het ons weten!

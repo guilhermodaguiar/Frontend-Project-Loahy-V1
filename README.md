@@ -59,8 +59,7 @@ Deze map bevat alle gebruikte afbeeldingen zoals *logo's*, *backgrounds* en *afb
 ### Pages
 Pages bevat alle webpagina's voor de applicatie. 
 ### Context
-Er zijn vier context gemaakt. Deze kunnen hun *informatie* delen met elk component.  
-> - AdminAuthContext
+Er zijn vier context gemaakt. Deze kunnen hun *informatie* delen met elk component.
 > - UserAuthContext
 > - ShoppingCartContext
 > - WishlistContext

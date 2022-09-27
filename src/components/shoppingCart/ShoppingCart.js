@@ -1,13 +1,25 @@
-import React, {useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
+import {ShoppingCartContext} from "../../context/ShoppingCartContext";
 import './ShoppingCart.css';
 import {IoCloseSharp} from "react-icons/io5";
 import NavBar from "../../layout/navBar/NavBar";
-
-
+import {useHistory} from "react-router-dom";
 
 
 function ShoppingCart(){
+    const history = useHistory();
+    const [toggleShoppingCart, setToggleShoppingCart] = useState(false);
+    const [shoppingCart, setShoppingCart] = useContext(ShoppingCartContext);
 
+    const totalPrice = cart.reduce((acc, cart) => acc + cart.price, 0);
+
+    const removeItem = (index) => {
+        setToggleShoppingCart(shoppingCart.filter((o, i) => index !== i));
+    };
+
+    function shoppingCart_deliveryRequest() {
+        history.push(`/cartitems/checkout`)
+    }
 
     return(
         <>
@@ -54,7 +66,6 @@ function ShoppingCart(){
                             </tr>
                             </tbody>
                         </table>
-
                     </form>
                 </fieldset>
 

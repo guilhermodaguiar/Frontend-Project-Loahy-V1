@@ -1,12 +1,27 @@
-import "./CostumerProfile.css";
 import React, {useContext, useEffect, useState} from "react";
-import {UserAuthContext} from "../../context/UserAuthContext";
-import axios from "axios";
-import NavBar from "../../layout/navBar/NavBar";
 
-function CostumerProfile() {
+import "./CustomerProfile.css";
+import NavBar from "../../layout/navBar/NavBar";
+import GreetUser from "../greetUser/GreetUser";
+import {AuthContext} from "../../context/AuthContext";
+import axios from "axios";
+import {useHistory} from "react-router-dom";
+
+
+
+function CustomerProfile() {
+    const history = useHistory();
+
+    const token = localStorage.getItem('token');
+    const {user: {userEmail}} = useContext(AuthContext);
+
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [adminInput, setAdminInput] = useState([]);
+
+
     const [userData, setUserData] = useState({});
-    const { user } = useContext(UserAuthContext);
+    const { user } = useContext(AuthContext);
+
 
     useEffect(() =>{
         async function fetchProfileData() {
@@ -26,17 +41,19 @@ function CostumerProfile() {
         }
 
         fetchProfileData();
+
+        return function cleanup() {
+            token.cancel();
+        }
     }, [])
 
     return(
         <>
             <NavBar/>
             <div>
-
-                <h1>
-                    Profiel pagina
-                </h1>
-                <p>Hoi {user.email}!</p>
+                <section>
+                    <GreetUser/>
+                </section>
                 <section>
                     <h2>Gegevens</h2>
                     <p><strong>Naam:</strong> {user.username}</p>
@@ -63,4 +80,4 @@ function CostumerProfile() {
     )
 }
 
-export default CostumerProfile;
+export default CustomerProfile;

@@ -1,49 +1,52 @@
 import {Redirect, Route, Switch} from "react-router-dom";
-import HeaderPage from "../layout/headerPage/HeaderPage";
+import Home from "../pages/home/Home";
 import ShoppingCart from "../components/shoppingCart/ShoppingCart";
-import CostumerSignIn from "../pages/customerSignIn/CostumerSignIn";
-import CostumerProfile from "../pages/costumerProfile/CostumerProfile";
-import AdminSignIn from "../pages/adminSignIn/AdminSignIn";
-import AdminProfile from "../pages/adminProfile/AdminProfile";
+import CustomerProfile from "../components/customerProfile/CustomerProfile";
+import AdminProfile from "../components/adminProfile/AdminProfile";
 import WishList from "../components/wishList/wishList";
 
 import React, {useContext} from "react";
-import {UserAuthContext} from "../context/UserAuthContext";
-import {AdminAuthContext} from "../context/AdminAuthContext";
+import { AuthContext } from "../context/AuthContext";
+import PrivateRoute from "./privateRoute/PrivateRoute";
+import Admin from "../pages/admin/Admin";
+import Customer from "../pages/customer/Customer";
+import CustomerPage from "../pages/customer/CustomerPage";
+import AdminPage from "../pages/admin/AdminPage";
 
 
 function Routes() {
-    const { isAuth } = useContext(UserAuthContext);
-    const { isAdminAuth } = useContext(AdminAuthContext);
 
     return(
-        <Switch>
-            <div className="inner-container">
-                <Switch>
-                    <Route exact path="/">
-                        <HeaderPage/>
-                    </Route>
-                    <Route path="/shopping-cart">
-                        <ShoppingCart/>
-                    </Route>
-                    <Route exact path="/costumer">
-                        <CostumerSignIn/>
-                    </Route>
-                    <Route path="/costumer/profile">
-                        {isAuth ? <CostumerProfile/> : <Redirect to="/"/>}
-                    </Route>
-                    <Route path="/wishlist">
-                        <WishList/>
-                    </Route>
-                    <Route exact path="/admin">
-                        <AdminSignIn/>
-                    </Route>
-                    <Route path="/admin/profile">
-                        {isAdminAuth ? <AdminProfile/> : <Redirect to="/"/>}
-                    </Route>
-                </Switch>
-            </div>
-        </Switch>
+        <>
+            <Switch>
+                <div className="inner-container">
+                    <Switch>
+                        <Route exact path="/">
+                            <Home/>
+                        </Route>
+                        <PrivateRoute path="/shopping-cart">
+                            <ShoppingCart/>
+                        </PrivateRoute>
+                        <Route exact path="/costumer">
+                            <Customer/>
+                        </Route>
+                        <PrivateRoute path="/costumer/main">
+                            <CustomerPage/>
+                        </PrivateRoute>
+                        <PrivateRoute path="/wishlist">
+                            <WishList/>
+                        </PrivateRoute>
+                        <Route exact path="/admin">
+                            <Admin/>
+                        </Route>
+                        <PrivateRoute exact path="/admin/main">
+                            <AdminPage/>
+                        </PrivateRoute>
+                    </Switch>
+                </div>
+            </Switch>
+        </>
+
     )
 }
 

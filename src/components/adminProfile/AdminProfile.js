@@ -1,9 +1,11 @@
 import "./AdminProfile.css";
+import GreetUser from "../greetUser/GreetUser";
 import React, {useContext, useEffect, useState} from 'react';
-import {AdminAuthContext} from "../../context/AdminAuthContext";
+import { AuthContext} from "/src/context/AuthContext";
 import axios from "axios";
-import UploadImage from "../../helpers/UploadImage";
+import UploadImage from "../ImageComponent/UploadImage";
 import { HashLink as Link } from "react-router-hash-link";
+
 
 function AdminProfile() {
     const [products, setProducts] = useState([]);
@@ -18,7 +20,12 @@ function AdminProfile() {
     const [brandStory, setBrandStory] = useState('')
 
 
-    const { user } = useContext(AdminAuthContext);
+    const [error, toggleError] = useState(false);
+    const [loading, toggleLoading] = useState(false);
+    const [succes, toggleSucces] = useState(false);
+
+    const { login, user } = useContext(AuthContext);
+
 
 
     useEffect(() => {
@@ -26,7 +33,7 @@ function AdminProfile() {
             const token = localStorage.getItem('token');
 
             try {
-                const response = await axios.get(`http://localhost:8080/users`, {
+                const response = await axios.get(`http://localhost:8080/authenticate`, {
                     headers: {
                         "Content-Type": "application/json",
                         Authorization: `Bearer ${token}`,
@@ -61,8 +68,37 @@ function AdminProfile() {
         }
 
         fetchProducts();
+
+            return function cleanup() {
+                token.cancel();
+            }
     }, []
     )
+
+    //existing admin login request
+    async function adminLoginRequest (e) {
+        e.preventDefault();
+        toggleError(false);
+        toggleSucces(true);
+
+        try {
+            const response = await axios.post(`http://localhost:8080/authenticate`, {
+                userEmail: e.email,
+                userPassword: e.password,
+            });
+
+            console.log(response.data);
+            login(response.data.accessToken);
+
+            setTimeout(() => {
+                history.push("/customerPage/profile");
+            },3000)
+
+        } catch (e) {
+            console.error(e);
+            toggleError(true);
+        }
+    }
 
     async function addProduct(e) {
         e.preventDefault();

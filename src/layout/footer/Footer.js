@@ -6,7 +6,7 @@ function Footer() {
         <>
             <footer>
                 <div>
-                    <h5>© 2022 Loahy Webdesign -Guilhermo d'Aguiar</h5>
+                    <h5>© 2022 Loahy Webdesign - Guilhermo d'Aguiar</h5>
                 </div>
                 <div className="footer-icons">
                     <div>
