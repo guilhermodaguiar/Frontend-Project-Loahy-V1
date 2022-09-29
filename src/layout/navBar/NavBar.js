@@ -1,5 +1,6 @@
+import React from "react";
+
 import './NavBar.css';
-import React, {useContext} from "react";
 import {NavLink} from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
 
@@ -29,13 +30,16 @@ function NavBar() {
                 </ul>
                 <ul className="navbar-list-icons">
                     <li>
-                        <NavLink to="/shopping-cart"  className="navbar-icon" activeClassName="active-shopping-cart"><HiOutlineShoppingCart size={22}/></NavLink>
+                        <NavLink to="/shopping-cart"  className="navbar-icon" activeClassName="active-shopping-cart">
+                            <HiOutlineShoppingCart size={22}/></NavLink>
                     </li>
                     <li>
-                        <NavLink to="/costumer" className="navbar-icon" activeClassName="active-wishlist-account"><HiOutlineHeart size={22}/></NavLink>
+                        <NavLink to="/costumer" className="navbar-icon" activeClassName="active-wishlist-account">
+                            <HiOutlineHeart size={22}/></NavLink>
                     </li>
                     <li>
-                        <NavLink to="/costumer" className="navbar-icon" activeClassName="active-customer-account"><HiOutlineUser size={22}/></NavLink>
+                        <NavLink to="/costumer" className="navbar-icon" activeClassName="active-customer-account">
+                            <HiOutlineUser size={22}/></NavLink>
                     </li>
                 </ul>
             </nav>

@@ -6,6 +6,9 @@ import GreetUser from "../greetUser/GreetUser";
 import {AuthContext} from "../../context/AuthContext";
 import axios from "axios";
 import {useHistory} from "react-router-dom";
+import UserProfile from "../userProfile/UserProfile";
+import ShoppingCart from "../shoppingCart/ShoppingCart";
+import WishList from "../wishList/wishList";
 
 
 
@@ -14,10 +17,6 @@ function CustomerProfile() {
 
     const token = localStorage.getItem('token');
     const {user: {userEmail}} = useContext(AuthContext);
-
-    const [isAdmin, setIsAdmin] = useState(false);
-    const [adminInput, setAdminInput] = useState([]);
-
 
     const [userData, setUserData] = useState({});
     const { user } = useContext(AuthContext);
@@ -45,15 +44,31 @@ function CustomerProfile() {
         return function cleanup() {
             token.cancel();
         }
-    }, [])
+    }, [token])
 
     return(
         <>
-            <NavBar/>
             <div>
                 <section>
                     <GreetUser/>
                 </section>
+                <section>
+                    <UserProfile/>
+                </section>
+                <section>
+                    <ShoppingCart/>
+                </section>
+                <section>
+                    <WishList/>
+                </section>
+                <section>
+                    <button type="button" onClick={user.logout}>
+                        Uitloggen
+                    </button>
+                </section>
+
+
+
                 <section>
                     <h2>Gegevens</h2>
                     <p><strong>Naam:</strong> {user.username}</p>

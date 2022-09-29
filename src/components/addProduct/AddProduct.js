@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import 'AddProduct.css'
+import './AddProduct.css';
 import {useHistory} from "react-router-dom";
 import {ShoppingCartContext} from "../../context/ShoppingCartContext";
 

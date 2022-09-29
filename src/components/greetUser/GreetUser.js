@@ -1,10 +1,10 @@
-import 'GreetUser.css';
+import './GreetUser.css';
 
 import React, {AuthContext} from "../../context/AuthContext";
 import {useContext} from "react";
 
 function GreetUser() {
-    const {user: {userName}} = useContext(AuthContext);
+    const {user: {user_email}} = useContext(AuthContext);
 
     return(
         <>
@@ -12,7 +12,7 @@ function GreetUser() {
                 <div className="welcome-user">
                     <h1>Welkom</h1>
                     <h2>
-                        {userName}
+                        {user_email}
                     </h2>
                 </div>
             </section>

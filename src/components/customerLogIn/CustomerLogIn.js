@@ -49,7 +49,7 @@ function CustomerLogIn() {
             login(response.data.accessToken);
 
             setTimeout(() => {
-                history.push("/customer/profile");
+                history.push("/customer/main");
             },3000)
 
         } catch (e) {

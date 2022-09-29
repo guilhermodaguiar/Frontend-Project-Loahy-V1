@@ -73,7 +73,7 @@ function CustomerRegister () {
             toggleAddSucces(true);
 
             setTimeout(() => {
-                history.push('/login');
+                history.push('/customer');
 
             }, 3000);
 

@@ -66,7 +66,7 @@ function AuthContextProvider({children}) {
                 ...isAuth,
                 auth: true,
                 user: {
-                    userEmail: response.data.userEmail,
+                    user_email: response.data.userEmail,
                     password: response.data.userPassword,
                     user_id: response.data.userId,
                     roles: response.data.authorities[0].authority,

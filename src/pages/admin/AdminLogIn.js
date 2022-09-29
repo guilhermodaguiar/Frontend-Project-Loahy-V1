@@ -32,6 +32,8 @@ function AdminLogIn() {
         setValidAdminPassword(PWD_REGEX.test(adminPassword));
     }, [adminPassword])
 
+
+
     async function adminLoginRequest(e) {
         e.preventDefault();
         toggleError(false);
@@ -44,13 +46,18 @@ function AdminLogIn() {
             });
 
             console.log(response.data);
-            //zoek uit
-            login(response.data.accessToken);
 
+            if (response.data.authorities[0].authority === 'ROLE_ADMIN') {
+                login(response.data.jwt);
 
-            setTimeout(() => {
-                history.push("/admin/profile");
-            },3000)
+                setTimeout(() => {
+
+                    history.push("/admin/main");
+                },3000)
+            } else {
+
+                history.push("/admin");
+            }
 
         } catch(e) {
             console.error(e);
@@ -113,7 +120,7 @@ function AdminLogIn() {
                         <h1> Inloggen succesvol!</h1>
                         <h5>U bent succesvol ingelogd<br/> en wordt automatisch doorgestuurd..</h5>
                         <p>Mocht u niet automatisch doorgestuurd worden<br/>
-                        <NavLink to="/admin/profile" exact activeClassName="active-link">klik dan hier!</NavLink>
+                        <NavLink to="/admin/main" exact activeClassName="active-link">klik dan hier!</NavLink>
                         </p>
                     </span>
                 )

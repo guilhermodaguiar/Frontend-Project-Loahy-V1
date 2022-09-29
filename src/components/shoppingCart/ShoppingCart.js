@@ -18,7 +18,7 @@ function ShoppingCart(){
     };
 
     function shoppingCart_deliveryRequest() {
-        history.push(`/cartitems/checkout`)
+        history.push(`/cart-items/checkout`)
     }
 
     return(
