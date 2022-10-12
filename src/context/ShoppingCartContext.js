@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-export const ShoppingCartContext = React.createContext();
+export const ShoppingCartContext = React.createContext({});
 
 export const ShoppingCartContextProvider = (props) => {
 

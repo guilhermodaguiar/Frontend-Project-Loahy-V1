@@ -6,6 +6,10 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: "Poppins", sans-serif;
+}
+
 .contact-us-main {
     display: flex;
     flex-direction: row;
@@ -40,7 +44,7 @@
 .contact-us-inner-container {
     display: flex;
     flex-direction: row-reverse;
-    justify-content: start;
+    justify-content: space-between;
     padding: 30px;
 }
 
@@ -51,7 +55,7 @@
     justify-content: start;
     width: 20px;
     height: 20px;
-    padding: 30px 100px;
+    padding: 30px 57px;
 }
 
 .contact-us-feedback {
@@ -84,18 +88,45 @@
     padding: 5px 0;
 }
 
+.green-up{
+    padding-top: 50px;
+    padding-left: 30px;
+}
+
+.green-up-container{
+    padding-left: 30px;
+}
+
 .contact-us-information-list {
     padding-top: 50px;
 }
 
 .contact-us-information {
-    padding-left: 100px;
+    padding-left: 60px;
 }
 
-input {
+.contact-us-border-container {
+    border-left: groove;
+    border-right: groove;
+    padding-left: 10px;
+    padding-right: 30px;
+}
+
+.contact-us-contact-us {
+    padding-right: 30px;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: wrap;
+}
+
+
+.input-containers {
     width: 100%;
     padding: 6px 10px;
-    margin: 10px 0;
+    margin: 10px 0px;
     border: 1px solid #ddd;
     box-sizing: content-box;
 }
@@ -106,6 +137,7 @@ textarea {
     margin: 10px 0;
     border: 1px solid #ddd;
     box-sizing: border-box;
+    font-family: Poppins, sans-serif;
 }
 
 

@@ -68,52 +68,60 @@ function AdminLogIn() {
     return (
         <>
             { !isAuth ? (
-                    <div className="outer-container">
-                        <div className="inner-container-admin">
-                            <h1>Admin pagina</h1>
-                            <form
-                                className="form-container-admin"
-                                onSubmit={handleSubmit(adminLoginRequest)}>
-                                <label htmlFor="email-field">
-                                    E-mailadres
-                                    <input
-                                        type="email"
-                                        id="email-field"
-                                        name="email"
-                                        {...register("adminEmail", {
-                                            required: "email-adres is verplicht!"
-                                        })}
-                                        aria-invalid={validAdminEmail ? "false" : "true"}
-                                        placeholder="admin email-adres"
-                                    />
-                                </label>
-                                {errors.userEmail && <p>{errors.userEmail.message}</p>}
-                                <label htmlFor="password-field">
-                                    Wachtwoord:
-                                    <input
-                                        type="password"
-                                        id="password-field"
-                                        name="password"
-                                        {...register("password", {
-                                            required: "wachtwoord is verplicht!"
-                                        })}
-                                        aria-invalid={validAdminPassword ? "false" : "true"}
-                                        placeholder="wachtwoord"
-                                    />
-                                </label>
-                                {errors.userPassword && <p>{errors.userPassword.message}</p>}
-                                {error && <p className="error-admin-login"> Combinatie van email-adres en wachtwoord is onjuist</p>}
+                <div>
+                    <div className="admin-page">
+                        <h1 className="admin-h1" >Admin pagina</h1>
+                    </div>
+                    <div className="admin-sign-in-body">
+                        <div className="outer-container">
+                            <div className="inner-container-admin">
 
-                                <button
-                                    disabled={!validAdminPassword || !validAdminEmail}
-                                    type="submit"
-                                    className="form-button"
-                                >
-                                    Inloggen
-                                </button>
-                            </form>
+                                <form
+                                    className="form-container-admin"
+                                    onSubmit={handleSubmit(adminLoginRequest)}>
+                                    <label htmlFor="email-field">
+                                        E-mailadres
+                                        <input
+                                            type="email"
+                                            id="email-field"
+                                            name="email"
+                                            {...register("adminEmail", {
+                                                required: "email-adres is verplicht!"
+                                            })}
+                                            aria-invalid={validAdminEmail ? "false" : "true"}
+                                            placeholder="admin email-adres"
+                                        />
+                                    </label>
+                                    {errors.userEmail && <p>{errors.userEmail.message}</p>}
+                                    <label htmlFor="password-field">
+                                        Wachtwoord:
+                                        <input
+                                            type="password"
+                                            id="password-field"
+                                            name="password"
+                                            {...register("password", {
+                                                required: "wachtwoord is verplicht!"
+                                            })}
+                                            aria-invalid={validAdminPassword ? "false" : "true"}
+                                            placeholder="wachtwoord"
+                                        />
+                                    </label>
+                                    {errors.userPassword && <p>{errors.userPassword.message}</p>}
+                                    {error && <p className="error-admin-login"> Combinatie van email-adres en wachtwoord is onjuist</p>}
+
+                                    <button
+                                        disabled={!validAdminPassword || !validAdminEmail}
+                                        type="submit"
+                                        className="form-button"
+                                    >
+                                        Inloggen
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
+                </div>
+
                 )
                 : (
                     <span className="inlog-admin-successful">

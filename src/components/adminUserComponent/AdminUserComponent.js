@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import axios from "axios";
 
-import {ReactComponent as DeleteIcon} from "../../assets/svg-account/deleteButton.svg";
+
 
 
 import {AuthContext} from "../../context/AuthContext";
@@ -101,7 +101,6 @@ function AdminUserComponent() {
                                         <td>
                                             <button className="delete-button"
                                                     onClick={() => deleteUser(user.username)}>
-                                                <DeleteIcon/>
                                             </button>
                                         </td>
                                         <td>{user.userId}</td>

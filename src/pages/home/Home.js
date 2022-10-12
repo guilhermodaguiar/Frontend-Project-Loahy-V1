@@ -1,10 +1,13 @@
 import React from "react";
+
+import './Home.css';
 import ProductOverview from "../../components/productOverview/ProductOverview";
-import AboutUsPage from "../../components/aboutUsPage/AboutUsPage";
-import ContactUs from "../../components/contactUs/ContactUs";
+import AboutUsComponent from "../../components/aboutUsComponent/AboutUsComponent";
+import ContactUsComponent from "../../components/contactUs/ContactUs";
 import ScrollIndicator from "../../helpers/scrollIndicator/ScrollIndicator";
 import ScrollToTop from "../../helpers/scrollToTop/ScrollToTop";
 import Header from "../../layout/header/Header";
+import NavBar from "../../layout/navBar/NavBar";
 
 function Home() {
 
@@ -15,12 +18,13 @@ function Home() {
 
     return(
         <>
+            <NavBar/>
             <ScrollIndicator/>
             <ScrollToTop/>
             <Header/>
             <ProductOverview/>
-            <AboutUsPage/>
-            <ContactUs/>
+            <AboutUsComponent/>
+            <ContactUsComponent/>
         </>
     )
 }

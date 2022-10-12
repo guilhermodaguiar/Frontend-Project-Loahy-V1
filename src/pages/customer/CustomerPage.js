@@ -1,4 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
+
+import './CostumorPage.css';
 import CustomerProfile from "../../components/customerProfile/CustomerProfile";
 import ScrollIndicator from "../../helpers/scrollIndicator/ScrollIndicator";
 import ScrollToTop from "../../helpers/scrollToTop/ScrollToTop";

@@ -6,14 +6,13 @@ import Routes from "./routing/Routes";
 import NavBar from "./layout/navBar/NavBar";
 
 
+
 function App() {
     return (
       <>
-          <Router>
-              <NavBar/>
-              <Routes/>
-              <Footer/>
-          </Router>
+          <NavBar/>
+          <Routes/>
+          <Footer/>
       </>
 
   );

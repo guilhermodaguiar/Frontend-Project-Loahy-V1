@@ -7,7 +7,7 @@ function Header() {
     return(
         <>
             <div className="inner-container">
-                <div className="header-name" >
+                <div className="home-page" >
                     <h1>Loahy</h1>
                     <Link to="#products">
                         <button

@@ -9,7 +9,7 @@ function AdminProductComponent() {
     const {user} = useContext(AuthContext);
     const token = localStorage.getItem('token');
 
-    const {register, formState: {errors}, handleSubmit} = useFormContext();
+    // const {register, formState: {errors}, handleSubmit} = useFormContext();
     const message = "..veld is verplicht";
     const history = useHistory();
 
@@ -55,7 +55,7 @@ function AdminProductComponent() {
         }
 
         setTimeout(() => {
-            history.push('/products-');
+            history.push('/');
         }, 300)
 
     }

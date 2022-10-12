@@ -2,6 +2,7 @@ import './ProductOverview.css';
 import React from "react";
 
 import Product from "../products/Product";
+import {HashLink as Link} from "react-router-hash-link";
 
 
 function ProductOverview() {
@@ -20,6 +21,16 @@ function ProductOverview() {
                                     <Product/>
                                 </div>
                             </li>
+                            <div>
+                                <Link to="/shop">
+                                    <button
+                                        type="button"
+                                        //bij het clicken moet het Productpagina worden afgevuurd
+                                        onClick={()=>console.log("Jij wil shoppen!")}
+                                    >Naar de Shop
+                                    </button>
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </div>

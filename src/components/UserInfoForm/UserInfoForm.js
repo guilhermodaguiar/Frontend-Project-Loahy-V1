@@ -29,7 +29,7 @@ function UserInfoForm() {
                     customerLastName: customerData.customer_lastname,
                     customerStreetName: customerData.customer_street_name,
                     customerHouseNumber: customerData.customer_house_number,
-                    customerHouseNumberAddition: customerData.customer_house_number_addition,
+                    customerHouseNumberAddition: customerData.customer_house_number_add,
                     customerCity: customerData.customer_city,
                     customerZipcode: customerData.customer_zipcode,
                     customerPhone: customerData.customer_phone,
@@ -64,7 +64,7 @@ function UserInfoForm() {
                       onSubmit={handleSubmit(onSubmit)}>
 
                     <h1> Wijzig hier uw persoonsgegevens</h1>
-                    <p>Elk veld moet ingevuld zijn voordat u deze gegevens kunt opslaan.. </p>
+                    <p>* Elk veld moet ingevuld zijn voordat u deze gegevens kunt opslaan.. </p>
 
                     <div className="form-names">
 
@@ -95,7 +95,7 @@ function UserInfoForm() {
 
                             />
                         </label>
-                        {errors.customer_lastname && <p className="form-error">{customer.person_lastname.message}</p>}
+                        {errors.customer_lastname && <p className="form-error">{errors.customer_lastname.message}</p>}
                         <br/>
 
                     </div>

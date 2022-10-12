@@ -9,6 +9,8 @@ function AdminContactUsComponent() {
     const token = localStorage.getItem('token');
     const { user } = useContext(AuthContext);
 
+    const [remarks, setRemarks] = useState([]);
+
     const [contactUs, setContactUs] = useState('');
     const [updateSucces, toggleUpdateSucces] = useState(false);
 
@@ -78,9 +80,8 @@ function AdminContactUsComponent() {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {users.map((contact) =>{
-                                    return <tr key={contact.contactNumber}>
-                                        <td>{contact.contactNumber}</td>
+                                {remarks.map((contact) =>{
+                                    return <tr key={contact.contactName}>
                                         <td>{contact.contactName}</td>
                                         <td>{contact.contactEmail}</td>
                                         <td>{contact.contactPhone}</td>
