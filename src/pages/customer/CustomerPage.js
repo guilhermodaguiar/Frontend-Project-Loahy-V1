@@ -7,7 +7,7 @@ import ScrollToTop from "../../helpers/scrollToTop/ScrollToTop";
 import NavBar from "../../layout/navBar/NavBar";
 import {AuthContext} from "../../context/AuthContext";
 import {HashLink as Link} from "react-router-hash-link";
-import ShoppingCart from "../../components/shoppingCart/ShoppingCart";
+import ShoppingCart from "../shoppingCart/ShoppingCart";
 import WishList from "../../components/wishList/wishList";
 import {useHistory} from "react-router-dom";
 import axios from "axios";

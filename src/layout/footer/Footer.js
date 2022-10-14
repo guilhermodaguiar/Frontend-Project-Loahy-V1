@@ -1,5 +1,6 @@
 import React from "react";
 import {FaFacebook, FaInstagram} from "react-icons/fa";
+import {GoMarkGithub} from "react-icons/go";
 
 function Footer() {
     return(
@@ -17,6 +18,11 @@ function Footer() {
                     <div>
                         <a href="https://www.facebook.com/Loahytree-109562478288311/?notif_id=1655164686624838&notif_t=aymt_page_post_reminder_14d_notification&ref=notif">
                             <FaFacebook className="facebook-icon" size={22}/>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="https://github.com/guilhermodaguiar">
+                            <GoMarkGithub className="github-icon" size={22}/>
                         </a>
                     </div>
                 </div>

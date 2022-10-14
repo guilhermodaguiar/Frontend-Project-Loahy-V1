@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 
 import './Shop.css';
 import axios from "axios";
-import AddProduct from "../../components/addProduct/AddProduct";
+import Product from "../../components/product/Product";
 import ScrollIndicator from "../../helpers/scrollIndicator/ScrollIndicator";
 import ScrollToTop from "../../helpers/scrollToTop/ScrollToTop";
 
@@ -12,9 +12,11 @@ function Shop() {
 
 
     useEffect(() => {
-        async function fetchProducts(e) {
+
+        async function fetchProducts() {
             try {
-                const response = await axios.get('http://localhost:8080/products/');
+                const response = await axios.get('http://localhost:8080/products', {
+                });
                     setProducts(response.data);
 
                 } catch (e) {
@@ -22,6 +24,7 @@ function Shop() {
                 }
             }
             fetchProducts();
+
         }, []);
 
 
@@ -38,26 +41,31 @@ function Shop() {
                 <ScrollIndicator/>
                 <ScrollToTop/>
                 <div className="product-page">
-                    <h1 className="product-h1">Producten</h1>
+                    <h1 className="product-h1">Shop</h1>
                     <div className="shop-outer-container">
                         <div className="inner-container">
                             <div className="container-all-products">
                                 {products.map((product) => {
                                 return(
                                     product.image !== null ?
-                                        <AddProduct
+                                        <Product
                                             key={product.productId}
+
                                             url={product.image.url}
+                                            filename={product.image.filename}
+
                                             product_id={product.productId}
-                                            productName={product.productName}
-                                            productPrice={product.productPrice}
+                                            product_name={product.productName}
+                                            product_description={product.productDescription}
+                                            product_price={product.productPrice}
                                         />
                                         :
-                                        <AddProduct
+                                        <Product
                                             key={product.id}
 
                                             product_id={product.productId}
                                             productName={product.productName}
+                                            product_description={product.productDescription}
                                             productPrice={product.productPrice}
                                         />
                                 )

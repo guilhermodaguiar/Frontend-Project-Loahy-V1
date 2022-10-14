@@ -1,12 +1,15 @@
-import React from "react";
+import React, {useContext} from "react";
 
 import './NavBar.css';
 import {NavLink} from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
 
 import { HiOutlineHeart, HiOutlineShoppingCart, HiOutlineUser } from "react-icons/hi";
+import shoppingCartContext from "../../context/ShoppingCartContext";
 
 function NavBar() {
+    const cartQuantity = 5;
+    // const { cartQuantity } = useContext(shoppingCartContext);
 
     return(
         <div className="inner-container">
@@ -35,8 +38,13 @@ function NavBar() {
                 </ul>
                 <ul className="navbar-list-icons">
                     <li>
-                        <NavLink to="/customer/shopping-cart"  className="navbar-icon" activeClassName="active-shopping-cart">
+                        <NavLink to="/shopping-cart"  className="navbar-icon" activeClassName="active-shopping-cart">
                             <HiOutlineShoppingCart size={22}/></NavLink>
+                        {cartQuantity > 0 && (
+                            <div className="rounded-circle">
+                                { cartQuantity }
+                            </div>
+                        )}
                     </li>
                     <li>
                         <NavLink to="/customer" className="navbar-icon" activeClassName="active-wishlist-account">
@@ -45,6 +53,7 @@ function NavBar() {
                     <li>
                         <NavLink to="/customer" className="navbar-icon" activeClassName="active-customer-account">
                             <HiOutlineUser size={22}/></NavLink>
+
                     </li>
                 </ul>
             </nav>

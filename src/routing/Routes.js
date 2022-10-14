@@ -2,7 +2,7 @@ import React from "react";
 
 import { Route, Switch} from "react-router-dom";
 import Home from "../pages/home/Home";
-import ShoppingCart from "../components/shoppingCart/ShoppingCart";
+import ShoppingCart from "../pages/shoppingCart/ShoppingCart";
 import WishList from "../components/wishList/wishList";
 import PrivateRoute from "./privateRoute/PrivateRoute";
 import CustomerPage from "../pages/customer/CustomerPage";
@@ -30,9 +30,9 @@ function Routes() {
                         <PrivateRoute path="/customer/main">
                             <CustomerPage/>
                         </PrivateRoute>
-                        <PrivateRoute path="/customer/shopping-cart">
+                        <Route path="/shopping-cart">
                             <ShoppingCart/>
-                        </PrivateRoute>
+                        </Route>
                         <PrivateRoute path="/customer/wishlist">
                             <WishList/>
                         </PrivateRoute>

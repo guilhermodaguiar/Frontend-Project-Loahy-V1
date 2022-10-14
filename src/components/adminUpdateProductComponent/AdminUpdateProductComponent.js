@@ -36,7 +36,7 @@ function AdminUpdateProductComponent() {
     }
 
     function updatedProduct() {
-        history.push('/products');
+        history.push('/randomProduct');
     }
 
     return(
@@ -89,7 +89,7 @@ function AdminUpdateProductComponent() {
                                     <br/>
 
                                     <label htmlFor="details-product-name">
-                                        Product-naam:
+                                        RandomProduct-naam:
                                         <input
                                             type="text"
                                             id="product_name"
@@ -140,7 +140,7 @@ function AdminUpdateProductComponent() {
                                     {errors.product_price && <p>{errors.product_price.message}</p>}
 
                                     <button type="submit">
-                                        Voeg Product toe
+                                        Voeg RandomProduct toe
                                     </button>
                                 </div>
                             </form>

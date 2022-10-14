@@ -28,7 +28,6 @@ body {
     align-items: center;
     background: url('../../../assets/winkel_wagen_background.jpg') no-repeat center center fixed;
     background-size: cover;
-    box-shadow: #b7b7b7 5px 10px 10px;
 }
 
 .header-name {
@@ -62,23 +61,11 @@ input {
     flex-basis: auto;
 }
 
-.form-container-login {
-    padding: 3rem;
-    margin: 1rem 5rem 1rem 5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    flex-grow: 1;
-    align-items: center;
-    min-width: 500px;
-    background-size: cover;
-}
-
 .login-body {
     display: flex;
     flex-direction: row;
     justify-content: start;
-    padding: 30px;
+    flex-wrap: wrap;
 }
 
 .to-register-body {
@@ -98,6 +85,8 @@ input {
     background-size: cover;
     border-right: groove;
     flex-wrap: wrap;
+    min-width: 500px;
+    background-color:chocolate;
 }
 
 .customer-login-outer-container {

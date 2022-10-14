@@ -27,7 +27,7 @@ function AuthContextProvider({children}) {
                 status: 'done',
             });
         }
-    }, [])
+    }, [getData])
 
 
     function login(token) {

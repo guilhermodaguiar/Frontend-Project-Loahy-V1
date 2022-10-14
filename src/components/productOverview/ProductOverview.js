@@ -1,36 +1,34 @@
 import './ProductOverview.css';
 import React from "react";
 
-import Product from "../products/Product";
-import {HashLink as Link} from "react-router-hash-link";
+import RandomProduct from "../randomProduct/RandomProduct";
+import {NavLink} from "react-router-dom";
+import {FcShop} from "react-icons/fc";
 
 
 function ProductOverview() {
+
 
     return (
         <>
             <main>
                 <div className="outer-container">
-                    <div className="product-container">
-                        <h1 className="title-products-header" id="products">Onze producten</h1>
-                        <div className="product-list">
-                            <li className="product-item-info">
-                                <div className="photo-wrapper">
-                                    <Product/>
-                                    <Product/>
-                                    <Product/>
+                    <h1 className="title-products-header" id="products">Onze producten</h1>
+                    <div className="product-overview-inner-container">
+                        <div className="product-container">
+                            <div className="product-list">
+                                <div className="product-item-info">
+                                        <div className="photo-wrapper">
+                                            <RandomProduct/>
+                                            <RandomProduct/>
+                                            <RandomProduct/>
+                                        </div>
                                 </div>
-                            </li>
-                            <div>
-                                <Link to="/shop">
-                                    <button
-                                        type="button"
-                                        //bij het clicken moet het Productpagina worden afgevuurd
-                                        onClick={()=>console.log("Jij wil shoppen!")}
-                                    >Naar de Shop
-                                    </button>
-                                </Link>
                             </div>
+                        </div>
+                        <div className="to-shop-link-container">
+                            <p className="click-to-shop">Klik <span><NavLink to="/shop" exact activeClassName="active-link"><FcShop className="shop-icon" size={25}/></NavLink></span> om naar de shop te gaan
+                            </p>
                         </div>
                     </div>
                 </div>

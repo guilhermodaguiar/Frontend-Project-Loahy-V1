@@ -6,6 +6,7 @@ import {faCheck, faTimes, faInfoCircle} from "@fortawesome/free-solid-svg-icons"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useRef, useState, useEffect} from "react";
 import {NavLink, useHistory} from "react-router-dom";
+import RandomRobot from "../../../components/randomRobot/RandomRobot";
 
 
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -208,7 +209,7 @@ function CustomerRegister() {
                                     <p className="form-footer">
                                         Ik heb al een Loahy account!<br/>
                                         <span className="line">
-                            <NavLink to="/customer" exact activeClassName="active-link">Login</NavLink>
+                                            <NavLink to="/customer" exact activeClassName="active-link">Login</NavLink>
                                         </span>
                                     </p>
                                 </div>

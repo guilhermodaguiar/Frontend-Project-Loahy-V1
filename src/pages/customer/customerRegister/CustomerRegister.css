@@ -28,7 +28,6 @@ body {
     align-items: center;
     background: url('../../../assets/winkel_wagen_background.jpg') no-repeat center center fixed;
     background-size: cover;
-    box-shadow: #b7b7b7 5px 10px 10px;
 }
 
 .header-name {
@@ -41,7 +40,6 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: start;
-    padding: 30px;
 }
 
 input {
@@ -63,15 +61,17 @@ input {
 .customer-inner-container {
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: space-between;
     padding: 30px;
+    flex-wrap: wrap;
 }
 
 .customer-register-outer-container {
     display: flex;
     flex-direction: column;
     justify-content: start;
-    padding: 90px;
+    padding: 60px;
+    background-color: wheat;
 }
 
 
@@ -91,16 +91,16 @@ input {
 }
 
 .form-container-register {
-    padding: 3rem;
-    margin: 1rem 5rem 1rem 5rem;
-    display: block;
+    padding: 37px;
+    display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     flex-grow: 1;
-    align-items: center;
+    align-items: flex-start;
     background-size: cover;
-    border-right: groove;
     flex-wrap: wrap;
+    min-width: 500px;
+    background-color: chocolate;
 }
 
 .valid-green-check {
@@ -133,7 +133,6 @@ input {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    padding: 60px;
 }
 
 

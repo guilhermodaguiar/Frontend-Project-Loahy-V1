@@ -93,7 +93,7 @@ function AdminProfile() {
             {/*    /!*                <tr>*!/*/}
             {/*    /!*                    <th className="client_id">klant-id</th>*!/*/}
             {/*    /!*                    <th className="order_nummer">order-nummer</th>*!/*/}
-            {/*    /!*                    <th className="order_field">Back-end_data met product, en aantal en subtotaal</th>*!/*/}
+            {/*    /!*                    <th className="order_field">Back-end_data met randomProduct, en aantal en subtotaal</th>*!/*/}
             {/*    /!*                    <th className="handle_order">verwerk button met ja en nee en wanneer verwerkt moet het het naar een link gaan naar email adres </th>*!/*/}
             {/*    /!*                </tr>*!/*/}
             {/*    /!*                </tbody>*!/*/}

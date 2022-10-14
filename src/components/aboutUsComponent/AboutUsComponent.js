@@ -11,16 +11,11 @@ function AboutUsComponent() {
     const [brandData, setBrandData] = useState({});
 
     useEffect(() => {
-        async function fetchBrandStory() {
 
-            const token = localStorage.getItem('token');
+        async function fetchBrandStory() {
 
             try {
                 const response = await axios.get(`http://localhost:8080/about-loahy`, {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
-                    },
                 });
                 setBrandData(response.data)
             } catch (e) {
@@ -28,10 +23,6 @@ function AboutUsComponent() {
             }
             fetchBrandStory();
 
-            return function cleanup() {
-
-                token.cancel();
-            }
         }
     }, []);
 
@@ -48,6 +39,7 @@ function AboutUsComponent() {
                                 Loahy staat voor duurzaam en creatieve producten voor kinderen van alle leeftijden. Speelgoed om kinderen te stimuleren hun fantasie te gebruiken en hun vaardigheden te ontwikkelen.
                                 Na de geboorte van zijn zoon Felipe in 2017, besloot oprichter Guilhermo om op zoek te gaan naar de leukste kinderproducten die er zijn. Zo ontstond Loahy. De producten zijn met zorg geselecteerd en worden internationaal ingekocht. Mis je nog iets op de website? Laat het ons weten!
                             </p>
+                            <p>{brandData.brandInformation}</p>
                         </article>
                     </div>
                     <div className="inner-container-about-us">
@@ -69,19 +61,6 @@ function AboutUsComponent() {
                         </div>
                     </div>
                 </div>
-
-                {/*<div className="page-title-wrapper" id="our-story">*/}
-                {/*    {Object.keys(brandData).length > 0 &&*/}
-                {/*        <><h1 className="title-about-us">{brandData.title}</h1>*/}
-                {/*            <article className={"foto-about-us"}>*/}
-                {/*                {brandData.image}*/}
-                {/*            </article>*/}
-                {/*            <article className="story-about-us">*/}
-                {/*                {brandData.content}*/}
-                {/*            </article>*/}
-                {/*        </>*/}
-                {/*    }*/}
-                {/*</div>*/}
             </main>
         </>
         )

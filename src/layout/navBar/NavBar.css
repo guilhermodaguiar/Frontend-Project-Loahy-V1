@@ -38,3 +38,31 @@ nav a:hover {
     justify-content: space-between;
     width: 200px;
 }
+
+.navbar-shopping-cart-icon {
+    background-color: transparent;
+    width: 2px;
+    height: 2px;
+    position: relative;
+    outline: transparent;
+    padding: unset;
+}
+
+.rounded-circle {
+    border-radius: 50% !important;
+    color: white;
+    font-size: 12px;
+    font-family: Poppins, sans-serif;
+    font-style: oblique;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    bottom: 64px;
+    right: 260px;
+    transform: translate(16%, 13%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: darkred;
+
+}
