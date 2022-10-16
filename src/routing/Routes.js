@@ -11,6 +11,7 @@ import AdminLogIn from "../pages/admin/AdminLogIn";
 import CustomerRegister from "../pages/customer/customerRegister/CustomerRegister";
 import CustomerLogIn from "../pages/customer/customerLogIn/CustomerLogIn";
 import Shop from "../pages/shop/Shop";
+import Shop2 from "../pages/shop/Shop2";
 
 
 
@@ -47,6 +48,9 @@ function Routes() {
                         </Route>
                         <Route exact path="/shop">
                             <Shop/>
+                        </Route>
+                        <Route exact path="/shop2">
+                            <Shop2/>
                         </Route>
                     </Switch>
                 </div>

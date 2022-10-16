@@ -54,7 +54,7 @@ function Product(props) {
                 )
             );
         } else {
-            setShoppingCart([...wishlist, {...product, qty: 1}]);
+            setWishlist([...wishlist, {...product, qty: 1}]);
         }
         localStorage.setItem(wishlist, JSON.stringify(wishlist));
     }
@@ -89,6 +89,9 @@ function Product(props) {
                     </div>
                 </div>
 
+
+                {/*Als wishlist leeg is moet het naar "/login/registreer gaan
+                - of een login component komen???*/}
                 <div className="AddItemsToWishlistContainer-container">
                     <div className="Add-items-to-wishlist-container">
 

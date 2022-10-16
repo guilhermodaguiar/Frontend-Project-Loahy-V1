@@ -7,7 +7,7 @@ export const WishlistContext = createContext({
 //maak custom provider
 function WishlistProvider({children}) {
     //state aanmaken
-    //functies schrijven om die state te wijzigen\
+    //functies schrijven om die state te wijzigen
     //data object managen
     const [amountOfProducts, setAmountOfProducts] = useState(0)
 

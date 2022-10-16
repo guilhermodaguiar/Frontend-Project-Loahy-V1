@@ -10,6 +10,16 @@ body {
     font-family: "Poppins", sans-serif;
 }
 
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: #e9b716;
+    padding: 30px 60px;
+    height: 100px;
+    color: white;
+}
+
 
 
 
