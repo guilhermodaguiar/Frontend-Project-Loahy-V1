@@ -20,7 +20,7 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background: url('../../assets/admin_background.jpg') no-repeat center center fixed;
+    background: url('../../assets/winkel_wagen_background.jpg') no-repeat center center fixed;
     background-size: cover;
 }
 
@@ -103,7 +103,19 @@ thead, tbody {
     justify-content: space-between;
     flex-direction: column;
     flex-wrap: wrap;
+}
 
+.cart-checkout-button {
+    background-color: #df7c6d;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    padding: 1px 7px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
 

@@ -131,5 +131,6 @@ main {
     flex-basis: auto;
     padding: 5px 0;
     font-size: large;
+    align-items: center;
 }
 

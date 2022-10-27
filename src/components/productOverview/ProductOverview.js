@@ -27,7 +27,7 @@ function ProductOverview() {
                             </div>
                         </div>
                         <div className="to-shop-link-container">
-                            <p className="click-to-shop">Klik <span><NavLink to="/shop" exact activeClassName="active-link"><FcShop className="shop-icon" size={25}/></NavLink></span> om naar de shop te gaan
+                            <p className="click-to-shop">Klik&nbsp;<span><NavLink to="/shop" exact activeClassName="active-link"><FcShop className="shop-icon" size={25}/></NavLink></span>&nbsp;om naar de shop te gaan
                             </p>
                         </div>
                     </div>

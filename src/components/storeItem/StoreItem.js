@@ -1,18 +1,19 @@
 import React, {useContext} from "react";
-import './Product.css';
-import {ShoppingCartContext} from "../../context/ShoppingCartContext";
+import './StoreItem.css';
 import {WishlistContext} from "../../context/WishlistContext";
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
-import { BsCartPlusFill } from "react-icons/bs";
+import {BsCartPlusFill, BsFillCartPlusFill} from "react-icons/bs";
 import {TbHeartPlus} from "react-icons/tb";
 import {formatCurrency} from "../../helpers/formatCurrency/FormatCurrency";
+import {HiHeart} from "react-icons/hi";
+import {CartContext} from "../../context/CartContext";
 
-function Product(props) {
+function StoreItem(props) {
 
     const history = useHistory();
 
-    const [shoppingCart, setShoppingCart] = useContext(ShoppingCartContext);
+    const [shoppingCart, setShoppingCart] = useContext(CartContext);
     const [wishlist, setWishlist] = useContext(WishlistContext);
 
 
@@ -66,17 +67,50 @@ function Product(props) {
 
     return (
         <>
+            <div className="main-container-product">
+                <div className="border-effect-container">
+                    <div className="random-robot-container">
+                        <div className="wishlist-heart">
+                            {}
+                            <HiHeart size={22}
+                                     onClick={() => {
+                                         addToWishlist(props.product_id)
+                                     }}/>
+                        </div>
+                        <div>
+                            <img alt={props.fileName}
+                                 src={props.url}
+                            />
+                        </div>
+                    </div>
+                    <div className="product-details">
+                        <strong className="product-name">
+                            {props.productName}
+                        </strong>
+                        <div className="product-price">
+                            € {props.productPrice.toFixed(2)}
+                            <p>{formatCurrency(props.productPrice)}</p>
+                        </div>
+                        <div className="product-item-inner">
+                            <div className="add-item-to-cart">
+                                <button className="click-to-cart"
+                                        onClick={() => addToShoppingCart({props})}>
+                                    <p><BsFillCartPlusFill/> &nbsp;In winkelwagen</p>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <section>
                 <span className="product-text">
                     <h3> {props.productName} </h3>
                 </span>
             </section>
             <section className="product">
-
                 <div className="info-marker-product"
                      onClick={redirect}>
                 </div>
-
                 <div className="AddItemsContainer-container">
                     <div className="AddItemsContainer">
 
@@ -88,8 +122,6 @@ function Product(props) {
                         </div>
                     </div>
                 </div>
-
-
                 {/*Als wishlist leeg is moet het naar "/login/registreer gaan
                 - of een login component komen???*/}
                 <div className="AddItemsToWishlistContainer-container">
@@ -104,22 +136,9 @@ function Product(props) {
                         </div>
                     </div>
                 </div>
-
-                <div className="container-ImageButton">
-                    <div className="product-image">
-                        <img alt={props.fileName} src={props.url}/>
-                    </div>
-                </div>
-
-                <span className="container-TextPrice">
-                         <span className="product-price">
-                             <p> € {props.productPrice.toFixed(2)} </p>
-                             <p>{formatCurrency(props.productPrice)}</p>
-                         </span>
-                </span>
             </section>
         </>
     )
 }
 
-export default Product;
+export default StoreItem;

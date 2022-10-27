@@ -4,13 +4,16 @@ import {NavLink, useHistory} from 'react-router-dom'
 import {AuthContext} from "../../../context/AuthContext";
 import axios from "axios";
 import {useFormContext} from "react-hook-form";
+import {RiLoginCircleFill} from "react-icons/ri";
+import {MdAccountCircle} from "react-icons/md";
+import {AiOutlineForm} from "react-icons/ai";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{4,11}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 function CustomerLogIn() {
     const history = useHistory();
-    const { login, isAuth } = useContext(AuthContext);
+    const {login, isAuth} = useContext(AuthContext);
 
     const {register, formState: {errors}, handleSubmit} = useFormContext();
 
@@ -50,7 +53,7 @@ function CustomerLogIn() {
 
             setTimeout(() => {
                 history.push("/customer/main");
-            },3000)
+            }, 3000)
 
         } catch (e) {
             console.error(e);
@@ -59,78 +62,80 @@ function CustomerLogIn() {
     }
 
 
-    return(
+    return (
         <>
-            { !isAuth ? (
-                <div>
-                    <div className="customer-inlog-page">
-                        <h1 className="header-name">Inloggen</h1>
-                    </div>
-
-                    <div className="customer-register-outer-container">
-                        <div>
-                                <h3 className="customer-h3-header">Ik heb een Loahy account</h3>
+            {!isAuth ? (
+                    <div>
+                        <div className="customer-inlog-page">
+                            <h1 className="header-name">Inloggen</h1>
                         </div>
-                        <div className="field-note">
-                            <p>Meld je aan met je e-mailadres en wachtwoord</p>
-                        </div>
-                        <div className="customer-inner-container">
-
-                            <div className="login-body">
-                                <section className="block-login-costumer">
-                                    <form
-                                        className="form-container-login"
-                                        onSubmit={handleSubmit(userLoginRequest)}>
-
-
-                                        <label htmlFor="email-field">
-                                            E-mailadres:
-                                            <input
-                                                type="email"
-                                                id="email-field"
-                                                {...register("userEmail", {
-                                                    required: "email-adres is verplicht!",
-                                                })}
-                                                aria-invalid={validUserEmail ? "false" : "true"}
-                                            />
-                                        </label>
-                                        {errors.userEmail && <p>{errors.userEmail.message}</p>}
-                                        <label htmlFor="password-field">
-                                            Wachtwoord:
-                                            <input
-                                                type="password"
-                                                id="password-field"
-                                                {...register("password", {
-                                                    required: "wachtwoord is verplicht!"
-                                                })}
-                                                aria-invalid={validPassword ? "false" : "true"}
-                                            />
-                                        </label>
-                                        {error.userPassword && <p>{error.userPassword.message}</p>}
-                                        {error && <p className="error">Combinatie van email adres en wachtwoord is onjuist, probeer het nog eens</p>}
-
-                                        <button
-                                            disabled={!validPassword || !validUserEmail}
-                                            type="submit"
-                                            className="form-button"
-                                        >
-                                            Inloggen
-                                        </button>
-                                    </form>
-                                </section>
+                        <div className="customer-register-outer-container">
+                            <div>
+                                <h3 className="customer-h3-header"><MdAccountCircle size={36}/>&nbsp;Ik heb een Loahy account</h3>
                             </div>
-                            <div className="to-register-body">
-                                <p className="form-footer">
-                                    Ik heb geen Loahy account<br/>
-                                    <span className="line">
-                                    <NavLink to="customer/register" exact activeClassName="active-link">Registreer</NavLink>
-                                </span>
-                                </p>
+                            <div className="login-field-note">
+                                Meld je aan met je e-mailadres en wachtwoord
+                            </div>
+                            <div className="customer-inner-container">
+
+                                <div className="login-body">
+                                    <section className="block-login-costumer">
+                                        <form
+                                            className="form-container-login"
+                                            onSubmit={handleSubmit(userLoginRequest)}>
+
+
+                                            <label htmlFor="email-field">
+                                                E-mailadres:
+                                                <input
+                                                    type="email"
+                                                    id="email-field"
+                                                    {...register("userEmail", {
+                                                        required: "email-adres is verplicht!",
+                                                    })}
+                                                    aria-invalid={validUserEmail ? "false" : "true"}
+                                                />
+                                            </label>
+                                            {errors.userEmail && <p>{errors.userEmail.message}</p>}
+                                            <label htmlFor="password-field">
+                                                Wachtwoord:
+                                                <input
+                                                    type="password"
+                                                    id="password-field"
+                                                    {...register("password", {
+                                                        required: "wachtwoord is verplicht!"
+                                                    })}
+                                                    aria-invalid={validPassword ? "false" : "true"}
+                                                />
+                                            </label>
+                                            {error.userPassword && <p>{error.userPassword.message}</p>}
+                                            {error &&
+                                                <p className="error">Combinatie van email adres en wachtwoord is onjuist,
+                                                    probeer het nog eens</p>}
+
+                                            <button
+                                                disabled={!validPassword || !validUserEmail}
+                                                type="submit"
+                                                className="form-button-login"
+                                            >
+                                                <RiLoginCircleFill/>&nbsp;Inloggen
+                                            </button>
+                                        </form>
+                                    </section>
+                                </div>
+                                <div className="to-register-body">
+                                    <p className="form-footer">
+                                        <AiOutlineForm size={40}/>Ik heb geen Loahy account
+                                        <span className="line">
+                                            <NavLink to="customer/register" exact activeClassName="active-link">
+                                                Registreer</NavLink>
+                                        </span>
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                </div>)
+                    </div>)
                 :
                 (<span className="inlog-customer-successful">
                 <h1>Inloggen succesvol!</h1>

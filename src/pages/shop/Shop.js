@@ -2,34 +2,34 @@ import React, {useEffect, useState} from "react";
 
 import './Shop.css';
 import axios from "axios";
-import Product from "../../components/product/Product";
+import StoreItem from "../../components/storeItem/StoreItem";
 import ScrollIndicator from "../../helpers/scrollIndicator/ScrollIndicator";
 import ScrollToTop from "../../helpers/scrollToTop/ScrollToTop";
 
 function Shop() {
 
-    const [products, setProducts] = useState([]);
+    const [storeItems, setStoreItems] = useState([]);
 
 
     useEffect(() => {
 
-        async function fetchProducts() {
+        async function fetchStoreItems() {
             try {
-                const response = await axios.get('http://localhost:8080/products', {
-                });
-                    setProducts(response.data);
+                const response = await axios.get('http://localhost:8080/products', {});
+                setStoreItems(response.data);
 
-                } catch (e) {
-                    console.error(e);
-                }
+            } catch (e) {
+                console.error(e);
             }
-            fetchProducts();
+        }
 
-        }, []);
+        fetchStoreItems();
+
+    }, []);
 
 
     window.scrollTo({
-        top:0,
+        top: 0,
         behavior: 'smooth'
     })
 
@@ -45,42 +45,40 @@ function Shop() {
                     <div className="shop-outer-container">
                         <div className="inner-container">
                             <div className="container-all-products">
-                                {products.map((product) => {
-                                return(
-                                    product.image !== null ?
-                                        <Product
-                                            key={product.productId}
+                                {storeItems.map((item) => {
+                                    return (
+                                        item.image !== null ?
+                                            <StoreItem
+                                                key={item.productId}
 
-                                            url={product.image.url}
-                                            filename={product.image.filename}
+                                                url={item.image.url}
+                                                filename={item.image.filename}
 
-                                            product_id={product.productId}
-                                            product_name={product.productName}
-                                            product_description={product.productDescription}
-                                            product_price={product.productPrice}
-                                        />
-                                        :
-                                        <Product
-                                            key={product.id}
+                                                product_id={item.productId}
+                                                product_name={item.productName}
+                                                product_description={item.productDescription}
+                                                product_price={item.productPrice}
+                                            />
+                                            :
+                                            <StoreItem
+                                                key={item.id}
 
-                                            product_id={product.productId}
-                                            productName={product.productName}
-                                            product_description={product.productDescription}
-                                            productPrice={product.productPrice}
-                                        />
-                                )
-                            })}
+                                                product_id={item.productId}
+                                                productName={item.productName}
+                                                product_description={item.productDescription}
+                                                productPrice={item.productPrice}
+                                            />
+                                    )
+                                })}
+                            </div>
                         </div>
                     </div>
-                </div>
 
                 </div>
             </div>
 
 
-
-
-            </>
+        </>
     )
 }
 

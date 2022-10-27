@@ -4,6 +4,7 @@ import axios from 'axios';
 import {AuthContext} from "../../context/AuthContext";
 import {useFormContext} from "react-hook-form";
 import {NavLink, useHistory} from "react-router-dom";
+import {RiLoginCircleFill} from "react-icons/ri";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{4,11}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -82,6 +83,7 @@ function AdminLogIn() {
                                     <label htmlFor="email-field">
                                         E-mailadres
                                         <input
+                                            className="admin-input"
                                             type="email"
                                             id="email-field"
                                             name="email"
@@ -96,6 +98,7 @@ function AdminLogIn() {
                                     <label htmlFor="password-field">
                                         Wachtwoord:
                                         <input
+                                            className="admin-input"
                                             type="password"
                                             id="password-field"
                                             name="password"
@@ -114,7 +117,7 @@ function AdminLogIn() {
                                         type="submit"
                                         className="form-button"
                                     >
-                                        Inloggen
+                                          Inloggen&nbsp;<RiLoginCircleFill size={22}/>
                                     </button>
                                 </form>
                             </div>

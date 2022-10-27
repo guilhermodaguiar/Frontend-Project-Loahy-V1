@@ -1,9 +1,9 @@
 import React from "react";
 
-import { Route, Switch} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 import Home from "../pages/home/Home";
-import ShoppingCart from "../pages/shoppingCart/ShoppingCart";
-import WishList from "../components/wishList/wishList";
+import ShoppingCart from "../pages/cart/ShoppingCart";
+import WishList from "../pages/wishList/WishList";
 import PrivateRoute from "./privateRoute/PrivateRoute";
 import CustomerPage from "../pages/customer/CustomerPage";
 import AdminPage from "../pages/admin/AdminPage";
@@ -12,7 +12,7 @@ import CustomerRegister from "../pages/customer/customerRegister/CustomerRegiste
 import CustomerLogIn from "../pages/customer/customerLogIn/CustomerLogIn";
 import Shop from "../pages/shop/Shop";
 import Shop2 from "../pages/shop/Shop2";
-
+import CheckOut from "../pages/checkout/CheckOut";
 
 
 function Routes() {
@@ -34,9 +34,12 @@ function Routes() {
                         <Route path="/shopping-cart">
                             <ShoppingCart/>
                         </Route>
-                        <PrivateRoute path="/customer/wishlist">
+                        <Route exact path="/customer/checkout">
+                            <CheckOut/>
+                        </Route>
+                        <Route path="/wishlist">
                             <WishList/>
-                        </PrivateRoute>
+                        </Route>
                         <Route exact path="/admin">
                             <AdminLogIn/>
                         </Route>

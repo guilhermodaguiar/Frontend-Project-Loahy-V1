@@ -110,10 +110,16 @@ body {
     border-right: groove;
     padding-left: 10px;
     padding-right: 30px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .contact-us-contact-us {
-    padding-right: 30px;
+    display: flex;
+    justify-content: start;
 }
 
 .flex-container {
@@ -138,6 +144,27 @@ textarea {
     border: 1px solid #ddd;
     box-sizing: border-box;
     font-family: Poppins, sans-serif;
+}
+
+.form-button-send-form {
+    background-color: #df7c6d;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    padding: 1px 7px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.contact-us-information-list-contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-basis: auto;
+    flex-wrap: wrap;
 }
 
 

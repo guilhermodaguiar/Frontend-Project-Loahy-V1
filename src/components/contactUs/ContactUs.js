@@ -3,8 +3,9 @@ import React, {useEffect} from "react";
 import {useState} from "react";
 import {FaFacebook, FaInstagram} from "react-icons/fa";
 import axios from "axios";
-import {ReactComponent as KvK } from "../../assets/icons/kvk-logo.svg";
+import {ReactComponent as KvK} from "../../assets/icons/kvk-logo.svg";
 import {HiLocationMarker, HiOutlineMail, HiOutlinePhone} from "react-icons/hi";
+import {FiSend} from "react-icons/fi";
 
 
 function ContactUs() {
@@ -18,14 +19,14 @@ function ContactUs() {
     //state voor functionaliteiten
     const [loading, toggleLoading] = useState(false);
     const [addSucces, toggleAddSucces] = useState(false);
-    const [ setContactInput] = useState([]);
+    const [setContactInput] = useState([]);
 
 
-    async function handleContactSubmit(e){
+    async function handleContactSubmit(e) {
         e.preventDefault(e);
         toggleLoading(true);
 
-        try{
+        try {
             const response = await axios.post('http://localhost:8080/contactus', {
                 contactName: contactName,
                 contactEmail: contactEmail,
@@ -43,7 +44,7 @@ function ContactUs() {
         toggleLoading(false);
     }
 
-    return(
+    return (
         <>
             <main>
                 <div className="contact-us-outer-container">
@@ -81,10 +82,11 @@ function ContactUs() {
                             <div className="contact-us-border-container">
                                 <div className="contact-us-information">
                                     <h3>Contact Informatie</h3>
-                                    <div className="contact-us-information-list">
+                                    <div className="contact-us-information-list-contact">
                                         <p><KvK className="Kvk-icon"/>82072272</p>
                                         <p><HiLocationMarker/>Balistraat 42, 3531PX, Utrecht</p>
-                                        <p><HiOutlineMail/><a href="mailto:contact-ons@loahy.nl">contact-ons@loahy.nl</a></p>
+                                        <p><HiOutlineMail/><a
+                                            href="mailto:contact-ons@loahy.nl">contact-ons@loahy.nl</a></p>
                                         <p><HiOutlinePhone/><a href="tel:+31-06-30399190">06-30399190</a></p>
                                     </div>
                                 </div>
@@ -95,7 +97,8 @@ function ContactUs() {
                                         </a>
                                     </div>
                                     <div>
-                                        <a className="facebook-icon" href="https://www.facebook.com/Loahytree-109562478288311/?notif_id=1655164686624838&notif_t=aymt_page_post_reminder_14d_notification&ref=notif">
+                                        <a className="facebook-icon"
+                                           href="https://www.facebook.com/Loahytree-109562478288311/?notif_id=1655164686624838&notif_t=aymt_page_post_reminder_14d_notification&ref=notif">
                                             <FaFacebook size={22}/>
                                         </a>
                                     </div>
@@ -174,11 +177,12 @@ function ContactUs() {
                                         </div>
                                         <button
                                             type="submit"
-                                            className="form-button"
-                                            disabled={ loading }
-                                        >Verzend
+                                            className="form-button-send-form"
+                                            disabled={loading}
+                                        ><FiSend/>&nbsp;verzend
                                         </button>
-                                        {addSucces === true && <p>Bedankt voor je bericht! Wij reageren binnen 24 uur </p>}
+                                        {addSucces === true &&
+                                            <p>Bedankt voor je bericht! Wij reageren binnen 24 uur </p>}
                                     </form>
                                 </div>
                             </div>

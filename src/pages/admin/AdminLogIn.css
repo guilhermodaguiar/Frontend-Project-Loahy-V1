@@ -34,3 +34,33 @@
     padding: 48px 0;
     color: white;
 }
+
+
+.form-container-admin {
+    padding: 3rem;
+    margin: 1rem 5rem 1rem 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-grow: 1;
+    align-items: start;
+    background-size: cover;
+    border-right: groove;
+    flex-wrap: wrap;
+    min-width: 500px;
+    background-color: chocolate;
+}
+
+.admin-input {
+    width: 70%;
+    padding: 7px 60px;
+    margin: 10px 42px;
+    border: 1px solid #ddd;
+    display: flex;
+    justify-content: start;
+}
+
+.placeholder {
+    justify-content: start;
+}
+

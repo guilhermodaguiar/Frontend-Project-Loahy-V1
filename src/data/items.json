@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Robot1",
+    "price": 10.99,
+    "imgUrl": "/imgs/Lovepik_com-401280567-robot.png"
+  },
+  {
+    "id": 2,
+    "name": "Robot2",
+    "price": 1199,
+    "imgUrl": "/imgs/Lovepik_com-610599430-Cartoon cute robot toy vector.png"
+  },
+  {
+    "id": 3,
+    "name": "Robot3",
+    "price": 1.05,
+    "imgUrl": "/imgs/Lovepik_com-611114674-Cute robot cartoon illustration.png"
+  },
+  {
+    "id": 4,
+    "name": "Robot4",
+    "price": 60,
+    "imgUrl": "/imgs/Lovepik_com-611115069-Cute robot cartoon illustration.png"
+  },
+  {
+    "id": 5,
+    "name": "Robot5",
+    "price": 140,
+    "imgUrl": "/imgs/Lovepik_com-611115071-Cute robot cartoon illustration.png"
+  }
+]

@@ -88,6 +88,8 @@ input {
     font-size: 28px;
     padding: 30px 30px;
     color: black;
+    display: flex;
+    align-items: center;
 }
 
 .form-container-register {
@@ -141,14 +143,23 @@ input {
 }
 
 .form-footer {
+    padding-right: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 
 
 .form-container-register button {
-    padding: 0.5rem;
+    background-color: #df7c6d;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    padding: 1px 7px;
+    cursor: pointer;
 }
 
 .instructions {
@@ -186,13 +197,15 @@ input {
 }
 
 .valid {
-    color: limegreen;
-    margin-left: 0.25rem;
+    color: wheat;
+    font-size: larger;
+    margin-left: 10px;
 }
 
 .invalid {
-    color: red;
-    margin-left: 0.25rem;
+    color: black;
+    margin-left: 10px;
+    font-size: larger;
 }
 
 .errMsg {
@@ -205,6 +218,7 @@ input {
 
 .line {
     display: inline-block;
+    padding: 5px;
 }
 
 .button-register {

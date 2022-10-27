@@ -5,7 +5,7 @@ import {AuthContext} from "../../context/AuthContext";
 function UserProfile() {
     const {
         user: {
-            user_id, customer_firstname, customer_lastname,
+            customer_firstname, customer_lastname,
             customer_street_name,
             customer_house_number,
             customer_house_number_additional,
@@ -15,25 +15,25 @@ function UserProfile() {
         }
     } = useContext(AuthContext);
 
-    return(
+    return (
         <>
             <section className="userprofile-page">
                 <div className="userprofile-container">
 
-                    <span>
+                    <div className="info-container">
                          {customer_firstname} {customer_lastname}
-                    </span>
+                    </div>
 
-                    <p>
+                    <div className="info-container">
                         {customer_street_name} {customer_house_number}-{customer_house_number_additional}
-                    </p>
+                    </div>
 
-                    <p>
+                    <div className="info-container">
                         {customer_zipcode} {customer_city}
-                    </p>
-                    <p>
+                    </div>
+                    <div className="info-container">
                         {customer_phone}
-                    </p>
+                    </div>
 
                 </div>
             </section>

@@ -4,13 +4,11 @@ import './Shop2.css';
 import axios from "axios";
 import ScrollIndicator from "../../helpers/scrollIndicator/ScrollIndicator";
 import ScrollToTop from "../../helpers/scrollToTop/ScrollToTop";
-import Product2 from "../../components/product/Product2";
-import RandomProduct from "../../components/randomProduct/RandomProduct";
 import RandomRobot from "../../components/randomRobot/RandomRobot";
 
 function Shop2() {
 
-    const [products2, setProducts2] = useState([]);
+    const [items, setItems] = useState([]);
 
 
     useEffect(() => {
@@ -19,7 +17,7 @@ function Shop2() {
             try {
                 const response = await axios.get('http://localhost:8080/products', {
                 });
-                setProducts2(response.data);
+                setItems(response.data);
 
             } catch (e) {
                 console.error(e);

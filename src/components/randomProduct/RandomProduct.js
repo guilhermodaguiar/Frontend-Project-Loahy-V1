@@ -8,24 +8,24 @@ function RandomProduct() {
 
     const history = useHistory();
 
-    const [products, setProducts] = useState([]);
-    const [currentProductIndex, setCurrentProductIndex] = useState(Math.floor(Math.random() * products.length));
+    const [items, setItems] = useState([]);
+    const [currentProductIndex, setCurrentProductIndex] = useState(Math.floor(Math.random() * items.length));
 
 
     useEffect(() => {
 
-        async function fetchProducts() {
+        async function fetchItems() {
             try {
                 const response = await axios.get('http://localhost:8080/products',{
                     });
-                setProducts(response.data);
+                setItems(response.data);
 
             } catch (e) {
                 console.error(e, "er is iets misgegaan met het ophalen van de data");
             }
         }
 
-        fetchProducts();
+        fetchItems();
     }, []);
 
 
@@ -34,7 +34,7 @@ function RandomProduct() {
         function getRandomNumber(max) {
             return Math.floor(Math.random()*max);
         }
-        setCurrentProductIndex(getRandomNumber(products.length));
+        setCurrentProductIndex(getRandomNumber(items.length));
     }
 
     useEffect(() => randomProduct(), [randomProduct]);
@@ -52,7 +52,7 @@ function RandomProduct() {
             <div className="product-outer-container">
                 <div className="product-image-container">
                     <img alt="randomProduct"
-                         src={products[currentProductIndex]}
+                         src={items[currentProductIndex]}
                     />
                     <div>
                         onClick={goToProduct}>

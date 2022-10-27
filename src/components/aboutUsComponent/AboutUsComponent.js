@@ -6,6 +6,11 @@ import Video from "../video/Video";
 import kid_image from "./../../assets/Felipe_playing_Klein.png";
 import kid_pirate from "./../../assets/Kid_playing_pirate Klein.png";
 import owner_profile_pic from "./../../assets/me2_Klein.png";
+import {FaRocket} from "react-icons/fa";
+import {GiPirateFlag} from "react-icons/gi";
+import {MdOutlineToys} from 'react-icons/md'
+
+
 
 function AboutUsComponent() {
     const [brandData, setBrandData] = useState({});
@@ -45,15 +50,15 @@ function AboutUsComponent() {
                     <div className="inner-container-about-us">
                         <div className="video-spaceship" >
                             <Video/>
-                            <p2 className="p2">Blasting off to space</p2>
+                            <p2 className="p2"><FaRocket size={22}/>&nbsp;Blasting off to space</p2>
                         </div>
                         <div className="image-kid-playing-with-toy">
                             <img src={ kid_image } alt="kid-playing-with_loahy_toys"/>
-                            <p className="p2">Felipe playing with toys</p>
+                            <p className="p2"><MdOutlineToys size={22}/>&nbsp;Felipe playing with toys</p>
                         </div>
                         <div>
                             <img src= { kid_pirate } alt="kid-playing-pirate"/>
-                            <p className="p2">Een klein piraat</p>
+                            <p className="p2"><GiPirateFlag size={22}/>&nbsp;Een klein piraat</p>
                         </div>
                         <div>
                             <img src={owner_profile_pic} alt="guilhermo-profile-pic"/>

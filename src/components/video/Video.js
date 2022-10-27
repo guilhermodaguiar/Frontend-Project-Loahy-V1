@@ -1,7 +1,8 @@
-import React, { useRef } from "react";
+import React, {useRef} from "react";
 
 import video from "../../assets/spaceship_loahy.mp4";
 import useVideoPlayer from "../useVideoPlayer/UseVideoPlayer";
+import {HiPause, HiPlay} from "react-icons/hi";
 
 function Video(){
     const videoElement = useRef(null);
@@ -26,9 +27,9 @@ function Video(){
                     <div className="actions">
                         <button onClick={togglePlay}>
                             {!playerState.isPlaying ? (
-                                <i className="bx bx-play"></i>
+                                <HiPlay size={22}/>
                             ) : (
-                                <i className="bx bx-pause"></i>
+                                <HiPause size={22}/>
                             )}
                         </button>
                     </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import './Header.css';
 import {HashLink as Link} from "react-router-hash-link";
+import {BsShopWindow} from "react-icons/bs";
 
 function Header() {
 
@@ -12,9 +13,9 @@ function Header() {
                     <Link to="#products">
                         <button
                             type="button"
-                            //bij het clicken moet het Productpagina worden afgevuurd
+                            className="button-tp-shopping-page"
                             onClick={()=>console.log("Jij wil shoppen!")}
-                        >Shop nu
+                        ><BsShopWindow size={23}/>&nbsp; Shop nu
                         </button>
                     </Link>
                 </div>
