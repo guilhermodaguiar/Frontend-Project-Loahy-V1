@@ -16,7 +16,7 @@ function RandomRobot(id) {
     const images = [robot1, robot2, robot3, robot4, robot5];
     const [currentImageIndex, setCurrentImageIndex] = useState(Math.floor(Math.random() * images.length));
     const {increaseCartQuantity} = useContext(CartContext);
-    const {addToWishlist} = useContext(WishlistContext);
+    const {increaseListQuantity} = useContext(WishlistContext);
 
     function changeImage() {
 
@@ -36,10 +36,9 @@ function RandomRobot(id) {
                 <div className="border-effect-container">
                     <div className="random-robot-container">
                         <div className="wishlist-heart">
-                            {/*hier komt functie hartje om op te clicken en naar wishlist te gaan
-                                en ook de logica als er niet ingelogd moet het naar inlog pagina gaan : (naar wishlistpagina)*/}
                             <HiHeart size={22}
-                                     onClick={() => addToWishlist(id)}
+                                     className="add-to-list-heart"
+                                     onClick={() => increaseListQuantity(id)}
                             />
                         </div>
                         <div>

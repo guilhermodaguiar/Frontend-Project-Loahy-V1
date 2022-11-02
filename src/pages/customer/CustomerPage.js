@@ -7,7 +7,7 @@ import ScrollToTop from "../../helpers/scrollToTop/ScrollToTop";
 import NavBar from "../../layout/navBar/NavBar";
 import {AuthContext} from "../../context/AuthContext";
 import {HashLink as Link} from "react-router-hash-link";
-import ShoppingCart from "../cart/ShoppingCart";
+import Cart from "../cart/Cart";
 import WishList from "../wishList/WishList";
 import {useHistory} from "react-router-dom";
 import axios from "axios";
@@ -22,11 +22,12 @@ function CustomerPage() {
     const[isCustomer, setIsCustomer] = useState([]);
 
     useEffect(() => {
-
+        const source = axios.CancelToken.source();
         async function fetchUserData() {
             try {
                 const response = await axios.get (`http://localhost:8080/users/${user_email}/`,
                     {
+                        cancelToken: source.token,
                         headers: {
                             "Content-Type": "application/json",
                             "Authorization": `Bearer ${token}`,
@@ -36,6 +37,10 @@ function CustomerPage() {
             } catch (e) {
                 console.error('Error: Er is iets misgegaan!', e)
             }
+        }
+        fetchUserData();
+        return function cleanUp() {
+            source.cancel();
         }
 
     }, [token, user_email]);
@@ -73,7 +78,7 @@ function CustomerPage() {
             <ScrollIndicator/>
             <ScrollToTop/>
             <CustomerProfile/>
-            <ShoppingCart/>
+            <Cart/>
             <WishList/>
         </>
     )

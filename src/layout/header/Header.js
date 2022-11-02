@@ -13,7 +13,7 @@ function Header() {
                     <Link to="#products">
                         <button
                             type="button"
-                            className="button-tp-shopping-page"
+                            className="button-to-shopping-page"
                             onClick={()=>console.log("Jij wil shoppen!")}
                         ><BsShopWindow size={23}/>&nbsp; Shop nu
                         </button>

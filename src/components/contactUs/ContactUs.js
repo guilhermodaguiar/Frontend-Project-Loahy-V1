@@ -1,6 +1,5 @@
 import './ContactUs.css';
-import React, {useEffect} from "react";
-import {useState} from "react";
+import React, {useState} from "react";
 import {FaFacebook, FaInstagram} from "react-icons/fa";
 import axios from "axios";
 import {ReactComponent as KvK} from "../../assets/icons/kvk-logo.svg";

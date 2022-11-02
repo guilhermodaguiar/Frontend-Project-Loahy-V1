@@ -77,7 +77,7 @@ function AuthContextProvider({children}) {
             });
 
         } catch (error) {
-            console.error('ERROR', error);
+            console.error('Er is iets misgegaan', error);
             localStorage.clear();
         }
     }

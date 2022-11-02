@@ -1,13 +1,23 @@
 import {createContext, useState} from "react";
+import axios from "axios";
 
 export const WishlistContext = createContext({
 
 });
 
-//maak custom provider
 function WishlistProvider({children}) {
     const [wishlistItems, setWishlistItems] = useState([]);
     const listQuantity = wishlistItems.reduce((quantity, item) => item.quantity + quantity, 0);
+
+    async function getItemData(id) {
+        try {
+            const itemData = await axios.get(`http://localhost:8080/products/${id}`);
+            setWishlistItems(itemData.data);
+        } catch (error) {
+            console.error('er is iets misgegaan', error);
+        }
+        getItemData();
+    }
 
     function getItemQuantity(id) {
         return wishlistItems.find(item => item.id === id)?.quantity || 0
@@ -51,16 +61,9 @@ function WishlistProvider({children}) {
         })
     }
 
-    const wishlistData = {
-        quantity: getItemQuantity,
-        list : wishlistItems,
-        addToWishlist: increaseListQuantity,
-        removeFromWishlist: decreaseListQuantity,
-        removeWishlist: removeFromList,
-    }
 
     return (
-        <WishlistContext.Provider value={wishlistData}>
+        <WishlistContext.Provider value={{listQuantity, getItemQuantity, increaseListQuantity, decreaseListQuantity, removeFromList}}>
             {children}
         </WishlistContext.Provider>
     )

@@ -67,3 +67,17 @@ nav a:hover {
     align-items: center;
     background-color: darkred;
 }
+
+.cart-icon:hover{
+    border-bottom: solid white;
+}
+
+.wishlist-icon:hover{
+    border-bottom: solid white;
+}
+
+.customer-icon:hover{
+    border-bottom: solid white;
+}
+
+

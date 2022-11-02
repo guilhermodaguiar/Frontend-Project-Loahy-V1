@@ -7,7 +7,7 @@ import {AuthContext} from "../../context/AuthContext";
 import axios from "axios";
 import {useHistory} from "react-router-dom";
 import UserProfile from "../userProfile/UserProfile";
-import ShoppingCart from "../../pages/cart/ShoppingCart";
+import Cart from "../../pages/cart/Cart";
 import WishList from "../../pages/wishList/WishList";
 
 
@@ -56,7 +56,7 @@ function CustomerProfile() {
                     <UserProfile/>
                 </section>
                 <section>
-                    <ShoppingCart/>
+                    <Cart/>
                 </section>
                 <section>
                     <WishList/>

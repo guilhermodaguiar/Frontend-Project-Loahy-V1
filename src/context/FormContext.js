@@ -5,14 +5,9 @@ function FormContextProvider(props) {
     const data = useForm();
 
     return (
-
-        <FormProvider
-            {...data}>
-
+        <FormProvider {...data}>
             {props.children}
-
-        </FormProvider>
-    );
+        </FormProvider>);
 }
 
 export default FormContextProvider;

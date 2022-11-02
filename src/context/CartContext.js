@@ -1,4 +1,5 @@
 import React, {createContext, useState} from "react";
+import axios from "axios";
 
 export const CartContext = createContext({});
 
@@ -7,12 +8,22 @@ function CartContextProvider({children}) {
     const [cartItems, setCartItems] = useState([]);
     const cartQuantity = cartItems.reduce((quantity, item) => item.quantity + quantity, 0);
 
+    async function getItemData(id) {
+        try {
+            const itemData = await axios.get(`http://localhost:8080/products/${id}`);
+            setCartItems(itemData.data);
+        } catch (error) {
+            console.error('er is iets misgegaan', error);
+        }
+        getItemData();
+    }
+
 
     function getItemQuantity(id) {
         return cartItems.find(item => item.id === id)?.quantity || 0
     }
 
-    function increaseCartQuantity(id: number) {
+    function increaseCartQuantity(id) {
         setCartItems(currItems => {
             if (currItems.find(item => item.id === id) == null) {
                 return [...currItems, {id, quantity: 1}]
@@ -28,7 +39,7 @@ function CartContextProvider({children}) {
         })
     }
 
-    function decreaseCartQuantity(id: number) {
+    function decreaseCartQuantity(id) {
         setCartItems(currItems => {
             if (currItems.find(item => item.id === id)?.quantity === 1) {
                 return currItems.filter(item => item.id !== id)
@@ -51,11 +62,10 @@ function CartContextProvider({children}) {
     }
 
     return (<CartContext.Provider value={{
-
-            cartQuantity, getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart,
-        }}>
-            {children}
-        </CartContext.Provider>)
+        cartQuantity, getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart,
+    }}>
+        {children}
+    </CartContext.Provider>)
 }
 
 export default CartContextProvider;

@@ -13,10 +13,10 @@ function RandomProduct() {
 
 
     useEffect(() => {
-
+        const source = axios.CancelToken.source();
         async function fetchItems() {
             try {
-                const response = await axios.get('http://localhost:8080/products',{
+                const response = await axios.get('http://localhost:8080/products',{cancelToken: source.token
                     });
                 setItems(response.data);
 
@@ -24,8 +24,10 @@ function RandomProduct() {
                 console.error(e, "er is iets misgegaan met het ophalen van de data");
             }
         }
-
         fetchItems();
+        function cleanUp() {
+            source.cancel();
+        }
     }, []);
 
 

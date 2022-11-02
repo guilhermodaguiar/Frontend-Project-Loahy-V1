@@ -1,4 +1,4 @@
-import './ProductOverview.css';
+import './itemOverview.css';
 import React from "react";
 
 import RandomProduct from "../randomProduct/RandomProduct";
@@ -6,7 +6,7 @@ import {NavLink} from "react-router-dom";
 import {FcShop} from "react-icons/fc";
 
 
-function ProductOverview() {
+function ItemOverview() {
 
 
     return (
@@ -37,4 +37,4 @@ function ProductOverview() {
     );
 }
 
-export default ProductOverview;
+export default ItemOverview;

@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import './StoreItem.css';
+import './ShopItem.css';
 import {WishlistContext} from "../../context/WishlistContext";
 import {useHistory} from "react-router-dom";
 
@@ -9,7 +9,7 @@ import {formatCurrency} from "../../helpers/formatCurrency/FormatCurrency";
 import {HiHeart} from "react-icons/hi";
 import {CartContext} from "../../context/CartContext";
 
-function StoreItem(props) {
+function ShopItem(props) {
 
     const history = useHistory();
 
@@ -141,4 +141,4 @@ function StoreItem(props) {
     )
 }
 
-export default StoreItem;
+export default ShopItem;

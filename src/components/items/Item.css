@@ -1,3 +1,8 @@
+.add-to-list-heart:hover {
+    background-color: inherit;
+    cursor: pointer;
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -16,7 +21,7 @@
     display: flex;
 }
 
-.wishlist-heart {
+.wishlist-heart-items {
     border-radius: 50% !important;
     color: darkcyan;
     width: 24px;
@@ -79,13 +84,7 @@ p {
     align-items: baseline;
 }
 
-
 .wishlist-heart:hover {
     background-color: goldenrod;
     cursor: pointer;
 }
-
-
-
-
-

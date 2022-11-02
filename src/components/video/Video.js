@@ -27,7 +27,7 @@ function Video(){
                     <div className="actions">
                         <button onClick={togglePlay}>
                             {!playerState.isPlaying ? (
-                                <HiPlay size={22}/>
+                                <HiPlay size={22} />
                             ) : (
                                 <HiPause size={22}/>
                             )}

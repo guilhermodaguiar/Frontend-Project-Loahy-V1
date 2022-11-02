@@ -109,3 +109,7 @@ input[type="range"]::-moz-range-progress {
     color: white;
     font-size: 20px;
 }
+
+.play-button {
+    background: white;
+}
