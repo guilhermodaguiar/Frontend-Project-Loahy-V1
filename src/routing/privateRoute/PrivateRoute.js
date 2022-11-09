@@ -3,12 +3,12 @@ import {Redirect, Route} from "react-router-dom";
 import {AuthContext} from "../../context/AuthContext";
 
 
-export const PrivateRoute = ({ children, ...rest }) => {
-    const { isAuth } = useContext(AuthContext)
+export const PrivateRoute = ({children, ...path}) => {
+    const {isAuth} = useContext(AuthContext)
 
     return (
-        <Route {...rest} render={() => {
-            return isAuth ? children : <Redirect to="/"/>
+        <Route {...path} render={() => {
+            return isAuth ? children : <Redirect to="customer/login"/>
         }}/>
     );
 }

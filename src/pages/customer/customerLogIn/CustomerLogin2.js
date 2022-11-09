@@ -1,36 +1,19 @@
 import './CustomerLogIn.css';
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
 import {NavLink, useHistory} from 'react-router-dom'
-import {AuthContext} from "../../../context/AuthContext";
 import axios from "axios";
 import {RiLoginCircleFill} from "react-icons/ri";
 import {MdAccountCircle} from "react-icons/md";
 import {AiOutlineForm} from "react-icons/ai";
+import {AuthContext} from "../../../context/AuthContext";
 
-const USER_REGEX = /^[A-z][A-z0-9-_]{4,11}$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
-function CustomerLogIn() {
-    const history = useHistory();
-    const {login, isAuth} = useContext(AuthContext);
-
-    const [userEmail, setUserEmail] = useState('');
-    const [validUserEmail, setValidUserEmail] = useState(false);
+function CustomerLogIn2() {
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [validPassword, setValidPassword] = useState(false);
-
     const [error, toggleError] = useState(false);
-    const [succes, toggleSucces] = useState(false);
-
-
-    useEffect(() => {
-        setValidUserEmail(USER_REGEX.test(userEmail));
-    }, [userEmail])
-
-    useEffect(() => {
-        setValidPassword(PWD_REGEX.test(password));
-    }, [password])
-
+    const {login, isAuth} = useContext(AuthContext);
+    const history = useHistory();
 
 
     async function userLoginRequest(e) {
@@ -38,17 +21,21 @@ function CustomerLogIn() {
 
         try {
             const response = await axios.post('http://localhost:8080/authenticate', {
-                userEmail: userEmail,
+                userEmail: email,
                 password: password,
             });
 
             console.log(response.data);
-            login(response.data.jwt);
-            toggleSucces(true);
+            if (response.data.authorities[0].authority === 'ROLE_USER') {
+                login(response.data.jwt);
 
-            setTimeout(() => {
-                history.push("/customer/profile");
-            }, 1500)
+                setTimeout(() => {
+                    history.push("/customer/profile");
+                }, 1500)
+            } else {
+                history.push("/customer/login");
+            }
+
 
         } catch (e) {
             console.error(e);
@@ -66,7 +53,8 @@ function CustomerLogIn() {
                         </div>
                         <div className="customer-register-outer-container">
                             <div>
-                                <h3 className="customer-h3-header"><MdAccountCircle size={36}/>&nbsp;Ik heb een Loahy account</h3>
+                                <h3 className="customer-h3-header"><MdAccountCircle size={36}/>&nbsp;Ik heb een Loahy
+                                    account</h3>
                             </div>
                             <div className="login-field-note">
                                 Meld je aan met je e-mailadres en wachtwoord
@@ -85,10 +73,9 @@ function CustomerLogIn() {
                                                 <input
                                                     type="email"
                                                     id="email-field"
-                                                    onChange={(e) => setUserEmail(e.target.value)}
-                                                    value={userEmail}
-                                                    required
-                                                    aria-invalid={validUserEmail ? "false" : "true"}
+                                                    name="email"
+                                                    value={email}
+                                                    onChange={(e) => setEmail(e.target.value)}
                                                 />
                                             </label>
                                             <label htmlFor="password-field">
@@ -96,24 +83,22 @@ function CustomerLogIn() {
                                                 <input
                                                     type="password"
                                                     id="password-field"
-                                                    onChange={(e) => setPassword(e.target.value)}
+                                                    name="password"
                                                     value={password}
-                                                    required
-                                                    aria-invalid={validPassword ? "false" : "true"}
+                                                    onChange={(e) => setPassword(e.target.value)}
                                                 />
                                             </label>
                                             {error &&
-                                                <p className="error">Combinatie van email adres en wachtwoord is onjuist,
-                                                    probeer het nog eens</p>}
+                                                <p className="error">Combinatie van emailadres en wachtwoord is onjuist</p>}
 
                                             <button
-                                                disabled={!validPassword || !validUserEmail}
                                                 type="submit"
                                                 className="form-button-login"
                                             >
                                                 <RiLoginCircleFill/>&nbsp;Inloggen
                                             </button>
                                         </form>
+
                                     </section>
                                 </div>
                                 <div className="to-register-body">
@@ -128,21 +113,19 @@ function CustomerLogIn() {
                                 </div>
                             </div>
                         </div>
-
                     </div>)
                 :
                 (<span className="inlog-customer-successful">
-                <h1>Inloggen succesvol!</h1>
+                <h4>Inloggen succesvol!</h4>
                 <h5>U bent succesvol ingelogd<br/> en wordt automatisch doorgestuurd..</h5>
                 <p>Mocht u niet automatisch doorgestuurd worden<br/>
-                <NavLink to="/profile" className="active-link">klik dan hier!</NavLink>
+                <NavLink to="/customer/profile">klik dan hier!</NavLink>
                 </p>
                 </span>)
             }
-
         </>
     );
 }
 
 
-export default CustomerLogIn;
+export default CustomerLogIn2;

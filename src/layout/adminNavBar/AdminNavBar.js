@@ -5,7 +5,7 @@ import {HashLink as Link} from "react-router-hash-link";
 import {AuthContext} from "../../context/AuthContext";
 
 function AdminNavBar() {
-const {user_email: { logout }} = useContext(AuthContext);
+const {logout} = useContext(AuthContext);
 
     return(
         <>
@@ -19,7 +19,7 @@ const {user_email: { logout }} = useContext(AuthContext);
                     </li>
                     <li>
                         <Link to="/#admin-product-overview">
-                            Producten
+                            Mijn Producten
                         </Link>
                     </li>
                     <li>
@@ -32,11 +32,11 @@ const {user_email: { logout }} = useContext(AuthContext);
                             Producten updaten
                         </Link>
                     </li>
-                    <li>
-                        <Link to="/#new-products-update">
-                            Producten bewerken
-                        </Link>
-                    </li>
+                    {/*<li>*/}
+                    {/*    <Link to="/#new-products-update">*/}
+                    {/*        Producten bewerken*/}
+                    {/*    </Link>*/}
+                    {/*</li>*/}
                     <li>
                         <Link to="/#all-costumers">
                             Klanten
@@ -53,17 +53,11 @@ const {user_email: { logout }} = useContext(AuthContext);
                         </Link>
                     </li>
                     <li>
-                        <Link to="#admin-about-us">
-                            Over Ons
-                        </Link>
-                    </li>
-                    <li>
                         <button className="logout-button"
                                 type="button"
                                 onClick={logout} >
 
                             Uitloggen
-
                         </button>
                     </li>
                 </ul>

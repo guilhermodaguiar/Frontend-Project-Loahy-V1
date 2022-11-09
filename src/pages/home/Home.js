@@ -1,7 +1,7 @@
 import React from "react";
 
 import './Home.css';
-import ItemOverview from "../../components/itemOverview/itemOverview";
+import ShopOverview from "../../components/shopOverview/ShopOverview";
 import AboutUsComponent from "../../components/aboutUsComponent/AboutUsComponent";
 import ContactUsComponent from "../../components/contactUs/ContactUs";
 import ScrollIndicator from "../../helpers/scrollIndicator/ScrollIndicator";
@@ -22,7 +22,7 @@ function Home() {
             <ScrollIndicator/>
             <ScrollToTop/>
             <Header/>
-            <ItemOverview/>
+            <ShopOverview/>
             <AboutUsComponent/>
             <ContactUsComponent/>
         </>

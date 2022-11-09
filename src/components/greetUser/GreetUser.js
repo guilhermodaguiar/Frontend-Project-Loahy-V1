@@ -4,16 +4,20 @@ import React, {AuthContext} from "../../context/AuthContext";
 import {useContext} from "react";
 
 function GreetUser() {
-    const {user: {user_email}} = useContext(AuthContext);
+    const {user: user_email} = useContext(AuthContext);
 
-    return(
+    return (
         <>
-            <section className="block-greetings-to-user">
+            <section className="greet-user-container">
                 <div className="welcome-user">
-                    <h1>Welkom</h1>
-                    <h2>
-                        {user_email}
-                    </h2>
+                    <div className="welcome-user-outer-container">
+                        <h1>Welkom</h1>
+                    </div>
+                    <div>
+                        <h1>
+                            {user_email}
+                        </h1><
+                    /div>
                 </div>
             </section>
         </>

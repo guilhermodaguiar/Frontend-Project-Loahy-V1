@@ -94,7 +94,7 @@ function CheckOut() {
                 <div className="to-shop-link-container">
                     <p className="click-to-shop">
                         Klik&nbsp;<span>
-                            <NavLink to="/shop" exact activeClassName="active-link">
+                            <NavLink to="/shop">
                                 <FcShop className="shop-icon" size={25}/>
                             </NavLink>
                         </span>&nbsp;om naar de shop te gaan
@@ -103,7 +103,7 @@ function CheckOut() {
                 <div className="to-shop-link-container">
                     <p className="click-to-shop">
                         Klik&nbsp;<span>
-                            <NavLink to="/shopping-cart" exact activeClassName="active-link">
+                            <NavLink to="/shopping-cart">
                                 <FaShoppingCart className="cart-icon" size={22}/>
                             </NavLink>
                         </span>&nbsp;om terug naar je winkelwagen te gaan

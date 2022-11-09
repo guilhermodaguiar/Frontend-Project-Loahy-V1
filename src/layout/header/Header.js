@@ -10,7 +10,7 @@ function Header() {
             <div className="inner-container">
                 <div className="home-page" >
                     <h1>Loahy</h1>
-                    <Link to="#products">
+                    <Link to="/#shop">
                         <button
                             type="button"
                             className="button-to-shopping-page"

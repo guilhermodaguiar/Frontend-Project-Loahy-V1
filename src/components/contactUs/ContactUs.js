@@ -5,6 +5,7 @@ import axios from "axios";
 import {ReactComponent as KvK} from "../../assets/icons/kvk-logo.svg";
 import {HiLocationMarker, HiOutlineMail, HiOutlinePhone} from "react-icons/hi";
 import {FiSend} from "react-icons/fi";
+import {useHistory} from "react-router-dom";
 
 
 function ContactUs() {
@@ -13,12 +14,12 @@ function ContactUs() {
     const [contactName, setContactName] = useState('');
     const [contactEmail, setContactEmail] = useState('');
     const [contactPhone, setContactPhone] = useState('');
-    const [contactOrg, setContactOrg] = useState('')
+    const [contactOrg, setContactOrg] = useState('');
 
     //state voor functionaliteiten
     const [loading, toggleLoading] = useState(false);
     const [addSucces, toggleAddSucces] = useState(false);
-    const [setContactInput] = useState([]);
+    const [contactInput, setContactInput] = useState([]);
 
 
     async function handleContactSubmit(e) {
@@ -26,7 +27,7 @@ function ContactUs() {
         toggleLoading(true);
 
         try {
-            const response = await axios.post('http://localhost:8080/contactus', {
+            const response = await axios.post('http://localhost:8080/contact-remarks/post', {
                 contactName: contactName,
                 contactEmail: contactEmail,
                 contactPhone: contactPhone,

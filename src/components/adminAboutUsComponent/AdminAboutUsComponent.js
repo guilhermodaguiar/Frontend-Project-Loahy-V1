@@ -16,7 +16,7 @@ function AdminAboutUsComponent() {
         async function fetchAboutUsData() {
 
             try {
-                const response = await axios.get(`http://localhost:8080/orders`, {
+                const response = await axios.post(`http://localhost:8080/orders`, {
                         headers: {
                             "Content-Type": "application/json",
                             "Authorization": `Bearer ${token}`,

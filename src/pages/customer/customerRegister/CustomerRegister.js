@@ -1,12 +1,11 @@
-import React, {useEffect, useRef, useState} from "react";
-
 import "./CustomerRegister.css";
+
+import React, {useEffect, useRef, useState} from "react";
 import axios from "axios";
 import {faCheck, faInfoCircle, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {NavLink, useHistory} from "react-router-dom";
 import {BsFillPencilFill} from "react-icons/bs";
-import {BiMessageError} from "react-icons/bi";
 import {MdAccountCircle} from "react-icons/md";
 import {IoMdLogIn} from "react-icons/io";
 
@@ -16,12 +15,14 @@ const EMAIL_REGEX = /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@(
 
 
 function CustomerRegister() {
+
+    const [toggleLoading] = useState(false);
     const history = useHistory();
 
     const userRef = useRef();
     const errRef = useRef();
 
-    const [userEmail, setUserEmail] = useState('');
+    const [email, setEmail] = useState('');
     const [validUserEmail, setValidUserEmail] = useState(false);
     const [emailFocus, setEmailFocus] = useState(false);
 
@@ -34,9 +35,8 @@ function CustomerRegister() {
     const [confirmPasswordFocus, setConfirmPasswordFocus] = useState(false);
 
 
-    const [addSucces, toggleAddSucces] = useState(false);
+    const [success, toggleSuccess] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-
 
     useEffect(() => {
         userRef.current.focus();
@@ -49,42 +49,44 @@ function CustomerRegister() {
     }, [password, confirmPassword])
 
     useEffect(() => {
-        setValidUserEmail(EMAIL_REGEX.test(userEmail));
-    }, [userEmail])
+        setValidUserEmail(EMAIL_REGEX.test(email));
+    }, [email])
 
     useEffect(() => {
         setErrorMessage('');
-    }, [userEmail, password, confirmPassword])
-
-    // AANMAKEN VAN ACCOUNT
+    }, [email, password, confirmPassword])
 
     async function registerUser(e) {
         e.preventDefault();
 
-        const v1 = EMAIL_REGEX.test(userEmail);
+        const v1 = EMAIL_REGEX.test(email);
         const v2 = PASSWORD_REGEX.test(password);
         if (!v1 || !v2) {
             setErrorMessage("Invalid Entry");
             return;
         }
+
         try {
-            const response = await axios.post("http://localhost:8080/users/create", {
-                userEmail: userEmail,
-                userPassword: password,
+            const response = await axios.post("http://localhost:8080/users", {
+                userEmail: email,
+                password: password,
             });
 
-            toggleAddSucces(true);
+            console.log(response.data);
+            toggleSuccess(true);
 
             setTimeout(() => {
-                history.push('/customer');
 
-            }, 3000);
+                history.push('/customer/login');
+
+            }, 2000);
+
 
         } catch (e) {
-            if (!e.response) {
-                setErrorMessage('Er is geen server response');
-            } else if (e.response.status === 409) {
-                setErrorMessage('Email is al in gebruik');
+            if (!e?.response) {
+                setErrorMessage('Geen server response');
+            } else if (errorMessage.response?.status === 409) {
+                setErrorMessage('Gebruikersnaam al in gebruik');
             } else {
                 setErrorMessage('Registratie mislukt.. Gebruikersnaam en/of email al in gebruik!')
             }
@@ -92,9 +94,10 @@ function CustomerRegister() {
         }
     }
 
+
     return (
         <>
-            {addSucces ? (
+            {success ? (
                 <section className="block-new-user-created-with-succes">
                     <h1>
                         Gelukt met het creëren van een Loahy account !!!
@@ -103,7 +106,7 @@ function CustomerRegister() {
                         Je kan nu inloggen...
                     </h3>
                     <p>Mocht u niet automatisch doorgestuurd worden<br/>
-                        <NavLink to="/customer" exact activeClassName="active-link">klik dan hier!</NavLink>
+                        <NavLink to="/customer/login">klik dan hier!</NavLink>
                     </p>
                 </section>) : (
                 <div>
@@ -112,7 +115,8 @@ function CustomerRegister() {
                     </div>
                     <div className="customer-register-outer-container">
                         <div>
-                            <h3 className="customer-h3-header"><MdAccountCircle size={36}/>&nbsp;Loahy account aanmaken</h3>
+                            <h3 className="customer-h3-header"><MdAccountCircle size={36}/>&nbsp;Loahy account aanmaken
+                            </h3>
                         </div>
                         <div className="customer-inner-container">
                             <div className="register-body">
@@ -129,7 +133,7 @@ function CustomerRegister() {
                                             <FontAwesomeIcon icon={faCheck}
                                                              className={validUserEmail ? "valid" : "hide"}/>
                                             <FontAwesomeIcon icon={faTimes}
-                                                             className={validUserEmail || !userEmail ? "hide" : "invalid"}/>
+                                                             className={validUserEmail || !email ? "hide" : "invalid"}/>
                                         </label>
 
 
@@ -138,8 +142,8 @@ function CustomerRegister() {
                                             id="email"
                                             ref={userRef}
                                             autoComplete="off"
-                                            onChange={(e) => setUserEmail(e.target.value)}
-                                            value={userEmail}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            value={email}
                                             required
                                             aria-invalid={validUserEmail ? "false" : "true"}
                                             aria-describedby="user-email-note"
@@ -148,7 +152,7 @@ function CustomerRegister() {
                                         />
 
                                         <p id="email-note"
-                                           className={emailFocus && userEmail && !validUserEmail ? "instructions" : "offscreen"}>
+                                           className={emailFocus && email && !validUserEmail ? "instructions" : "offscreen"}>
                                             <FontAwesomeIcon icon={faInfoCircle}/>
                                             Email is verplicht!<br/>
                                         </p>
@@ -204,14 +208,12 @@ function CustomerRegister() {
                                             <FontAwesomeIcon icon={faInfoCircle}/>
                                             Wachtwoorden moeten overeenkomen.
                                         </p>
-                                        {errorMessage && <p className="error"><BiMessageError size={25}/>Dit account bestaat al. Probeer een ander
-                                            email-address</p>}
                                         <button
                                             type="submit"
                                             className="form-button"
                                             disabled={!validUserEmail || !validPassword || !validConfirmPassword}
                                         >
-                                            <BsFillPencilFill />&nbsp; Registreer
+                                            <BsFillPencilFill/>&nbsp; Registreer
                                         </button>
                                     </form>
                                 </section>
@@ -220,7 +222,9 @@ function CustomerRegister() {
                                 <p className="form-footer">
                                     <IoMdLogIn size={40}/>Ik heb al een Loahy account!<br/>
                                     <span className="line">
-                                            <NavLink to="/customer" exact activeClassName="active-link">Login</NavLink>
+                                            <NavLink to="/customer/login">
+                                               login
+                                            </NavLink>
                                     </span>
                                 </p>
                             </div>

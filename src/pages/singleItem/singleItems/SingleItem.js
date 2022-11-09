@@ -1,32 +1,26 @@
+import './SingleItem.css';
+
 import React, {useContext} from "react";
-import './ShopItem.css';
-import {CartContext} from "../../context/CartContext";
-import {WishlistContext} from "../../context/WishlistContext";
-import {useHistory} from "react-router-dom";
+import {CartContext} from "../../../context/CartContext";
+import {WishlistContext} from "../../../context/WishlistContext";
 import {HiHeart} from "react-icons/hi";
-import {formatCurrency} from "../../helpers/formatCurrency/FormatCurrency";
+import {formatCurrency} from "../../../helpers/formatCurrency/FormatCurrency";
 import {BsCartPlusFill, BsFillCartPlusFill} from "react-icons/bs";
 
-function ShopItem2(props) {
-    const history = useHistory();
 
+function SingleItem(props) {
     const {increaseCartQuantity} = useContext(CartContext);
     const {increaseListQuantity} = useContext(WishlistContext);
-
-    function redirect() {
-        history.push(`shop/${props.productId}`);
-    }
-
 
     return(
         <>
             <div className="main-container-product">
                 <div className="border-effect-container">
                     <div className="random-robot-container">
-                        <div className="wishlist-heart">
+                        <div className="wishlist-heart-items">
                             <HiHeart size={22}
                                      className="add-to-list-heart"
-                                     onClick={() => increaseListQuantity(props.product_id)}
+                                     onClick={() => increaseListQuantity(props.id)}
                             />
                         </div>
                         <div>
@@ -60,9 +54,6 @@ function ShopItem2(props) {
                 </span>
             </section>
             <section className="product">
-                <div className="info-marker-product"
-                     onClick={redirect}>
-                </div>
                 <div className="add-to cart-container-outer">
                     <div className="AddItemsContainer">
                         <div className="buy_plus_button_container">
@@ -78,4 +69,4 @@ function ShopItem2(props) {
     )
 }
 
-export default ShopItem2;
+export default SingleItem;

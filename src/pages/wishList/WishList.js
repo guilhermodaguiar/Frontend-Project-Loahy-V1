@@ -59,14 +59,14 @@ function WishList() {
                             <div className="warning-icon"><BiMessageError size={40}/></div>
                             <p className="click-to-shop"> Je moet ingelogd zijn om je Wishlist te zien en te updaten</p>
                             <p className="click-to-shop"> Klik&nbsp;
-                                <NavLink to="/customer/register" exact activeClassName="active-link">
+                                <NavLink to="/customer/register">
                                     <p className="click-p">hier</p>
                                 </NavLink>
                                 &nbsp;om te registreren
                             </p>
 
                             <p className="click-to-shop"> Klik&nbsp;
-                                <NavLink to="/customer" exact activeClassName="active-link"><p
+                                <NavLink to="/customer"><p
                                     className="click-p">hier</p></NavLink>
                                 &nbsp;om in te loggen
                             </p>
@@ -75,8 +75,7 @@ function WishList() {
                                 <p className="click-to-shop">
                                     Klik&nbsp;
                                     <span>
-                                        <NavLink to="/shop"
-                                                 exact activeClassName="active-link">
+                                        <NavLink to="/shop">
                                             <FcShop className="shop-icon"
                                                     size={25}/>
                                         </NavLink>

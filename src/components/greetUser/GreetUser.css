@@ -1,0 +1,18 @@
+.welcome-user {
+    display: flex;
+    padding: 30px 90px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.greet-user-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.welcome-user-outer-container {
+    display: flex;
+    justify-content: space-around;
+}

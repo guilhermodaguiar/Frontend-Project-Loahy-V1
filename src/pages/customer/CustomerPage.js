@@ -4,52 +4,52 @@ import './CostumorPage.css';
 import CustomerProfile from "../../components/customerProfile/CustomerProfile";
 import ScrollIndicator from "../../helpers/scrollIndicator/ScrollIndicator";
 import ScrollToTop from "../../helpers/scrollToTop/ScrollToTop";
-import NavBar from "../../layout/navBar/NavBar";
 import {AuthContext} from "../../context/AuthContext";
 import {HashLink as Link} from "react-router-hash-link";
-import Cart from "../cart/Cart";
-import WishList from "../wishList/WishList";
-import {useHistory} from "react-router-dom";
 import axios from "axios";
+import NavBar from "../../layout/navBar/NavBar";
 
 
 function CustomerPage() {
-    const history = useHistory();
-
     const token = localStorage.getItem('token');
-    const { user: {user_email}, logout } = useContext(AuthContext);
-
-    const[isCustomer, setIsCustomer] = useState([]);
+    const {user: {user_email}, logout} = useContext(AuthContext);
+    const [userData, setUserData] = useState([]);
+    const [isUser, setIsUser] = useState(false);
 
     useEffect(() => {
-        const source = axios.CancelToken.source();
+
         async function fetchUserData() {
             try {
-                const response = await axios.get (`http://localhost:8080/users/${user_email}/`,
+                const response = await axios.get(`http://localhost:8080/users/${user_email}/`,
                     {
-                        cancelToken: source.token,
                         headers: {
                             "Content-Type": "application/json",
                             "Authorization": `Bearer ${token}`,
                         }
                     }
-                    );
+                );
+                setUserData(response.data)
+                console.log(response);
+
+                if (response.data.authorities.authority === 'ROLE_USER') {
+                    setIsUser(true)
+                } else {
+                    setIsUser(false)
+                }
             } catch (e) {
                 console.error('Error: Er is iets misgegaan!', e)
             }
         }
+
         fetchUserData();
-        return function cleanUp() {
-            source.cancel();
-        }
 
-    }, [token, user_email]);
+    }, []);
 
 
-    return(
+    return (
         <>
-            <NavBar/>
             <div>
+                <NavBar/>
                 <nav>
                     <ul>
                         <li>
@@ -72,14 +72,12 @@ function CustomerPage() {
             </div>
             <button className="logout-button"
                     type="button"
-                    onClick={logout} >
+                    onClick={logout}>
                 Uitloggen
             </button>
             <ScrollIndicator/>
             <ScrollToTop/>
             <CustomerProfile/>
-            <Cart/>
-            <WishList/>
         </>
     )
 

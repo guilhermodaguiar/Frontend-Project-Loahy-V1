@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext} from "react";
 
 import './AdminPage.css';
 import AdminProfile from "../../components/adminProfile/AdminProfile";
@@ -15,56 +15,23 @@ import AdminAboutUsComponent from "../../components/adminAboutUsComponent/AdminA
 import AdminOrderComponent from "../../components/adminOrderComponent/AdminOrderComponent";
 import GreetUser from "../../components/greetUser/GreetUser";
 import {AuthContext} from "../../context/AuthContext";
-import axios from "axios";
 import AdminNavBar from "../../layout/adminNavBar/AdminNavBar";
+import NavBar from "../../layout/navBar/NavBar";
 
 
 function AdminPage() {
 
+    const {user, logout} = useContext(AuthContext);
 
-    const token = localStorage.getItem('token');
-    const { user: { user_email }, logout } = useContext(AuthContext);
-
-    const [isAdmin, setIsAdmin] = useState(false);
-    const [adminInput, setAdminInput] = useState([]);
-
-    useEffect(() => {
-
-        async function fetchAdminData() {
-
-            try {
-                const response = await axios.get(`http://localhost:8080/users/${user_email}/`,
-                    {
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": `Bearer ${token}`,
-                        }
-                    }
-                );
-                setAdminInput(response.data);
-
-                if (response.data.authorities[0].authority === 'ROLE_ADMIN') {
-                    setIsAdmin(true)
-                } else {
-                    setIsAdmin(false)
-                }
-            } catch (e) {
-                console.error('Error: Er is iets misgegaan!', e);
-            }
-        }
-
-        fetchAdminData();
-    }, [isAdmin, token, user_email]);
 
     window.scrollTo({
-        top:0,
+        top: 0,
         behavior: 'smooth'
     });
 
-    return(
+    return (
         <>
-            { !isAdmin ? (
-
+            {user.roles !== "ROLE_ADMIN" ? (
                     <div className="admin-route-container">
                         <div className="admin-route">
                             <h1>U moet ingelogd zijn als
@@ -73,10 +40,10 @@ function AdminPage() {
                             </h1>
                         </div>
                     </div>
-            ) :
+                ) :
                 (
                     <div className="admin-main">
-
+                        <NavBar/>
                         <ScrollIndicator/>
                         <ScrollToTop/>
 
@@ -87,34 +54,44 @@ function AdminPage() {
                             <h1>Admin Profiel Pagina</h1>
                             <GreetUser/>
                         </div>
-                        <section>
+                        <section id="admin-profile">
                             <AdminProfile/>
                         </section>
 
                         {/*producten*/}
-                        <section>
+                        <section id="admin-product-overview">
                             <AdminProductOverviewComponent/>
                         </section>
-                        <section>
+                        <section id="admin-add-new-product">
+
+                            oooooooooooooooooooooo
                             <AdminAddProductComponent/>
                         </section>
-                        <section>
+                        <section id="admin-new-products-update">
                             <AdminUpdateProductComponent/>
                         </section>
 
                         {/*andere componenten*/}
-                        <section>
+                        <section id="all-costumers">
                             <AdminUserComponent/>
                         </section>
-                        <section>
+                        <section id="all-orders">
                             <AdminOrderComponent/>
                         </section>
-                        <section>
+                        <section id="all-contact-remarks">
                             <AdminContactUsComponent/>
                         </section>
                         <section>
                             <AdminAboutUsComponent/>
                         </section>
+                        oooooooooooooooooooooooooo
+                        <div>
+                            <button className="logout-button"
+                                    type="button"
+                                    onClick={logout} >
+                                Uitloggen
+                            </button>
+                        </div>
                     </div>
                 )}
         </>
