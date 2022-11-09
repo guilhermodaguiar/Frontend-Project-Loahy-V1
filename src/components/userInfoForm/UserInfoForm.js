@@ -1,21 +1,26 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
-import {useFormContext} from "react-hook-form";
 import {useHistory} from "react-router-dom";
 import './userInfoForm.css'
 
 function UserInfoForm() {
-
-    const {register, formState: {errors}, handleSubmit} = useFormContext();
-    const message = "..dit veld is verplicht";
     const history = useHistory();
     const {user} = useContext(AuthContext);
     const token = localStorage.getItem('token');
 
+    const [firstName, setFirstName ] = useState('');
+    const [lastName, setLastName ] = useState('');
+    const [streetName, setStreetName] = useState('');
+    const [houseNumber, setHouseNumber ] = useState('');
+    const [houseNumberAdd, setHouseNumberAdd ] = useState('');
+    const [city, setCity ] = useState('');
+    const [zipcode, setZipcode ] = useState('');
+    const [phone, setPhone ] = useState('');
 
-    async function sendPersonData(customerData) {
+
+    async function sendCustomerData() {
         try {
             await axios.put(`http://localhost:8080/customer/${user.customer_id}`,
                 {
@@ -23,17 +28,15 @@ function UserInfoForm() {
                         "Content-Type": "application/json",
                         Authorization: `Bearer ${token}`,
                     },
-
-                    userId: user.id,
-                    customerFirstName: customerData.customer_firstname,
-                    customerLastName: customerData.customer_lastname,
-                    customerStreetName: customerData.customer_street_name,
-                    customerHouseNumber: customerData.customer_house_number,
-                    customerHouseNumberAddition: customerData.customer_house_number_add,
-                    customerCity: customerData.customer_city,
-                    customerZipcode: customerData.customer_zipcode,
-                    customerPhone: customerData.customer_phone,
-
+                    userId: user.userId,
+                    customerFirstName: firstName,
+                    customerLastName: lastName,
+                    customerStreetName: streetName,
+                    customerHouseNumber: houseNumber,
+                    customerHouseNumberAddition: houseNumberAdd,
+                    customerCity: city,
+                    customerZipcode: zipcode,
+                    customerPhone: phone,
                 });
 
         } catch (e) {
@@ -41,9 +44,9 @@ function UserInfoForm() {
         }
     }
 
-    async function onSubmit(customerData) {
+    async function addCustomerData(customerData) {
         try {
-            await sendPersonData(customerData);
+            await sendCustomerData(customerData);
 
             setTimeout(() => {
 
@@ -61,10 +64,10 @@ function UserInfoForm() {
 
             <div className="UserInfo-Form-Container">
                 <form className="user-info-form"
-                      onSubmit={handleSubmit(onSubmit)}>
+                      onSubmit={addCustomerData}>
 
                     <h1> Wijzig hier uw persoonsgegevens</h1>
-                    <p>* Elk veld moet ingevuld zijn voordat u deze gegevens kunt opslaan.. </p>
+                    <p>* Elk veld moet ingevuld zijn voordat u deze gegevens kunt opslaan </p>
 
                     <div className="form-names">
 
@@ -72,119 +75,95 @@ function UserInfoForm() {
                             Voornaam:
                             <input
                                 type="text"
-                                id="firstname"
-                                {...register("customer_firstname", {
-                                    required: {value: true, message: message}
-                                })}
+                                id="username-field"
+                                value={firstName}
+                                onChange={(e) => setFirstName(e.target.value)}
                                 placeholder="Voornaam"
-
                             />
                         </label>
-                        {errors.customer_firstname && <p className="form-error">{errors.customer_firstname.message}</p>}
-                        <br/>
-
                         <label htmlFor="details-lastname">
                             Achternaam
                             <input
                                 type="text"
-                                id="lastname"
-                                {...register("customer_lastname", {
-                                    required: {value: true, message: message}
-                                })}
+                                id="username-field"
+                                value={lastName}
+                                onChange={(e) => setLastName(e.target.value)}
                                 placeholder="Achternaam"
-
                             />
                         </label>
-                        {errors.customer_lastname && <p className="form-error">{errors.customer_lastname.message}</p>}
-                        <br/>
-
                     </div>
 
                     <div className="form-address">
-
                         <label htmlFor="details-street-name">
                             Straatnaam
                             <input
                                 type="text"
-                                id="street name"
-                                {...register("customer_street_name", {
-                                    required: {value: true, message: message}
-                                })}
-                                placeholder="Straatnaam"
-
+                                id="street-name-field"
+                                value={streetName}
+                                onChange={(e) => setStreetName(e.target.value)}
+                                placeholder="Straat"
                             />
                         </label>
-                        {errors.customer_street_name && <p className="form-error">{errors.customer_street_name.message}</p>}
-                        <br/>
-
                         <label htmlFor="details-house-number">
                             Huisnummer
                             <input
                                 type="text"
                                 id="house-number"
-                                {...register("customer_house_number", {
-                                    required: {value: true, message: message}
-                                })}
+                                value={houseNumber}
+                                onChange={(e) => setHouseNumber(e.target.value)}
                                 placeholder="Huisnummer"
 
                             />
                         </label>
-                        {errors.customer_house_number && <p className="form-error">{errors.customer_house_number.message}</p>}
-                        <br/>
-
-
                         <label htmlFor="details-house-number-additional">
                             Toevoegingen
                             <input
                                 type="text"
                                 id="house-number-additional"
-                                {...register("customer_house_number_additional", {
-                                    required: {value: true, message: message}
-                                })}
+                                value={houseNumberAdd}
+                                onChange={(e) => setHouseNumberAdd(e.target.value)}
                                 placeholder="Toevoegingen"
-
                             />
                         </label>
-                        {errors.customer_house_number_add && <p className="form-error">{errors.customer_house_number_add.message}</p>}
-
-
                     </div>
-
                     <div className="form-address">
-
                         <label htmlFor="details-city">
                             Woonplaats
                             <input
                                 type="text"
                                 id="city"
-                                {...register("customer_city", {
-                                    required: {value: true, message: message}
-                                })}
+                                value={city}
+                                onChange={(e) => setCity(e.target.value)}
                                 placeholder="Woonplaats"
 
                             />
                         </label>
-                        {errors.customer_city && <p className="form-error">{errors.customer_city.message}</p>}
-                        <br/>
-
                         <label htmlFor="details-zipcode">
                             Postcode
                             <input
                                 type="text"
                                 id="zipcode"
-                                {...register("customer_zipcode", {
-                                    required: {value: true, message: message}
-                                })}
+                                value={zipcode}
+                                onChange={(e) => setZipcode(e.target.value)}
+                                placeholder="Postcode"
+                            />
+                        </label>
+                        <label htmlFor="details-phone">
+                            Telefoon nummer
+                            <input
+                                type="tel"
+                                id="zipcode"
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
                                 placeholder="Postcode"
 
                             />
                         </label>
-                        {errors.customer && <p className="form-error">{errors.customer_zipcode.message}</p>}
-                        <br/>
-
                     </div>
-
-                    <button className="save-button">
+                    <button
+                        type="submit"
+                        className="save-button"
+                        >
                         Opslaan
                     </button>
                 </form>

@@ -11,7 +11,6 @@ import ScrollToTop from "../../helpers/scrollToTop/ScrollToTop";
 
 import AdminUserComponent from "../../components/adminUserComponent/AdminUserComponent";
 import AdminContactUsComponent from "../../components/adminContactUsComponent/AdminContactUsComponent";
-import AdminAboutUsComponent from "../../components/adminAboutUsComponent/AdminAboutUsComponent";
 import AdminOrderComponent from "../../components/adminOrderComponent/AdminOrderComponent";
 import GreetUser from "../../components/greetUser/GreetUser";
 import {AuthContext} from "../../context/AuthContext";
@@ -33,11 +32,10 @@ function AdminPage() {
         <>
             {user.roles !== "ROLE_ADMIN" ? (
                     <div className="admin-route-container">
-                        <div className="admin-route">
-                            <h1>U moet ingelogd zijn als
-                                <br/> ADMINISTRATOR
-                                <br/>om deze content te mogen zien..
-                            </h1>
+                        <div className="admin-route-container">
+                            <div className="admin-route">
+                                <h1>Moet ingelogd zijn als Admin</h1>
+                            </div>
                         </div>
                     </div>
                 ) :
@@ -63,15 +61,11 @@ function AdminPage() {
                             <AdminProductOverviewComponent/>
                         </section>
                         <section id="admin-add-new-product">
-
-                            oooooooooooooooooooooo
                             <AdminAddProductComponent/>
                         </section>
                         <section id="admin-new-products-update">
                             <AdminUpdateProductComponent/>
                         </section>
-
-                        {/*andere componenten*/}
                         <section id="all-costumers">
                             <AdminUserComponent/>
                         </section>
@@ -81,12 +75,9 @@ function AdminPage() {
                         <section id="all-contact-remarks">
                             <AdminContactUsComponent/>
                         </section>
-                        <section>
-                            <AdminAboutUsComponent/>
-                        </section>
-                        oooooooooooooooooooooooooo
                         <div>
-                            <button className="logout-button"
+                            <button
+                                className="logout-button"
                                     type="button"
                                     onClick={logout} >
                                 Uitloggen

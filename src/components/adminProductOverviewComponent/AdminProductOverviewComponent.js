@@ -5,6 +5,7 @@ import {AuthContext} from "../../context/AuthContext";
 import {useHistory} from "react-router-dom";
 import {IoCloseSharp} from "react-icons/io5";
 import {GrUpdate} from "react-icons/gr";
+import {FaFileUpload} from "react-icons/fa";
 
 function AdminProductOverviewComponent() {
     const history = useHistory();
@@ -24,7 +25,6 @@ function AdminProductOverviewComponent() {
 
     //POST Product
     async function sendItemData(e) {
-        e.preventDefault(e);
         toggleLoading(true);
         try {
             await axios.post(`http://localhost:8080/products`,
@@ -52,8 +52,7 @@ function AdminProductOverviewComponent() {
         setPreviewUrl(URL.createObjectURL(uploadedFile));
     }
 
-    async function sendImageData(e) {
-        e.preventDefault();
+    async function sendImageData(id) {
         const formData = new FormData();
         formData.append("file", file);
 
@@ -119,11 +118,10 @@ function AdminProductOverviewComponent() {
         <>
             {user.roles !== "ROLE_ADMIN" ?
                 (<div className="admin-route-container">
-                        <div className="admin-route">
-                            <h1>U moet ingelogd zijn als
-                                <br/> ADMINISTRATOR
-                                <br/>om deze content te mogen zien..
-                            </h1>
+                        <div className="admin-route-container">
+                            <div className="admin-route">
+                                <h1>Moet ingelogd zijn als Admin</h1>
+                            </div>
                         </div>
                     </div>
                 )
@@ -158,10 +156,11 @@ function AdminProductOverviewComponent() {
                                 </tbody>
                             </table>
                         </div>
+
                         <div className={"item-update"}>
                             <div className="update-item-container">
                                 <p>Update hier je product</p>
-                                <p>Voer eerst het bestaande productId om de product/item verder te wijzigen</p>
+                                <p>Voer eerst het bestaande product Id om de product/item verder te wijzigen</p>
                             </div>
                             <div className="form-container">
                                 <form className="update-item-form-"
@@ -197,7 +196,8 @@ function AdminProductOverviewComponent() {
                                                 type="submit"
                                                 className="form-submit-image-button"
                                             >
-                                                Uploaden
+                                                <FaFileUpload size={22}/>
+                                                Upload
                                             </button>
                                         </form>
                                     </div>
@@ -240,7 +240,6 @@ function AdminProductOverviewComponent() {
                                     </button>
                                 </form>
                             </div>
-
                         </div>
                     </>
                 )}

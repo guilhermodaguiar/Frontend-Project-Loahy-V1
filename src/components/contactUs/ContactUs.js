@@ -5,7 +5,6 @@ import axios from "axios";
 import {ReactComponent as KvK} from "../../assets/icons/kvk-logo.svg";
 import {HiLocationMarker, HiOutlineMail, HiOutlinePhone} from "react-icons/hi";
 import {FiSend} from "react-icons/fi";
-import {useHistory} from "react-router-dom";
 
 
 function ContactUs() {

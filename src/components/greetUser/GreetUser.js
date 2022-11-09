@@ -4,7 +4,7 @@ import React, {AuthContext} from "../../context/AuthContext";
 import {useContext} from "react";
 
 function GreetUser() {
-    const {user: user_email} = useContext(AuthContext);
+    const {user} = useContext(AuthContext);
 
     return (
         <>
@@ -15,7 +15,7 @@ function GreetUser() {
                     </div>
                     <div>
                         <h1>
-                            {user_email}
+                            {user.user_email}
                         </h1><
                     /div>
                 </div>

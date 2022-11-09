@@ -1,5 +1,5 @@
 import './CustomerLogIn.css';
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
 import {NavLink, useHistory} from 'react-router-dom'
 import {AuthContext} from "../../../context/AuthContext";
 import axios from "axios";
@@ -7,55 +7,42 @@ import {RiLoginCircleFill} from "react-icons/ri";
 import {MdAccountCircle} from "react-icons/md";
 import {AiOutlineForm} from "react-icons/ai";
 
-const USER_REGEX = /^[A-z][A-z0-9-_]{4,11}$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-
 function CustomerLogIn() {
     const history = useHistory();
     const {login, isAuth} = useContext(AuthContext);
 
-    const [userEmail, setUserEmail] = useState('');
-    const [validUserEmail, setValidUserEmail] = useState(false);
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [validPassword, setValidPassword] = useState(false);
-
     const [error, toggleError] = useState(false);
-    const [succes, toggleSucces] = useState(false);
-
-
-    useEffect(() => {
-        setValidUserEmail(USER_REGEX.test(userEmail));
-    }, [userEmail])
-
-    useEffect(() => {
-        setValidPassword(PWD_REGEX.test(password));
-    }, [password])
-
-
+    const [loading, toggleLoading] = useState(false);
 
     async function userLoginRequest(e) {
         e.preventDefault();
+        toggleLoading(false);
 
         try {
             const response = await axios.post('http://localhost:8080/authenticate', {
-                userEmail: userEmail,
+                userEmail: email,
                 password: password,
             });
 
             console.log(response.data);
-            login(response.data.jwt);
-            toggleSucces(true);
+            if (response.data.authorities[1].authority === 'ROLE_USER') {
+                login(response.data.jwt);
 
-            setTimeout(() => {
-                history.push("/customer/profile");
-            }, 1500)
+                setTimeout(() => {
+                    history.push("/customer/profile");
+                }, 1500)
+            } else {
+                history.push("/customer/login");
+            }
+
 
         } catch (e) {
             console.error(e);
             toggleError(true);
         }
     }
-
 
     return (
         <>
@@ -66,7 +53,8 @@ function CustomerLogIn() {
                         </div>
                         <div className="customer-register-outer-container">
                             <div>
-                                <h3 className="customer-h3-header"><MdAccountCircle size={36}/>&nbsp;Ik heb een Loahy account</h3>
+                                <h3 className="customer-h3-header"><MdAccountCircle size={36}/>&nbsp;Ik heb een Loahy
+                                    account</h3>
                             </div>
                             <div className="login-field-note">
                                 Meld je aan met je e-mailadres en wachtwoord
@@ -85,10 +73,9 @@ function CustomerLogIn() {
                                                 <input
                                                     type="email"
                                                     id="email-field"
-                                                    onChange={(e) => setUserEmail(e.target.value)}
-                                                    value={userEmail}
+                                                    value={email}
+                                                    onChange={(e) => setEmail(e.target.value)}
                                                     required
-                                                    aria-invalid={validUserEmail ? "false" : "true"}
                                                 />
                                             </label>
                                             <label htmlFor="password-field">
@@ -99,15 +86,10 @@ function CustomerLogIn() {
                                                     onChange={(e) => setPassword(e.target.value)}
                                                     value={password}
                                                     required
-                                                    aria-invalid={validPassword ? "false" : "true"}
                                                 />
                                             </label>
-                                            {error &&
-                                                <p className="error">Combinatie van email adres en wachtwoord is onjuist,
-                                                    probeer het nog eens</p>}
-
                                             <button
-                                                disabled={!validPassword || !validUserEmail}
+                                                disabled={loading}
                                                 type="submit"
                                                 className="form-button-login"
                                             >

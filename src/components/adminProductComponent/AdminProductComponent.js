@@ -1,63 +1,67 @@
 import React, {useContext, useState} from "react";
-import UploadImage from "../ImageComponent/UploadImage";
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
 import {useHistory} from "react-router-dom";
+import {GrUpdate} from "react-icons/gr";
+import {FaFileUpload} from "react-icons/fa";
 
 
 function AdminProductComponent() {
     const {user} = useContext(AuthContext);
-    const token = localStorage.getItem('token');
-
-    // const {register, formState: {errors}, handleSubmit} = useFormContext();
-    const message = "..veld is verplicht";
     const history = useHistory();
+    const [loading, toggleLoading] = useState(false);
 
-    const [addSucces, toggleAddSucces] = useState(false);
     const [productName, setProductName] = useState('');
-    const [productDescription, setProductDescription] = useState('');
+    const [productInfo, setProductInfo] = useState('');
     const [productPrice, setProductPrice] = useState('');
-    const [error, toggleError] = useState(false)
+
+    const [file, setFile] = useState([]);
+    const [previewUrl, setPreviewUrl] = useState('');
 
 
-    async function sendProductData(productdata) {
+
+    async function sendItemData() {
+        toggleLoading(true);
         try {
-            await axios.post(`http://localhost:8080/products/create`,
+            await axios.post(`http://localhost:8080/products/`,
                 {
-                    productName: productdata.product_name,
-                    productDescription: productdata.product_description,
-                    productPrice: productdata.product_price,
-                }).then(addNewProduct)
+                    productName: productName,
+                    productDescription: productInfo,
+                    productPrice: productPrice,
+                }).then(addedNewProduct)
 
-        } catch (error) {
-            console.error(error);
+        } catch (e) {
+            console.error(e);
         }
     }
+    sendItemData();
 
-
-    async function addNewProduct() {
-        history.push('/producten');
+    function addedNewProduct() {
+        history.push('/')
     }
 
-    async function deleteProduct(productName) {
-        toggleError(false);
+    async function sendImageData(id) {
+        const formData = new FormData();
+        formData.append("file", file);
+
         try {
-            await axios.delete(`http://localhost:8080/products/delete/${productName}`,
+            const result = await axios.post(`http://localhost:8080/products/${id}/image`, formData,
                 {
                     headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`,
-                    }
+                        "Content-Type": "multipart/form-data"
+                    },
                 })
+            console.log(result.data);
         } catch (e) {
-            toggleError(true);
             console.error(e)
         }
+    }
 
-        setTimeout(() => {
-            history.push('/');
-        }, 300)
-
+    function handleImageChange(e) {
+        const uploadedFile = e.target.files[0];
+        console.log(uploadedFile);
+        setFile(uploadedFile);
+        setPreviewUrl(URL.createObjectURL(uploadedFile));
     }
 
     return (
@@ -72,43 +76,82 @@ function AdminProductComponent() {
                     </div>
                 </div>
             ) : (
-                <div className="add-new-product" id="/admin-add-new-product">Nieuw product toevoegen
-                {addSucces === true && <p>Product is toegevoegd!</p>}
-                    <form onSubmit={addNewProduct}>
-                    <label htmlFor="image-field">
-                        <UploadImage/>
-                    </label>
-                    <label htmlFor="product-name">
-                        Product Naam
-                        <input
-                            type="text"
-                            name="product-name-field"
-                            id="product-name"
-                            value={productName}
-                            onChange={(e) => setProductName(e.target.value)}/>
-                    </label>
-                    <label htmlFor="product-description">
-                        Product informatie
-                        <input
-                            type="text"
-                            name="product-information-field"
-                            id="product-information"
-                            value={productDescription}
-                            onChange={(e) => setProductDescription(e.target.value)}/>
-                    </label>
-                    <label htmlFor="product-price">
-                        <input
-                            id="price"
-                            name="product-price"
-                            value={productPrice}
-                            onChange={(e) => setProductPrice(e.target.value)}
-                        />
-                    </label>
-                    <button type="submit">
-                        Voeg Product toe
-                    </button>
-                </form>
-                </div>)}
+                <div className={"item-add"}>
+                    <div className="add-item-container">
+                        <p>Voeg hier je product</p>
+                        <p>Een product Id wordt automatisch gegenereerd, deze is terug te vinden in: Mijn producten
+                        </p>
+                    </div>
+                    <div className="form-add-container">
+                        <form className="add-item-form-"
+                              onSubmit={sendItemData()}>
+                            <div>
+                                <form onSubmit={sendImageData}>
+                                    <label htmlFor="itemImage-field">
+                                        Kies Afbeelding
+                                        <input
+                                            type="file"
+                                            id="itemImage-field"
+                                            name="image"
+                                            onChange={handleImageChange}
+                                        />
+                                    </label>
+                                    {previewUrl &&
+                                        <label>
+                                            Preview:
+                                            <img src={previewUrl} alt="Voorbeeld van de afbeelding die zojuist gekozen is" className="image-preview"/>
+                                        </label>
+                                    }
+                                    <button
+                                        type="submit"
+                                        className="form-submit-image-button"
+                                    >
+                                        <FaFileUpload size={22}/>
+                                        Upload Image
+                                    </button>
+                                </form>
+                            </div>
+                            <label htmlFor="itemName-field">
+                                Product Naam
+                                <input
+                                    type="text"
+                                    id="itemName-field"
+                                    name="name"
+                                    value={productName}
+                                    onChange={(e) => setProductName(e.target.value)}
+                                />
+                            </label>
+                            <label htmlFor="itemDescription-field">
+                                product Informatie
+                                <input
+                                    type="text"
+                                    id="itemDescription-field"
+                                    name="description"
+                                    value={productInfo}
+                                    onChange={(e) => setProductInfo(e.target.value)}
+                                />
+                            </label>
+                            <label htmlFor="itemPrice-field">
+                                Product Prijs
+                                <input
+                                    type="number"
+                                    id="itemPrice-field"
+                                    name="price"
+                                    value={productPrice}
+                                    onChange={(e) => setProductPrice(e.target.value)}
+                                />
+                            </label>
+                            <button
+                                type="submit"
+                                className="form-update-product-button"
+                                disabled={loading}
+                            >
+                                <GrUpdate/> Wijzig Product
+                            </button>
+                        </form>
+                    </div>
+                </div>)
+            }
         </>
     )
 }

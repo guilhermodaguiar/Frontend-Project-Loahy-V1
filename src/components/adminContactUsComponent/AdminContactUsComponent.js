@@ -3,6 +3,7 @@ import React, {useContext, useEffect, useState} from "react";
 import './AdminContactUsComponent.css';
 import {AuthContext} from "../../context/AuthContext";
 import axios from "axios";
+import {AiTwotoneDelete} from "react-icons/ai";
 
 
 function AdminContactUsComponent() {
@@ -11,25 +12,35 @@ function AdminContactUsComponent() {
 
     const [remarks, setRemarks] = useState([]);
 
-    const [contactUs, setContactUs] = useState('');
-    const [updateSucces, toggleUpdateSucces] = useState(false);
+    async function deleteRemark(userEmail) {
+        try {
+            await axios.delete(`http://localhost:8080/contact-remarks/${userEmail}`,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                    }
+                })
+        } catch (e) {
+            console.error(e);
+        }
+    }
 
     useEffect(() => {
 
         async function fetchContactUsData() {
 
             try {
-                const response = await axios.get(`http://localhost:8080/orders`, {
+                const response = await axios.get(`http://localhost:8080/contact-remarks`, {
                         headers: {
                             "Content-Type": "application/json",
                             "Authorization": `Bearer ${token}`,
                         }
                     }
                 );
-                setContactUs(response.data);
-
+                setRemarks(response.data);
             } catch (e) {
-                console.error('There was an error!', e);
+                console.error('Er is iets misgegaan!', e);
             }
         }
         fetchContactUsData();
@@ -40,38 +51,23 @@ function AdminContactUsComponent() {
 
     }, [token]);
 
-    async function handleBrandSubmit(e) {
-        e.preventDefault();
-
-        try {
-            const response = await axios.post('http://localhost:8080/about-loahy', {
-            });
-
-            toggleUpdateSucces(true);
-        } catch(e) {
-            console.error('Error: er is iets misgegaan', e);
-        }
-    }
-
     return(
         <>
             {user.roles !== "ROLE_ADMIN" ? (
                     <div className="admin-route-container">
                         <div className="admin-route">
-                            <h1>U moet ingelogd zijn als
-                                <br/> ADMINISTRATOR
-                                <br/>om deze content te mogen zien..
-                            </h1>
+                            <h1>Moet ingelogd zijn als Admin</h1>
                         </div>
                     </div>
                 )
                 :
                 (
                     <div className="contact-page" id="contact-remarks">Contact-formulier
-                        <form>
+                        <section>
                             <table>
                                 <thead>
                                 <tr>
+                                    <th className="contact-delete"></th>
                                     <th className="contact-name">Naam</th>
                                     <th className="contact-email">E-mailadres</th>
                                     <th className="contact-phone">Telefoonnummer</th>
@@ -81,7 +77,13 @@ function AdminContactUsComponent() {
                                 </thead>
                                 <tbody>
                                 {remarks.map((contact) =>{
-                                    return <tr key={contact.contactName}>
+                                    return<tr key={contact.contactName}>
+                                        <td>
+                                            <button className="delete-button"
+                                                    onClick={() => deleteRemark(contact.orderName)}>
+                                                Verwijder<AiTwotoneDelete/>
+                                            </button>
+                                        </td>
                                         <td>{contact.contactName}</td>
                                         <td>{contact.contactEmail}</td>
                                         <td>{contact.contactPhone}</td>
@@ -91,7 +93,7 @@ function AdminContactUsComponent() {
                                 })}
                                 </tbody>
                             </table>
-                        </form>
+                        </section>
                     </div>
                 )
             }

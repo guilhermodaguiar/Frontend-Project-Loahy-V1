@@ -10,7 +10,7 @@ import AdminPage from "../pages/admin/AdminPage";
 import AdminLogIn from "../pages/admin/AdminLogIn";
 import CheckOut from "../pages/checkout/CheckOut";
 import CustomerRegister from "../pages/customer/customerRegister/CustomerRegister";
-import CustomerLogIn2 from "../pages/customer/customerLogIn/CustomerLogin2";
+import CustomerLogIn from "../pages/customer/customerLogIn/CustomerLogIn";
 
 
 function Routes() {
@@ -20,7 +20,7 @@ function Routes() {
             <div className="inner-container">
                 <Switch>
                     <Route exact path="/customer/login">
-                        <CustomerLogIn2/>
+                        <CustomerLogIn/>
                     </Route>
                     <Route exact path="/customer/register">
                         <CustomerRegister/>

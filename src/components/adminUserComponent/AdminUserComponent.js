@@ -1,18 +1,13 @@
 import React, {useContext, useEffect, useState} from "react";
 import axios from "axios";
-
-
-
-
 import {AuthContext} from "../../context/AuthContext";
+import {FaUserCircle} from "react-icons/fa";
 
 function AdminUserComponent() {
 
     const token = localStorage.getItem('token');
     const {user} = useContext(AuthContext);
-
     const [users, setUsers] = useState([]);
-
 
     async function deleteUser(userEmail) {
         try {
@@ -29,9 +24,7 @@ function AdminUserComponent() {
     }
 
     useEffect(() => {
-
         async function fetchUsers() {
-
             try {
                 const response = await axios.get(`http://localhost:8080/users`,
                     {
@@ -42,13 +35,11 @@ function AdminUserComponent() {
                     }
                 );
                 setUsers(response.data)
-
             } catch (e) {
-                console.error('Error: Er is iets misgegaan!', e);
+                console.error('Er is iets misgegaan!', e);
             }
         }
         fetchUsers();
-
         return function cleanup() {
             token.cancel();
         }
@@ -59,14 +50,11 @@ function AdminUserComponent() {
     return(
         <>
             {user.roles !== "ROLE_ADMIN" ? (
-                    <div className="admin-route-container">
-                        <div className="admin-route">
-                            <h1>U moet ingelogd zijn als
-                                <br/> ADMINISTRATOR
-                                <br/>om deze content te mogen zien..
-                            </h1>
-                        </div>
+                <div className="admin-route-container">
+                    <div className="admin-route">
+                        <h1>Moet ingelogd zijn als Admin</h1>
                     </div>
+                </div>
                 )
                 :
                 (
@@ -74,14 +62,14 @@ function AdminUserComponent() {
 
                         <section className="Admin_UsersComponent">
                             <div>
-                                <h2> GEBRUIKERS </h2>
+                                <h2> Users&nbsp;<FaUserCircle/> </h2>
                             </div>
                             <table>
                                 <thead>
                                 <tr>
                                     <th></th>
-                                    <th>Gebruikers-Id</th>
-                                    <th>E-mail</th>
+                                    <th>user-Id</th>
+                                    <th>e-mail</th>
                                     <th>Voornaam</th>
                                     <th>Achternaam</th>
                                     <th>Straatnaam</th>
@@ -97,10 +85,9 @@ function AdminUserComponent() {
 
                                 {users.map((user) => {
                                     return <tr key={user.userId}>
-
                                         <td>
                                             <button className="delete-button"
-                                                    onClick={() => deleteUser(user.username)}>
+                                                    onClick={() => deleteUser(user.userEmail)}>
                                             </button>
                                         </td>
                                         <td>{user.userId}</td>
@@ -115,14 +102,10 @@ function AdminUserComponent() {
                                         <td>{user.customer.customerPhone}</td>
                                     </tr>
                                 })}
-
                                 </tbody>
-
                             </table>
-
                         </section>
                     </div>
-
                 )}
         </>
     )
