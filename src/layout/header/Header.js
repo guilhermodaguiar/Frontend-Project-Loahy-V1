@@ -14,7 +14,7 @@ function Header() {
                         <button
                             type="button"
                             className="button-to-shopping-page"
-                            onClick={()=>console.log("Jij wil shoppen!")}
+                            onClick={() => console.log("Jij wil shoppen!")}
                         ><BsShopWindow size={23}/>&nbsp; Shop nu
                         </button>
                     </Link>

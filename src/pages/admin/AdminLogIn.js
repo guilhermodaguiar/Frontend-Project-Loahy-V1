@@ -13,10 +13,12 @@ function AdminLogIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, toggleError] = useState(false);
+    const [loading, toggleLoading] = useState(false);
 
 
     async function adminLoginRequest(e) {
         e.preventDefault();
+        toggleLoading(false);
 
         try {
             const response = await axios.post(`http://localhost:8080/authenticate`, {
@@ -84,6 +86,7 @@ function AdminLogIn() {
                                             <p className="error-admin-login"> Combinatie van email-adres en wachtwoord is
                                                 onjuist</p>}
                                         <button
+                                            disabled={loading}
                                             type="submit"
                                             className="form-button"
                                         >

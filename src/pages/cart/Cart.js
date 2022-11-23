@@ -5,14 +5,14 @@ import {NavLink, useHistory} from "react-router-dom";
 import {FcShop} from "react-icons/fc";
 import {IoBagCheckOutline} from "react-icons/io5";
 import {AuthContext} from "../../context/AuthContext";
-import {CartContext} from "../../context/CartContext";
 import CartComponent from "../../components/cartComponent/CartComponent";
+import {CartContext} from "../../context/CartContext";
 
 
 function Cart() {
     const {isAuth} = useContext(AuthContext);
     const history = useHistory();
-    const {cartItems} = useContext(CartContext);
+    const {state: {cart}} = useContext(CartContext);
 
 
     function checkout() {
@@ -26,7 +26,7 @@ function Cart() {
                 <h1 className="shopping-cart-h1">Winkelwagen</h1>
             </div>
             <div className="shopping-cart-container">
-                {cartItems.map((item) => {
+                {cart.map((item) => {
                     return <CartComponent
                         key={item.productId}
 
@@ -38,10 +38,6 @@ function Cart() {
                         productPrice={item.productPrice}
                     />
                 })}
-
-                {cartItems.map(item => (
-                    <CartComponent key={item.productId} {...item} />
-                ))}
             </div>
             <div className={"shopping-cart-container"}>
                 {!isAuth ? (

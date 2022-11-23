@@ -1,72 +1,39 @@
-import {createContext, useEffect, useState} from "react";
+import {createContext, useEffect, useReducer, useState} from "react";
 import axios from "axios";
+import {wishlistReducer} from "./Reducers";
 
 export const WishlistContext = createContext({});
 
 function WishlistProvider({children}) {
     const [wishlistItems, setWishlistItems] = useState([]);
-    const listQuantity = wishlistItems.reduce((quantity, item) => item.quantity + quantity, 0);
+
 
     useEffect(() => {
-        async function getItemData(id) {
+        async function getItemData() {
             try {
-                const itemData = await axios.get(`http://localhost:8080/products/${id}`);
+                const itemData = await axios.get(`http://localhost:8080/products`);
+                console.log(itemData.data)
                 setWishlistItems(itemData.data);
+                dispatch2({
+                    type: "SET_WISHLIST_ITEMS",
+                    payload: itemData.data,
+                })
             } catch (e) {
                 console.error('er is iets misgegaan', e);
             }
         }
-
         getItemData();
     }, []);
 
+    console.log(wishlistItems);
 
-    function getItemQuantity(id) {
-        return wishlistItems.find(item => item.id === id)?.quantity || 0
-    }
-
-    function increaseListQuantity(id) {
-        setWishlistItems(currItems => {
-            if (currItems.find(item => item.id === id) == null) {
-                return [...currItems, {id, quantity: 1}]
-            } else {
-                return currItems.map(item => {
-                    if (item.id === id) {
-                        return {...item, quantity: item.quantity + 1}
-                    } else {
-                        return item
-                    }
-                })
-            }
-        })
-    }
-
-    function decreaseListQuantity(id) {
-        setWishlistItems(currItems => {
-            if (currItems.find(item => item.id === id)?.quantity === 1) {
-                return currItems.filter(item => item.id !== id)
-            } else {
-                return currItems.map(item => {
-                    if (item.id === id) {
-                        return {...item, quantity: item.quantity - 1}
-                    } else {
-                        return item
-                    }
-                })
-            }
-        })
-    }
-
-    function removeFromList(id) {
-        setWishlistItems(currItems => {
-            return currItems.filter(item => item.id !== id)
-        })
-    }
-
+    const [state2,dispatch2] = useReducer(wishlistReducer, {
+        wishlistItems: [],
+        wishlist: [],
+    })
 
     return (
-        <WishlistContext.Provider
-            value={{listQuantity, getItemQuantity, increaseListQuantity, decreaseListQuantity, removeFromList}}>
+        <WishlistContext.Provider value={{state2, dispatch2}}>
             {children}
         </WishlistContext.Provider>
     )

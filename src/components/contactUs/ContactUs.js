@@ -56,57 +56,10 @@ function ContactUs() {
                     </div>
                     <div className="flex-container">
                         <div className="contact-us-inner-container">
-                            <div className="contact-map">
-                                <div className="green-up-container">
-                                    <h3>GreenUp!</h3>
-                                    <p>Onze producten zijn ook verkrijgbaar bij GreenUp! warenhuis</p>
-                                </div>
-                                <div className="green-up">
-                                    <iframe
-                                        title="green-up-warenhuis"
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2451.358835162259!2d5.
-                                    117260715725428!3d52.09140067973533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.
-                                    1!3m3!1m2!1s0x47c66fea5f7de223%3A0x74bc5e881f872feb!2sGreen%20UP!5e0!3m2!1snl!2snl!
-                                    4v1665526748126!5m2!1snl!2snl"
-                                        width="290"
-                                        height="290"
-                                        style={{border: 0}}
-                                        allowFullScreen=""
-                                        loading="lazy"
-                                        referrerPolicy="no-referrer-when-downgrade">
-                                    </iframe>
-                                </div>
-
-                            </div>
-                            <div className="contact-us-border-container">
-                                <div className="contact-us-information">
-                                    <h3>Contact Informatie</h3>
-                                    <div className="contact-us-information-list-contact">
-                                        <p><KvK className="Kvk-icon"/>82072272</p>
-                                        <p><HiLocationMarker/>Balistraat 42, 3531PX, Utrecht</p>
-                                        <p><HiOutlineMail/><a
-                                            href="mailto:contact-ons@loahy.nl">contact-ons@loahy.nl</a></p>
-                                        <p><HiOutlinePhone/><a href="tel:+31-06-30399190">06-30399190</a></p>
-                                    </div>
-                                </div>
-                                <div className="contact-us-icons">
-                                    <div>
-                                        <a className="instagram-icon" href="https://www.instagram.com/loahytree/">
-                                            <FaInstagram size={22}/>
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <a className="facebook-icon"
-                                           href="https://www.facebook.com/Loahytree-109562478288311/?notif_id=1655164686624838&notif_t=aymt_page_post_reminder_14d_notification&ref=notif">
-                                            <FaFacebook size={22}/>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
                             <div className="contact-us-contact-us">
                                 <div>
                                     <h3>Stuur ons een bericht</h3>
-                                    <p>Stuur ons een bericht en we reageren binnen 24 uur</p>
+                                    <p className="just-a-p">Stuur ons een bericht en we reageren binnen 24 uur</p>
                                     <form className="container-contact-form" onSubmit={handleContactSubmit}>
                                         <div>
                                             <div className="contact-us-section-containers">
@@ -185,7 +138,55 @@ function ContactUs() {
                                     </form>
                                 </div>
                             </div>
+                            <div className="contact-us-border-container">
+                                <div className="contact-us-information">
+                                    <h3>Contact Informatie</h3>
+                                    <div className="contact-us-information-list-contact">
+                                        <p className="just_a-p"><KvK className="Kvk-icon"/>&nbsp;82072272</p>
+                                        <p className="just_a-p"><HiLocationMarker/>&nbsp;Balistraat 42, 3531PX, Utrecht</p>
+                                        <p className="just_a-p"><HiOutlineMail/>&nbsp;<a href="mailto:contact-ons@loahy.nl">contact-ons@loahy.nl</a></p>
+                                        <p className="just_a-p"><HiOutlinePhone/>&nbsp;<a href="tel:+31-06-30399190">06-30399190</a></p>
+                                    </div>
+                                </div>
+                                <div className="contact-us-icons">
+                                    <div>
+                                        <a className="instagram-icon" href="https://www.instagram.com/loahytree/">
+                                            <FaInstagram size={22}/>
+                                        </a>
+                                    </div>
+                                    &nbsp;
+                                    <div>
+                                        <a className="facebook-icon"
+                                           href="https://www.facebook.com/Loahytree-109562478288311/?notif_id=1655164686624838&notif_t=aymt_page_post_reminder_14d_notification&ref=notif">
+                                            <FaFacebook size={22}/>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="contact-map">
+                                <div className="green-up-container">
+                                    <h3>GreenUp!</h3>
+                                </div>
+                                <div className="green-up-container">
+                                    <p>Onze producten zijn ook verkrijgbaar bij GreenUp! warenhuis</p>
+                                </div>
+                                <div className="green-up">
+                                    <iframe
+                                        title="green-up-warenhuis"
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2451.358835162259!2d5.
+                                    117260715725428!3d52.09140067973533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.
+                                    1!3m3!1m2!1s0x47c66fea5f7de223%3A0x74bc5e881f872feb!2sGreen%20UP!5e0!3m2!1snl!2snl!
+                                    4v1665526748126!5m2!1snl!2snl"
+                                        width="290"
+                                        height="290"
+                                        style={{border: 0}}
+                                        allowFullScreen=""
+                                        loading="lazy"
+                                        referrerPolicy="no-referrer-when-downgrade">
+                                    </iframe>
+                                </div>
 
+                            </div>
                         </div>
                     </div>
                 </div>

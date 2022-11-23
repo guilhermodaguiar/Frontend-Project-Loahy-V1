@@ -140,14 +140,12 @@ thead {
 
 .increase-item, button {
     background: black;
-    display: flex;
     align-items: center;
     border-color: white;
 }
 
 .decrease-item, button {
     background: black;
-    display: flex;
     align-items: center;
 }
 

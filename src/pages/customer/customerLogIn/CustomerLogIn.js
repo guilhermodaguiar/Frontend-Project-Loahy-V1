@@ -88,6 +88,9 @@ function CustomerLogIn() {
                                                     required
                                                 />
                                             </label>
+                                            {error &&
+                                                <p className="error-customer-login"> Combinatie van email-adres en wachtwoord is
+                                                    onjuist</p>}
                                             <button
                                                 disabled={loading}
                                                 type="submit"
@@ -117,7 +120,7 @@ function CustomerLogIn() {
                 <h1>Inloggen succesvol!</h1>
                 <h5>U bent succesvol ingelogd<br/> en wordt automatisch doorgestuurd..</h5>
                 <p>Mocht u niet automatisch doorgestuurd worden<br/>
-                <NavLink to="/profile" className="active-link">klik dan hier!</NavLink>
+                <NavLink to="/customer/profile" className="active-link">klik dan hier!</NavLink>
                 </p>
                 </span>)
             }

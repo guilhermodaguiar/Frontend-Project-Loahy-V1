@@ -6,12 +6,11 @@ import {HashLink as Link} from "react-router-hash-link";
 
 import {HiOutlineHeart, HiOutlineShoppingCart, HiOutlineUser} from "react-icons/hi";
 import {CartContext} from "../../context/CartContext";
-import CartComponent from "../../components/cartComponent/CartComponent";
+import CartDropDown from "../../components/cartDropDownMenu/CartDropDown";
 
 
 function NavBar() {
-    const {cartQuantity} = useContext(CartContext);
-
+    const { state: {cart} } = useContext(CartContext);
 
     return (
         <div className="inner-container">
@@ -47,12 +46,12 @@ function NavBar() {
                                     size={22}/>
                                 </div>
                                 <div className="dropdown-content">
-                                    <div className="cart-component-background"><CartComponent/></div>
+                                    <div className="cart-component-background"><CartDropDown/></div>
                                 </div>
                             </span>
                         </NavLink>
-                        {cartQuantity > 0 && (<div className="rounded-circle">
-                            {cartQuantity}
+                        {cart.length > 0 && (<div className="rounded-circle">
+                            {cart.length}
                         </div>)}
                     </li>
                     <li>

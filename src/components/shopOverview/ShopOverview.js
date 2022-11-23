@@ -1,27 +1,15 @@
 import './ShopOverview.css';
-import React, {useEffect, useState} from "react";
+import React, {useContext} from "react";
 import ShopItem from "../shopItem/ShopItem";
-import axios from "axios";
+import {CartContext} from "../../context/CartContext";
+import {WishlistContext} from "../../context/WishlistContext";
 
 
 function ShopOverview() {
-    const [storeItems, setStoreItems] = useState([]);
+    const {state: {items}} = useContext(CartContext);
+    const {state2: {wishlistItems}} = useContext(WishlistContext);
 
-    useEffect(() => {
-
-        async function fetchStoreItems() {
-            try {
-                const response = await axios.get('http://localhost:8080/products')
-                console.log(response);
-                setStoreItems(response.data);
-
-            } catch (e) {
-                console.error(e);
-            }
-        }
-
-        fetchStoreItems();
-    }, []);
+    console.log(items);
 
     return (
         <>
@@ -34,17 +22,31 @@ function ShopOverview() {
                                 <div className="product-list">
                                     <div className="product-item-info">
                                         <div className="photo-wrapper">
-                                            {storeItems.map((item) => {
+                                            {items.map((item) => {
                                                 return <ShopItem
+                                                    item = {item}
                                                     key={item.productId}
 
                                                     url={item.image.url}
-                                                    fileName={item.image.filename}
+                                                    fileName={item.image.fileName}
 
                                                     productId={item.productId}
                                                     productName={item.productName}
                                                     productDescription={item.productInformation}
                                                     productPrice={item.productPrice}
+                                                />
+                                            })}
+                                            {wishlistItems.map((wishlistItem)=> {
+                                                return<ShopItem
+                                                    key={wishlistItem.productId}
+
+                                                    url={wishlistItem.image.url}
+                                                    fileName={wishlistItem.image.fileName}
+
+                                                    productId={wishlistItem.productId}
+                                                    productName={wishlistItem.productName}
+                                                    productDescription={wishlistItem.productInformation}
+                                                    productPrice={wishlistItem.productPrice}
                                                 />
                                             })}
                                         </div>

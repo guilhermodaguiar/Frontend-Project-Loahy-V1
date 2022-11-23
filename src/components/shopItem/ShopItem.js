@@ -1,17 +1,15 @@
 import React, {useContext} from "react";
 import './ShopItem.css';
-import {WishlistContext} from "../../context/WishlistContext";
 
-import {BsFillCartPlusFill} from "react-icons/bs";
+import {BsFillCartDashFill, BsFillCartPlusFill} from "react-icons/bs";
 import {formatCurrency} from "../../helpers/formatCurrency/FormatCurrency";
 import {HiHeart} from "react-icons/hi";
 import {CartContext} from "../../context/CartContext";
+import {WishlistContext} from "../../context/WishlistContext";
 
-function ShopItem(item) {
-
-    const {increaseCartQuantity} = useContext(CartContext)
-    const {increaseListQuantity} = useContext(WishlistContext);
-
+function ShopItem(item, wishlistItem) {
+    const {state: {cart}, dispatch,} = useContext(CartContext);
+    const {dispatch2} = useContext(WishlistContext);
 
     return (
         <>
@@ -19,12 +17,13 @@ function ShopItem(item) {
                 <div className="border-effect-container">
                     <div className="random-robot-container">
                         <div className="wishlist-heart">
-                            {}
                             <HiHeart size={22}
                                      className="add-to-list-heart"
-                                     onClick={() => {
-                                         increaseListQuantity();
-                                     }}/>
+                                     onClick={() => dispatch2({
+                                         type: 'ADD_TO_WISHLIST',
+                                         payload: wishlistItem,
+                                     })
+                                     }/>
                         </div>
                         <div>
                             <img alt={item.fileName}
@@ -43,12 +42,26 @@ function ShopItem(item) {
                             <p>{formatCurrency(item.productPrice)}</p>
                         </div>
                         <div className="product-item-inner">
-                            <div className="add-item-to-cart">
-                                <button className="click-to-cart"
-                                        onClick={() => increaseCartQuantity(item.productId)}>
-                                    <p><BsFillCartPlusFill/> &nbsp;In winkelwagen</p>
-                                </button>
-                            </div>
+                            {cart.some((p) => p.id === item.productId) ?
+                                (<div className="remove-item-from-cart">
+                                    <button className="click-from-cart"
+                                            onClick={() => dispatch({
+                                                type: 'REMOVE_FROM_CART',
+                                                payload: item,
+                                            })}>
+                                        <p><BsFillCartDashFill/> &nbsp;Uit winkelwagen</p>
+                                    </button>
+                                </div>)
+                                :
+                                (<div className="add-item-to-cart">
+                                    <button className="click-to-cart"
+                                            onClick={() => dispatch({
+                                                type: 'ADD_TO-CART',
+                                                payload: item,
+                                            })}>
+                                        <p><BsFillCartPlusFill/> &nbsp;In winkelwagen</p>
+                                    </button>
+                                </div>)}
                         </div>
                     </div>
                 </div>

@@ -1,81 +1,51 @@
-import React, {createContext, useEffect, useState} from "react";
+import React, {createContext, useEffect, useReducer, useState} from "react";
+import {cartReducer} from "./Reducers";
 import axios from "axios";
+
 
 export const CartContext = createContext({});
 
 function CartContextProvider({children}) {
+    const [products, setProducts] = useState();
 
-    const [cartItems, setCartItems] = useState([]);
-
-    const cartQuantity = cartItems.reduce((quantity, item) => item.quantity + quantity, 0);
 
     useEffect(() => {
-        async function getItemData(productId) {
+        async function getItemData() {
             try {
-                const itemData = await axios.get(`http://localhost:8080/products/${productId}`);
-                console.log(itemData);
-                setCartItems(itemData.data);
+                const itemData = await axios.get(`http://localhost:8080/products`);
+                console.log(itemData.data);
+                setProducts(itemData.data);
+                dispatch({
+                    type: "SET_ITEMS",
+                    payload: itemData.data,
+                })
+
             } catch (e) {
                 console.error('er is iets misgegaan', e);
             }
         }
-
-        getItemData()
+        getItemData();
     }, []);
 
+    console.log(products);
 
-    function getItemQuantity(productId) {
-        return cartItems.find(item => item.productId === productId)?.quantity || 0
+
+    const [state, dispatch] = useReducer(cartReducer, {
+        items: [],
+        cart: []
+    })
+
+    const value = {
+        items:state.items,
+        cart: state.cart,
     }
 
-    function increaseCartQuantity(productId) {
-        setCartItems(currItems => {
-            if (currItems.find(item => item.productId === productId) == null) {
-                return [...currItems, {productId, quantity: 1}]
-            } else {
-                return currItems.map(item => {
-                    if (item.productId === productId) {
-                        return {...item, quantity: item.quantity + 1}
-                    } else {
-                        return item
-                    }
-                })
-            }
-        })
-    }
 
-    function decreaseCartQuantity(productId) {
-        setCartItems(currItems => {
-            if (currItems.find(item => item.productId === productId)?.quantity === 1) {
-                return currItems.filter(item => item.productId !== productId)
-            } else {
-                return currItems.map(item => {
-                    if (item.productId === productId) {
-                        return {...item, quantity: item.quantity - 1}
-                    } else {
-                        return item
-                    }
-                })
-            }
-        })
-    }
-
-    function removeFromCart(productId) {
-        setCartItems(currItems => {
-            return currItems.filter(item => item.productId !== productId)
-        })
-    }
-
-    return (<CartContext.Provider value={{
-        cartItems,
-        cartQuantity,
-        getItemQuantity,
-        increaseCartQuantity,
-        decreaseCartQuantity,
-        removeFromCart,
-    }}>
-        {children}
-    </CartContext.Provider>)
+    return (
+        <CartContext.Provider value={{state, dispatch, value}}>
+            {children}
+        </CartContext.Provider>
+    )
 }
 
 export default CartContextProvider;

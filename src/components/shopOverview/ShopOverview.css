@@ -115,7 +115,6 @@ main {
     align-items: center;
     padding-top: 10px;
     padding-bottom: 10px;
-    width: 450px;
 }
 
 
@@ -166,15 +165,6 @@ main {
     align-items: center;
     background-color: wheat;
     border: ridge;
-}
-
-.product-details {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    flex-direction: column;
-    padding: 10px;
 }
 
 .main-container-product {
