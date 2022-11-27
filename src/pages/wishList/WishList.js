@@ -81,10 +81,6 @@ function WishList() {
                                             <div className="cart-container-inner"></div>
                                         </div>
                                         <div className="cart-container-outer">
-                                            <div className="cart-container-inner">Prijs</div>
-                                            <div className="cart-container-inner"></div>
-                                        </div>
-                                        <div className="cart-container-outer">
                                             <div className="cart-container-inner"></div>
                                         </div>
                                     </div>

@@ -27,7 +27,7 @@ function AdminProductOverviewComponent() {
     async function sendItemData(e) {
         toggleLoading(true);
         try {
-            await axios.post(`http://localhost:8080/products`,
+            await axios.post(`http://localhost:8080/products/create`,
                 {
                     productId: productNumber,
                     productName: productName,

@@ -10,3 +10,30 @@ body {
     font-family: "Poppins", sans-serif;
 }
 
+.navbar-list-options {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 400px;
+}
+
+nav a,
+nav a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.userInfo-Form-Container {
+    display: flex;
+    padding: 30px;
+    flex-wrap: wrap;
+    background: wheat;
+}
+
+
+

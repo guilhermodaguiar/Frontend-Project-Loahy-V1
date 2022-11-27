@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 
 import "./CustomerProfile.css";
-import NavBar from "../../layout/navBar/NavBar";
 import GreetUser from "../greetUser/GreetUser";
 import {AuthContext} from "../../context/AuthContext";
 import axios from "axios";
@@ -10,6 +9,9 @@ import UserProfile from "../userProfile/UserProfile";
 import Cart from "../../pages/cart/Cart";
 import WishList from "../../pages/wishList/WishList";
 import UserInfoForm from "../userInfoForm/UserInfoForm";
+import NavBar from "../../layout/navBar/NavBar";
+import {HashLink as Link} from "react-router-hash-link";
+import CustomerNavBar from "../../layout/customerNavBar/CustomerNavBar";
 
 
 
@@ -17,10 +19,9 @@ function CustomerProfile() {
     const history = useHistory();
 
     const token = localStorage.getItem('token');
-    const {user: {userEmail}} = useContext(AuthContext);
+    const {user: {userEmail}, logout} = useContext(AuthContext);
 
     const [userData, setUserData] = useState({});
-    const { user } = useContext(AuthContext);
 
 
     useEffect(() =>{
@@ -53,6 +54,7 @@ function CustomerProfile() {
                 <section>
                     <GreetUser/>
                 </section>
+                <CustomerNavBar/>
                 <section>
                     <UserProfile/>
                 </section>
@@ -66,7 +68,7 @@ function CustomerProfile() {
                     <WishList/>
                 </section>
                 <section>
-                    <button type="button" onClick={user.logout}>
+                    <button type="button" onClick={userEmail.logout}>
                         Uitloggen
                     </button>
                 </section>

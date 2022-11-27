@@ -62,7 +62,7 @@ function UserInfoForm() {
     return (
         <>
 
-            <div className="UserInfo-Form-Container">
+            <div className="userInfo-Form-Container">
                 <form className="user-info-form"
                       onSubmit={addCustomerData}>
 

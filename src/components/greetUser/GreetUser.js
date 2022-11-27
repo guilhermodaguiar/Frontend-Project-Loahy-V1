@@ -11,11 +11,11 @@ function GreetUser() {
             <section className="greet-user-container">
                 <div className="welcome-user">
                     <div className="welcome-user-outer-container">
-                        <h1>Welkom</h1>
+                        <h1 className="greet-email">Welkom</h1>
                     </div>
                     <div>
-                        <h1>
-                            {user.user_email}
+                        <h1 className="greet-email">
+                            &nbsp; {user.user_email}
                         </h1><
                     /div>
                 </div>
