@@ -87,32 +87,6 @@ body {
     display: flex;
 }
 
-tr {
-    padding-bottom: 20px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-th {
-    width: 180px;
-    padding-top: 5px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-thead {
-    padding-top: 2px;
-    padding-bottom: 2px;
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column;
-    flex-wrap: wrap;
-}
-
 .cart-checkout-button {
     background-color: #df7c6d;
     font-family: 'Poppins', sans-serif;

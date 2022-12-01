@@ -73,8 +73,8 @@ function ShopItem({item}) {
                         <strong className="product-name">
                             {item.productName}
                         </strong>
-                        <div>
-                            {item.productDescription}
+                        <div className="product-information">
+                            {item.productInformation}
                         </div>
                         <div>
                             <p>{formatCurrency(item.productPrice)}</p>

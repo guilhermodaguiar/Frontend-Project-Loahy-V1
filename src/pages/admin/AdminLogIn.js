@@ -31,8 +31,8 @@ function AdminLogIn() {
             login(response.data.jwt);
 
             setTimeout(() => {
-                    history.push("/admin/profile");
-                }, 1500)
+                history.push("/admin/profile");
+            }, 1500)
         } catch (e) {
             console.error(e);
             toggleError(true);
@@ -96,8 +96,11 @@ function AdminLogIn() {
                 )
                 : (
                     <span className="inlog-admin-successful">
-                        <h4> Inloggen succesvol!</h4>
-                        <h5>U bent succesvol ingelogd<br/> en wordt automatisch doorgestuurd..</h5>
+                        <h3> Inloggen succesvol!</h3>
+                        <div className="dot-pulse">
+                            loading
+                        </div>
+                        <h5>U bent succesvol ingelogd<br/> en wordt automatisch doorgestuurd</h5>
                         <p>Mocht u niet automatisch doorgestuurd worden<br/>
                         <NavLink to="/admin/profile">klik dan hier!</NavLink>
                         </p>

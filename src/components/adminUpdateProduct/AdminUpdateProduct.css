@@ -1,12 +1,13 @@
-.add-item-container p {
+.update-item-container p {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
 }
 
-.item-add-container {
+.item-update-container {
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
     justify-content: flex-start;
 }
 
@@ -27,7 +28,7 @@
     padding: 10px;
 }
 
-.add-item-container {
+.update-item-container {
     padding: 10px;
 }
 

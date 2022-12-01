@@ -12,28 +12,33 @@ const {logout} = useContext(AuthContext);
             <section className="admin-nav-bar-outer-container">
                 <div className="admin-nav-bar-inner-container">
                     <div className="container-for-padding">
-                        <Link to="/#admin-product-overview">
+                        <Link to="/admin/profile/#admin_product_overview">
                             Mijn producten
                         </Link>
                     </div>
                     <div className="container-for-padding">
-                        <Link to="/#admin-add-new-product">
+                        <Link to="/admin/profile/#admin_add_new_product">
+                            Product toevoegen
+                        </Link>
+                    </div>
+                    <div className="container-for-padding">
+                        <Link to="/admin/profile/#admin_update_product">
                             Product aanpassen
                         </Link>
                     </div>
                     <div className="container-for-padding">
-                        <Link to="/#all-costumers">
+                        <Link to="/admin/profile/#all_costumers">
                             Klanten
                         </Link>
                     </div>
                     <div className="container-for-padding">
-                        <Link to="/#all-orders">
+                        <Link to="/admin/profile/#all_orders">
                             Orders
                         </Link>
                     </div>
                     <div className="container-for-padding">
-                        <Link to="/#all-contact-remarks">
-                            Contact Opmerkingen
+                        <Link to="/admin/profile/#all_contact_remarks">
+                            Contact
                         </Link>
                     </div>
                     <div className="container-for-button">

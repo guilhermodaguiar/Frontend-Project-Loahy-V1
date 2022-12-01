@@ -1,11 +1,11 @@
-import React, {useContext, useEffect, useState} from "react";
+import './AdminOrder.css';
 
-import './AdminOrderComponent.css';
+import React, {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
 import {AiTwotoneDelete} from "react-icons/ai";
 
-function AdminOrderComponent() {
+function AdminOrder() {
     const token = localStorage.getItem('token');
     const {user} = useContext(AuthContext);
     const [orders, setOrders] = useState([])
@@ -41,7 +41,7 @@ function AdminOrderComponent() {
         }
 
         fetchOrders();
-    }, [orders]);
+    }, []);
 
     return (
         <>
@@ -53,7 +53,8 @@ function AdminOrderComponent() {
                     </div>
                 )
                 :
-                (<div className="history-orders" id="all-orders">History Orders
+                (<div className="history-orders" id="all_orders">
+                    History Orders
                         <section>
                             <table>
                                 <thead>
@@ -88,4 +89,4 @@ function AdminOrderComponent() {
     )
 }
 
-export default AdminOrderComponent;
+export default AdminOrder;

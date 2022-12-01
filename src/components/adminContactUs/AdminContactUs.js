@@ -1,12 +1,12 @@
-import React, {useContext, useEffect, useState} from "react";
+import './AdminContactUs.css';
 
-import './AdminContactUsComponent.css';
+import React, {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../context/AuthContext";
 import axios from "axios";
 import {AiTwotoneDelete} from "react-icons/ai";
 
 
-function AdminContactUsComponent() {
+function AdminContactUs() {
     const token = localStorage.getItem('token');
     const { user } = useContext(AuthContext);
 
@@ -57,7 +57,7 @@ function AdminContactUsComponent() {
                 )
                 :
                 (
-                    <div className="contact-page" id="contact-remarks">Contact-formulier
+                    <div className="contact-page" id="all_contact_remarks">Contact-formulier
                         <section>
                             <table>
                                 <thead>
@@ -96,4 +96,4 @@ function AdminContactUsComponent() {
     )
 }
 
-export default AdminContactUsComponent;
+export default AdminContactUs;

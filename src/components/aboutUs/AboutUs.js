@@ -1,4 +1,4 @@
-import './AboutUsComponent.css'
+import './AboutUs.css'
 import React from "react";
 import Video from "../video/Video";
 import kid_image from "./../../assets/Felipe_playing_Klein.png";
@@ -9,7 +9,7 @@ import {GiPirateFlag} from "react-icons/gi";
 import {MdOutlineToys} from 'react-icons/md'
 
 
-function AboutUsComponent() {
+function AboutUs() {
     return (<>
         <main>
             <div className="outer-container">
@@ -44,4 +44,4 @@ function AboutUsComponent() {
     </>)
 }
 
-export default AboutUsComponent;
+export default AboutUs;

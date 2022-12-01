@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../context/AuthContext";
 import axios from "axios";
 
-function AdminAboutUsComponent() {
+function AdminAboutUs() {
     const token = localStorage.getItem('token');
     const {user} = useContext(AuthContext);
 
@@ -86,4 +86,4 @@ function AdminAboutUsComponent() {
     )
 }
 
-export default AdminAboutUsComponent;
+export default AdminAboutUs;

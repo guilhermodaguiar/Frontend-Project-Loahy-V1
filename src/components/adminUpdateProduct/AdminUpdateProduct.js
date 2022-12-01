@@ -1,15 +1,14 @@
-import "./AdminProductComponent.css"
+import "./AdminUpdateProduct.css"
 
 import React, {useContext, useState} from "react";
-import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
 import {useHistory, useParams} from "react-router-dom";
-import {FaFileUpload} from "react-icons/fa";
+import axios from "axios";
 import {MdAddCircle} from "react-icons/md";
 import {RiErrorWarningLine} from "react-icons/ri";
+import {FaFileUpload} from "react-icons/fa";
 
-
-function AdminProductComponent() {
+function AdminUpdateProduct() {
     const {user} = useContext(AuthContext);
     const history = useHistory();
     const {id} = useParams();
@@ -85,16 +84,17 @@ function AdminProductComponent() {
                     </div>
                 </div>
             ) : (
-                <div className="item-add-container">
+                <div className="item-update-container" id="admin_update_product">
                     <h2>Product Aanpassen<MdAddCircle size={25}/></h2>
-                    <div className="add-item-container">
+                    <div className="update-item-container">
                         <p>Pas hier je product</p>
                         <RiErrorWarningLine/>
-                        <p>Alle velden moeten verplicht ingevuld worden!! Product nummer vindt je in Mijn
-                            producten(link)</p>
+                        <p>Alle velden moeten verplicht ingevuld worden!! </p>
+                        <p>Vul het Product nummer Product nummer vindt je in Mijn
+                            producten(link) </p>
                     </div>
-                    <div className="form-add-container">
-                        <form className="add-item-form"
+                    <div className="form-update-container">
+                        <form className="update-item-form"
                               onSubmit={sendItemData}>
                             <div className="form-container-all">
                                 <form onSubmit={sendUpdatedImageData}>
@@ -126,10 +126,11 @@ function AdminProductComponent() {
                                 </form>
                             </div>
                             <label className="label-container" htmlFor="itemName-field">
-                                Product Naam
+                                Product Nummer
                                 <input
-                                    type="text"
+                                    type="number"
                                     id="itemName-field"
+                                    placeholder="voorbeeld 1010"
                                     name="name"
                                     value={productNumber}
                                     onChange={(e) => setProductNumber(e.target.value)}
@@ -179,7 +180,7 @@ function AdminProductComponent() {
                                     type="submit"
                                     className="form-update-product-button"
                                 >
-                                    Product Bijwerken
+                                    Product bijwerken
                                 </button>
                             </div>
 
@@ -191,4 +192,4 @@ function AdminProductComponent() {
     )
 }
 
-export default AdminProductComponent;
+export default AdminUpdateProduct;

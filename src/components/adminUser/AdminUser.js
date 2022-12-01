@@ -1,9 +1,11 @@
+import "./AdminUser.css"
+
 import React, {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
 import {FaUserCircle} from "react-icons/fa";
 
-function AdminUserComponent() {
+function AdminUser() {
 
     const token = localStorage.getItem('token');
     const {user} = useContext(AuthContext);
@@ -54,7 +56,7 @@ function AdminUserComponent() {
                 )
                 :
                 (
-                    <div className="users-page-admin-element" id="all-customers">
+                    <div className="users-page-admin-element" id="all_customers">
 
                         <section className="Admin_UsersComponent">
                             <div>
@@ -99,4 +101,4 @@ function AdminUserComponent() {
     )
 }
 
-export default AdminUserComponent;
+export default AdminUser;

@@ -67,9 +67,9 @@ main {
 }
 
 .product-name {
-    font-weight: 300;
+    font-weight: 400;
     color: #df7c6d;
-    margin: 20px 0px;
+    margin: 20px 0;
 }
 
 .product-description {

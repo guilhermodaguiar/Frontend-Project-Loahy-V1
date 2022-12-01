@@ -1,4 +1,5 @@
 import './CustomerLogIn.css';
+
 import React, {useContext, useState} from "react";
 import {NavLink, useHistory} from 'react-router-dom'
 import {AuthContext} from "../../../context/AuthContext";
@@ -31,10 +32,10 @@ function CustomerLogIn() {
 
             setTimeout(() => {
                 history.push("/customer/profile");
-                }, 1500)
+            }, 1500)
 
         } catch (error) {
-            console.error("E~r is iets misgegaan met inloggen",error);
+            console.error("E~r is iets misgegaan met inloggen", error);
             toggleError(true);
         }
     }
@@ -81,7 +82,8 @@ function CustomerLogIn() {
                                                 />
                                             </label>
                                             {error &&
-                                                <p className="error-customer-login"> Combinatie van email-adres en wachtwoord is
+                                                <p className="error-customer-login"> Combinatie van email-adres en
+                                                    wachtwoord is
                                                     onjuist</p>}
                                             <button
                                                 disabled={loading}
@@ -109,7 +111,10 @@ function CustomerLogIn() {
                     </div>)
                 :
                 (<span className="inlog-customer-successful">
-                <h1>Inloggen succesvol!</h1>
+                <h3>Inloggen succesvol!</h3>
+                    <div className="dot-pulse">
+                        loading
+                    </div>
                 <h5>U bent succesvol ingelogd<br/> en wordt automatisch doorgestuurd..</h5>
                 <p>Mocht u niet automatisch doorgestuurd worden<br/>
                 <NavLink to="/customer/profile" className="active-link">klik dan hier!</NavLink>
