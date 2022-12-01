@@ -1,11 +1,14 @@
-import React, {useContext, useEffect, useState} from "react";
+import "./AdminProductOverviewComponent.css"
 
+import React, {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
-import {useHistory} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import {IoCloseSharp} from "react-icons/io5";
 import {GrUpdate} from "react-icons/gr";
 import {FaFileUpload} from "react-icons/fa";
+import {MdAddCircle} from "react-icons/md";
+import {IoIosAddCircle} from "react-icons/md";
 
 function AdminProductOverviewComponent() {
     const history = useHistory();
@@ -13,18 +16,19 @@ function AdminProductOverviewComponent() {
     const token = localStorage.getItem('token');
     const [loading, toggleLoading] = useState(false);
 
-    const [products, setProducts] = useState([]);
+    const [items, setItems] = useState([]);
+    const {id} = useParams();
 
-    const [productNumber, setProductNumber] = useState('');
+    const [productNumber, setProductNumber] = useState();
     const [productName, setProductName] = useState('');
     const [productInfo, setProductInfo] = useState('');
-    const [productPrice, setProductPrice] = useState('');
+    const [productPrice, setProductPrice] = useState();
 
     const [file, setFile] = useState([]);
     const [previewUrl, setPreviewUrl] = useState('');
 
     //POST Product
-    async function sendItemData(e) {
+    async function sendItemData() {
         toggleLoading(true);
         try {
             await axios.post(`http://localhost:8080/products/create`,
@@ -41,7 +45,7 @@ function AdminProductOverviewComponent() {
     }
 
     function addedNewProduct() {
-        history.push('/')
+        history.push('/#shop')
     }
 
 
@@ -52,7 +56,8 @@ function AdminProductOverviewComponent() {
         setPreviewUrl(URL.createObjectURL(uploadedFile));
     }
 
-    async function sendImageData(id) {
+    async function sendImageData(e) {
+        e.preventDefault();
         const formData = new FormData();
         formData.append("file", file);
 
@@ -74,23 +79,16 @@ function AdminProductOverviewComponent() {
     useEffect(() => {
             async function fetchItems() {
                 try {
-                    const response = await axios.get(`http://localhost:8080/products`,
-                        {
-                            headers: {
-                                "Content-Type": "application/json",
-                                "Authorization": `Bearer ${token}`,
-                            }
-                        }
-                    );
-                    setProducts(response.data);
-
+                    const response = await axios.get(`http://localhost:8080/products/all`);
+                    setItems(response.data);
+                    console.log(response.data);
                 } catch (e) {
                     console.error('Er is iets misgegaan!', e);
                 }
             }
             fetchItems();
         }
-        , [products])
+        , []);
 
 
     //DELETEPRODUCTS
@@ -116,17 +114,17 @@ function AdminProductOverviewComponent() {
 
     return (
         <>
-            {user.roles !== "ROLE_ADMIN" ?
-                (<div className="admin-route-container">
-                        <div className="admin-route-container">
-                            <div className="admin-route">
-                                <h1>Moet ingelogd zijn als Admin</h1>
-                            </div>
-                        </div>
-                    </div>
-                )
-                :
-                (<>
+            {/*{user.roles !== "ROLE_ADMIN" ?*/}
+            {/*    (<div className="admin-route-container">*/}
+            {/*            <div className="admin-route-container">*/}
+            {/*                <div className="admin-route">*/}
+            {/*                    <h1>Moet ingelogd zijn als Admin</h1>*/}
+            {/*                </div>*/}
+            {/*            </div>*/}
+            {/*        </div>*/}
+            {/*    )*/}
+            {/*    :*/}
+            {/*    (<>*/}
                         <div className="products-overview">
                             <h1>Producten</h1>
                             <table>
@@ -141,7 +139,7 @@ function AdminProductOverviewComponent() {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {products.map((product) => {
+                                {items.map((product) => {
                                     return <tr key={product.productId}>
                                         <td><IoCloseSharp size={20}
                                                           onClick={deleteItem(product.productId)}/></td>
@@ -157,10 +155,12 @@ function AdminProductOverviewComponent() {
                             </table>
                         </div>
 
-                        <div className={"item-update"}>
-                            <div className="update-item-container">
-                                <p>Update hier je product</p>
-                                <p>Voer eerst het bestaande product Id om de product/item verder te wijzigen</p>
+                        <div className="item-add-container">
+                            <h2>Product Toevoegen<MdAddCircle size={25} /></h2>
+                            <div className="add-item-container">
+                                <p>Voeg hier je product</p>
+                                <p>Een product Id wordt automatisch gegenereerd, deze is terug te vinden in: Mijn producten
+                                </p>
                             </div>
                             <div className="form-container">
                                 <form className="update-item-form-"
@@ -236,13 +236,13 @@ function AdminProductOverviewComponent() {
                                         className="form-update-product-button"
                                         disabled={loading}
                                     >
-                                        <GrUpdate/> Wijzig Product
+                                        <IoIosAddCircle/> Voeg producten toe
                                     </button>
                                 </form>
                             </div>
                         </div>
-                    </>
-                )}
+                    {/*</>*/}
+                // )}
         </>
     )
 }

@@ -68,22 +68,35 @@ nav a:hover {
     background-color: darkred;
 }
 
-.cart-icon:hover{
+.rounded-circle-2 {
+    border-radius: 50% !important;
+    color: white;
+    font-size: 12px;
+    font-family: Poppins, sans-serif;
+    font-style: oblique;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    bottom: 22px;
+    right: 172px;
+    transform: translate(16%, 13%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: darkred;
+}
+
+.cart-icon:hover {
     border-bottom: solid white;
 }
 
-.wishlist-icon:hover{
+.wishlist-icon:hover {
     border-bottom: solid white;
 }
 
-.customer-icon:hover{
+.customer-icon:hover {
     border-bottom: solid white;
 }
-
-
-/*De dropdown menu attributen*/
-/* Navbar container */
-
 
 .hover-icon {
     float: left;
@@ -94,17 +107,17 @@ nav a:hover {
     border: none;
     outline: none;
     color: white;
-    font-family: inherit; /* Important for vertical align on mobile phones */
-    margin: 0; /* Important for vertical align on mobile phones */
+    font-family: inherit;
+    margin: 0;
 }
 
-/* Dropdown content (hidden by default) */
+
 .dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
@@ -116,7 +129,7 @@ nav a:hover {
     text-align: left;
 }
 
-/* Add a grey background color to dropdown links on hover */
+
 .dropdown-content p:hover {
     background-color: #ddd;
     display: flex;

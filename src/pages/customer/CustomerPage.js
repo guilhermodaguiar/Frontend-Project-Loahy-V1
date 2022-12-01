@@ -27,13 +27,12 @@ function CustomerPage() {
                         }
                     }
                 );
-                setUserData(response.data)
-                console.log(response);
+                setUserData(response.data);
 
                 if (response.data.authorities[0].authority === 'ROLE_USER') {
-                    setIsUser(true)
+                    setIsUser(true);
                 } else {
-                    setIsUser(false)
+                    setIsUser(false);
                 }
             } catch (e) {
                 console.error('Error: Er is iets misgegaan!', e)
@@ -42,7 +41,7 @@ function CustomerPage() {
 
         fetchUserData();
 
-    }, []);
+    }, [isUser, token]);
 
 
     return (

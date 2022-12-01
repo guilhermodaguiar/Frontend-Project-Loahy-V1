@@ -1,46 +1,55 @@
+import "./AdminProductComponent.css"
+
 import React, {useContext, useState} from "react";
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
-import {useHistory} from "react-router-dom";
-import {GrUpdate} from "react-icons/gr";
+import {useHistory, useParams} from "react-router-dom";
 import {FaFileUpload} from "react-icons/fa";
+import {MdAddCircle} from "react-icons/md";
+import {RiErrorWarningLine} from "react-icons/ri";
 
 
 function AdminProductComponent() {
     const {user} = useContext(AuthContext);
     const history = useHistory();
-    const [loading, toggleLoading] = useState(false);
+    const {id} = useParams();
 
+    const [productNumber, setProductNumber] = useState()
     const [productName, setProductName] = useState('');
     const [productInfo, setProductInfo] = useState('');
-    const [productPrice, setProductPrice] = useState('');
+    const [productPrice, setProductPrice] = useState();
 
     const [file, setFile] = useState([]);
     const [previewUrl, setPreviewUrl] = useState('');
 
 
-
     async function sendItemData() {
-        toggleLoading(true);
         try {
-            await axios.post(`http://localhost:8080/products/`,
+            await axios.put(`http://localhost:8080/products/${id}`,
                 {
+                    productId: productNumber,
                     productName: productName,
                     productDescription: productInfo,
                     productPrice: productPrice,
-                }).then(addedNewProduct)
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                }
+            ).then(addedNewProduct)
 
         } catch (e) {
             console.error(e);
         }
     }
-    sendItemData();
 
     function addedNewProduct() {
         history.push('/')
     }
 
-    async function sendImageData(id) {
+    async function sendUpdatedImageData(e) {
+        e.preventDefault();
         const formData = new FormData();
         formData.append("file", file);
 
@@ -76,20 +85,23 @@ function AdminProductComponent() {
                     </div>
                 </div>
             ) : (
-                <div className={"item-add"}>
+                <div className="item-add-container">
+                    <h2>Product Aanpassen<MdAddCircle size={25}/></h2>
                     <div className="add-item-container">
-                        <p>Voeg hier je product</p>
-                        <p>Een product Id wordt automatisch gegenereerd, deze is terug te vinden in: Mijn producten
-                        </p>
+                        <p>Pas hier je product</p>
+                        <RiErrorWarningLine/>
+                        <p>Alle velden moeten verplicht ingevuld worden!! Product nummer vindt je in Mijn
+                            producten(link)</p>
                     </div>
                     <div className="form-add-container">
-                        <form className="add-item-form-"
-                              onSubmit={sendItemData()}>
-                            <div>
-                                <form onSubmit={sendImageData}>
+                        <form className="add-item-form"
+                              onSubmit={sendItemData}>
+                            <div className="form-container-all">
+                                <form onSubmit={sendUpdatedImageData}>
                                     <label htmlFor="itemImage-field">
                                         Kies Afbeelding
                                         <input
+                                            className="input-container-all"
                                             type="file"
                                             id="itemImage-field"
                                             name="image"
@@ -97,9 +109,11 @@ function AdminProductComponent() {
                                         />
                                     </label>
                                     {previewUrl &&
-                                        <label>
+                                        <label className="label-container">
                                             Preview:
-                                            <img src={previewUrl} alt="Voorbeeld van de afbeelding die zojuist gekozen is" className="image-preview"/>
+                                            <img src={previewUrl}
+                                                 alt="Voorbeeld van de afbeelding die zojuist gekozen is"
+                                                 className="image-preview"/>
                                         </label>
                                     }
                                     <button
@@ -111,7 +125,18 @@ function AdminProductComponent() {
                                     </button>
                                 </form>
                             </div>
-                            <label htmlFor="itemName-field">
+                            <label className="label-container" htmlFor="itemName-field">
+                                Product Naam
+                                <input
+                                    type="text"
+                                    id="itemName-field"
+                                    name="name"
+                                    value={productNumber}
+                                    onChange={(e) => setProductNumber(e.target.value)}
+                                    required
+                                />
+                            </label>
+                            <label className="label-container" htmlFor="itemName-field">
                                 Product Naam
                                 <input
                                     type="text"
@@ -119,35 +144,45 @@ function AdminProductComponent() {
                                     name="name"
                                     value={productName}
                                     onChange={(e) => setProductName(e.target.value)}
+                                    required
                                 />
                             </label>
-                            <label htmlFor="itemDescription-field">
+                            <label className="label-container" htmlFor="itemDescription-field">
                                 product Informatie
-                                <input
-                                    type="text"
+                                <textarea
                                     id="itemDescription-field"
                                     name="description"
                                     value={productInfo}
                                     onChange={(e) => setProductInfo(e.target.value)}
+                                    rows={3}
+                                    cols={20}
+                                    required
                                 />
                             </label>
-                            <label htmlFor="itemPrice-field">
-                                Product Prijs
+                            <label className="label-container" htmlFor="itemPrice-field">
+                                Product Prijs in €
                                 <input
+                                    placeholder="verander komma naar punt 0.00"
                                     type="number"
                                     id="itemPrice-field"
-                                    name="price"
+                                    required name="price"
+                                    min="0"
+                                    step="0.01"
+                                    title="Currency"
                                     value={productPrice}
+                                    lang="en-US"
                                     onChange={(e) => setProductPrice(e.target.value)}
                                 />
                             </label>
-                            <button
-                                type="submit"
-                                className="form-update-product-button"
-                                disabled={loading}
-                            >
-                                <GrUpdate/> Wijzig Product
-                            </button>
+                            <div className="button-container">
+                                <button
+                                    type="submit"
+                                    className="form-update-product-button"
+                                >
+                                    Product Bijwerken
+                                </button>
+                            </div>
+
                         </form>
                     </div>
                 </div>)

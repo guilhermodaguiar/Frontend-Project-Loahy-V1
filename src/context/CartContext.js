@@ -1,51 +1,39 @@
-import React, {createContext, useEffect, useReducer, useState} from "react";
-import {cartReducer} from "./Reducers";
-import axios from "axios";
+import React, {createContext, useContext, useReducer} from "react";
 
+const CartStateContext = createContext();
+const CartDispatchContext = createContext();
 
-export const CartContext = createContext({});
-
-function CartContextProvider({children}) {
-    const [products, setProducts] = useState();
-
-
-    useEffect(() => {
-        async function getItemData() {
-            try {
-                const itemData = await axios.get(`http://localhost:8080/products`);
-                console.log(itemData.data);
-                setProducts(itemData.data);
-                dispatch({
-                    type: "SET_ITEMS",
-                    payload: itemData.data,
-                })
-
-            } catch (e) {
-                console.error('er is iets misgegaan', e);
-            }
-        }
-        getItemData();
-    }, []);
-
-    console.log(products);
-
-
-    const [state, dispatch] = useReducer(cartReducer, {
-        items: [],
-        cart: []
-    })
-
-    const value = {
-        items:state.items,
-        cart: state.cart,
+const cartReducer = (state, action) => {
+    switch (action.type) {
+        case "ADD_TO_CART":
+            return [...state, action.item];
+        case "REMOVE_FROM_CART":
+            const newArr = [...state];
+            newArr.splice(action.index, 1);
+            return newArr;
+        case "CHANGE_CART_QTY":
+            const newArr3 = [...state];
+            newArr3.map((c) =>
+                c.item === action.item ? (c.qty = action.qty) : c.qty, 1)
+            return newArr3;
+        default:
+            throw new Error(`unknown action ${action.type}`);
     }
+};
 
+
+export const CartProvider = ({ children }) => {
+    const [state, dispatch] = useReducer(cartReducer, []
+    );
 
     return (
-        <CartContext.Provider value={{state, dispatch, value}}>
-            {children}
-        </CartContext.Provider>
-    )
-}
+        <CartDispatchContext.Provider value={dispatch}>
+            <CartStateContext.Provider value={state}>
+                {children}
+            </CartStateContext.Provider>
+        </CartDispatchContext.Provider>
+    );
+};
 
-export default CartContextProvider;
+export const useCart = () => useContext(CartStateContext);
+export const useDispatchCart = () => useContext(CartDispatchContext);

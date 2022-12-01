@@ -1,13 +1,25 @@
 import './ShopOverview.css';
-import React, {useContext} from "react";
+import React, {useEffect, useState} from "react";
 import ShopItem from "../shopItem/ShopItem";
-import {CartContext} from "../../context/CartContext";
-import {WishlistContext} from "../../context/WishlistContext";
+import axios from "axios";
 
 
 function ShopOverview() {
-    const {state: {items}} = useContext(CartContext);
-    const {state2: {wishlistItems}} = useContext(WishlistContext);
+    const [items, setItems] = useState([]);
+
+    useEffect(() => {
+        async function getItemData() {
+            try {
+                const itemData = await axios.get(`http://localhost:8080/products/`);
+                console.log(itemData.data);
+                setItems(itemData.data);
+            } catch (e) {
+                console.error('er is iets misgegaan', e);
+            }
+        }
+        getItemData();
+    }, []);
+
 
     console.log(items);
 
@@ -24,29 +36,8 @@ function ShopOverview() {
                                         <div className="photo-wrapper">
                                             {items.map((item) => {
                                                 return <ShopItem
-                                                    item = {item}
                                                     key={item.productId}
-
-                                                    url={item.image.url}
-                                                    fileName={item.image.fileName}
-
-                                                    productId={item.productId}
-                                                    productName={item.productName}
-                                                    productDescription={item.productInformation}
-                                                    productPrice={item.productPrice}
-                                                />
-                                            })}
-                                            {wishlistItems.map((wishlistItem)=> {
-                                                return<ShopItem
-                                                    key={wishlistItem.productId}
-
-                                                    url={wishlistItem.image.url}
-                                                    fileName={wishlistItem.image.fileName}
-
-                                                    productId={wishlistItem.productId}
-                                                    productName={wishlistItem.productName}
-                                                    productDescription={wishlistItem.productInformation}
-                                                    productPrice={wishlistItem.productPrice}
+                                                    item={item}
                                                 />
                                             })}
                                         </div>

@@ -1,90 +1,110 @@
 import React, {useContext} from "react";
 import './Cart.css';
-import {BiMessageError} from "react-icons/bi";
 import {NavLink, useHistory} from "react-router-dom";
+import {useCart, useDispatchCart} from "../../context/CartContext";
+import CartComponent from "./CartComponent";
 import {FcShop} from "react-icons/fc";
-import {IoBagCheckOutline} from "react-icons/io5";
+import {BiMessageError} from "react-icons/bi";
 import {AuthContext} from "../../context/AuthContext";
-import CartComponent from "../../components/cartComponent/CartComponent";
-import {CartContext} from "../../context/CartContext";
+import {IoBagCheckOutline} from "react-icons/io5";
+import {formatCurrency} from "../../helpers/formatCurrency/FormatCurrency";
 
 
 function Cart() {
-    const {isAuth} = useContext(AuthContext);
     const history = useHistory();
-    const {state: {cart}} = useContext(CartContext);
+    const cartItems= useCart();
+    const {isAuth} = useContext(AuthContext);
+    const dispatch = useDispatchCart();
 
+    const totalPrice = cartItems.reduce((acc, cart) => acc + cart.productPrice, 0);
 
     function checkout() {
         history.push('customer/checkout');
     }
 
+    function handleRemove(index) {
+        dispatch({type: "REMOVE_FROM_CART", index});
+    }
 
-    return <>
-        <div>
-            <div className="shopping-cart-page">
-                <h1 className="shopping-cart-h1">Winkelwagen</h1>
-            </div>
-            <div className="shopping-cart-container">
-                {cart.map((item) => {
-                    return <CartComponent
-                        key={item.productId}
+    return (
+        <>
+            <div>
+                <div className="shopping-cart-page">
+                    <h1 className="shopping-cart-h1">Winkelwagen</h1>
+                </div>
+                <div className="name-price-qty-container">
+                    <div className="cart-container-inner"></div>
+                    <div className="cart-container-inner"></div>
+                    <div className="cart-container-inner">Naam</div>
+                    <div className="cart-container-inner">Prijs</div>
+                    <div className="cart-container-inner">Aantal</div>
+                    <div className="cart-container-inner">Subtotaal</div>
+                </div>
 
-                        url={item.image.url}
-                        fileName={item.image.fileName}
-
-                        productId={item.productId}
-                        productName={item.productName}
-                        productPrice={item.productPrice}
-                    />
-                })}
-            </div>
-            <div className={"shopping-cart-container"}>
-                {!isAuth ? (
-                    <div>
+                <div className="shopping-cart-container">
+                    {cartItems.map((item, index) => {
+                        return <CartComponent
+                            key={index}
+                            item={item}
+                            index={index}
+                            handleRemove={handleRemove}
+                        />
+                    })}
+                    <div className="total-and-price-container">
+                        <div className="aantal-producten">
+                            Totaal aantal: {cartItems.length} producten
+                        </div>
+                        <div className="total-price2">
+                            <strong>Totaal prijs: {formatCurrency(totalPrice.toFixed(2))}</strong>
+                        </div>
+                    </div>
+                </div>
+                <div className={"shopping-cart-container"}>
+                    {!isAuth ? (
                         <div>
-                            <div className="warning-icon"><BiMessageError size={40}/></div>
-                            <p className="click-to-shop"> Je moet ingelogd zijn om bestellen</p>
-                            <p className="click-to-shop"> Klik&nbsp;
-                                <NavLink to="/customer/register">
-                                    <p className="click-p">hier</p>
-                                </NavLink>
-                                &nbsp;om te registreren
-                            </p>
+                            <div>
+                                <div className="warning-icon"><BiMessageError size={40}/></div>
+                                <div className="click-to-shop"> Je moet ingelogd zijn om bestellen</div>
+                                <div className="click-to-shop"> Klik&nbsp;
+                                    <NavLink to="/customer/register">
+                                        <div className="click-p">hier</div>
+                                    </NavLink>
+                                    &nbsp;om te registreren
+                                </div>
+                                <div className="click-to-shop"> Klik&nbsp;
+                                    <NavLink to="/customer">
+                                        <div
+                                            className="click-p">hier
+                                        </div>
+                                    </NavLink>
+                                    &nbsp;om in te loggen
+                                </div>
 
-                            <p className="click-to-shop"> Klik&nbsp;
-                                <NavLink to="/customer"><p
-                                    className="click-p">hier</p></NavLink>
-                                &nbsp;om in te loggen
-                            </p>
-
-                            <div className="to-shop-link-container">
-                                <p className="click-to-shop">
-                                    Klik&nbsp;
-                                    <span>
+                                <div className="to-shop-link-container">
+                                    <p className="click-to-shop">
+                                        Klik&nbsp;
+                                        <span>
                                         <NavLink to="/shop">
                                             <FcShop className="shop-icon"
                                                     size={25}/>
                                         </NavLink>
                                 </span>&nbsp;om verder te winkelen
-                                </p>
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ) : (
-                    <div className="button-size">
-                        <button className="cart-checkout-button"
-                                onClick={checkout}>
-                            <IoBagCheckOutline size={22}/>&nbsp;Bestellen
-                        </button>
-                    </div>
-                )}
+                    ) : (
+                        <div className="button-size">
+                            <button className="cart-checkout-button"
+                                    onClick={checkout}>
+                                <IoBagCheckOutline size={22}/>&nbsp;Bestellen
+                            </button>
+                        </div>
+                    )}
+                </div>
             </div>
-
-
-        </div>
-    </>
-
+        </>
+    )
 }
 
 

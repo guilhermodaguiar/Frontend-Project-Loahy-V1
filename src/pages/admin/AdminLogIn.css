@@ -38,7 +38,6 @@
 
 .form-container-admin {
     padding: 3rem;
-    margin: 1rem 5rem 1rem 5rem;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -47,7 +46,6 @@
     background-size: cover;
     border-right: groove;
     flex-wrap: wrap;
-    min-width: 500px;
     background-color: chocolate;
 }
 

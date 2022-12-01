@@ -40,7 +40,7 @@ function Routes() {
                     <Route exact path="/admin">
                         <AdminLogIn/>
                     </Route>
-                    <PrivateRoute exact path="/admin/profile">
+                    <PrivateRoute path="/admin/profile">
                         <AdminPage/>
                     </PrivateRoute>
                     <Route exact path="/">

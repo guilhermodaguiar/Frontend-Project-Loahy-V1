@@ -1,16 +1,18 @@
-import React, {useContext} from "react";
+import React from "react";
 
 import './NavBar.css';
 import {NavLink} from "react-router-dom";
 import {HashLink as Link} from "react-router-hash-link";
-
 import {HiOutlineHeart, HiOutlineShoppingCart, HiOutlineUser} from "react-icons/hi";
-import {CartContext} from "../../context/CartContext";
 import CartDropDown from "../../components/cartDropDownMenu/CartDropDown";
+import {useWishlist} from "../../context/WishlistContext";
+import {useCart} from "../../context/CartContext";
 
 
 function NavBar() {
-    const { state: {cart} } = useContext(CartContext);
+    const wishlistItems = useWishlist();
+    const cartItems = useCart();
+
 
     return (
         <div className="inner-container">
@@ -40,19 +42,20 @@ function NavBar() {
                 <ul className="navbar-list-icons">
                     <li>
                         <NavLink to="/shopping-cart" className="navbar-icon">
-                            <span className="hover-icon">
-                                <div><HiOutlineShoppingCart
+                            <div className="hover-icon">
+                                <HiOutlineShoppingCart
                                     className="cart-icon"
                                     size={22}/>
-                                </div>
                                 <div className="dropdown-content">
-                                    <div className="cart-component-background"><CartDropDown/></div>
+                                    <div className="cart-component-background">
+                                        <CartDropDown/>
+                                    </div>
                                 </div>
-                            </span>
+                            </div>
+                            {cartItems.length > 0 && (<div className="rounded-circle">
+                                {cartItems.length}
+                            </div>)}
                         </NavLink>
-                        {cart.length > 0 && (<div className="rounded-circle">
-                            {cart.length}
-                        </div>)}
                     </li>
                     <li>
                         <NavLink to="/wishlist" className="navbar-icon">
@@ -60,6 +63,9 @@ function NavBar() {
                                 size={22}
                                 className="wishlist-icon"
                             />
+                            {wishlistItems.length > 0 && (<div className="rounded-circle-2">
+                                {wishlistItems.length}
+                            </div>)}
                         </NavLink>
                     </li>
                     <li>

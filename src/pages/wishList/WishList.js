@@ -1,113 +1,134 @@
 import './WishList.css';
-import React, {useContext} from "react";
-import {AuthContext} from "../../context/AuthContext";
+import React, {useContext, useState} from "react";
+import WishlistComponent from "./WishlistComponent";
+import {useDispatchWishlist, useWishlist} from "../../context/WishlistContext";
 import {NavLink} from "react-router-dom";
-import {FcShop} from "react-icons/fc";
+import {HashLink as Link} from "react-router-hash-link";
 import {BiMessageError} from "react-icons/bi";
-import {GrDocumentMissing} from "react-icons/gr";
-import {WishlistContext} from "../../context/WishlistContext";
-import {IoCloseSharp} from "react-icons/io5";
+import {FcShop} from "react-icons/fc";
+import axios from "axios";
+import {BsBookmarkHeart} from "react-icons/bs";
+import {AuthContext} from "../../context/AuthContext";
 
 
 function WishList() {
     const {isAuth} = useContext(AuthContext);
-    const {state2: {wishlist, wishlistItems}, dispatch2} = useContext(WishlistContext);
+    const wishlistItems = useWishlist();
+    const dispatch3 = useDispatchWishlist();
+    const [loading, toggleLoading] = useState(false);
+    const [addSucces, toggleAddSucces] = useState(false);
+    const [wishlistInput, setWishlistInput] = useState([]);
+    const [productListLong, setProductListLong] = useState([])
+
+    console.log(wishlistItems);
+    console.log(isAuth);
+
+    const handleRemove = (index) => {
+        dispatch3({type: "REMOVE_FROM_WISHLIST", index});
+    };
+
+    async function handleSaveWishlist(e) {
+        e.preventDefault(e);
+        toggleLoading(true);
+
+        try {
+            const response = await axios.post('http://localhost:8080/wishlists/save',
+                {
+                    productList: productListLong,
+
+                });
+            setWishlistInput(response.data);
+            toggleAddSucces(true);
+
+        } catch (e) {
+            console.error(e);
+            console.log(e.response);
+        }
+        toggleLoading(false);
+    }
 
     return (
         <>
             <div className="wishlist-page">
                 <h1 className="wishlist-h1">Wishlist</h1>
             </div>
-            {wishlist.map((item) =>
-                <div className="wishlist-outer-outer-container">
-                    {!isAuth ? (
+            <div className="wishlist-outer-outer-container">
+                {!isAuth ? (
+                    <div>
                         <div>
-                            <div>
-                                <div className="warning-icon"><BiMessageError size={40}/></div>
-                                <p className="click-to-shop"> Je moet ingelogd zijn om je Wishlist te zien en te
+                            <div className="warning-icon"><BiMessageError size={40}/></div>
+                            <div className="click-to-shop">
+                                <p>Je moet ingelogd zijn om je Wishlist te zien en te
                                     updaten</p>
-                                <p className="click-to-shop"> Klik&nbsp;
-                                    <NavLink to="/customer/register">
-                                        <p className="click-p">hier</p>
-                                    </NavLink>
-                                    &nbsp;om te registreren
-                                </p>
+                            </div>
+                            <div className="click-to-shop"> Klik&nbsp;
+                                <NavLink to="/customer/register">
+                                    <div className="click-p">hier</div>
+                                </NavLink>
+                                &nbsp;om te registreren
+                            </div>
 
-                                <p className="click-to-shop"> Klik&nbsp;
-                                    <NavLink to="/customer"><p
-                                        className="click-p">hier</p></NavLink>
-                                    &nbsp;om in te loggen
-                                </p>
+                            <div className="click-to-shop"> Klik&nbsp;
+                                <NavLink to="/customer/login"><div
+                                    className="click-p">hier</div></NavLink>
+                                &nbsp;om in te loggen
+                            </div>
 
-                                <div className="to-shop-link-container">
-                                    <p className="click-to-shop">
-                                        Klik&nbsp;
-                                        <span>
-                                        <NavLink to="/shop">
+                            <div className="to-shop-link-container">
+                                <div className="click-to-shop">
+                                    Klik&nbsp;
+                                    <span>
+                                        <Link to="/#shop">
                                             <FcShop className="shop-icon"
                                                     size={25}/>
-                                        </NavLink>
-                                </span>&nbsp;om verder te winkelen
-                                    </p>
+                                        </Link>
+                                    </span>&nbsp;om verder te winkelen
                                 </div>
                             </div>
                         </div>
-                    ) : (
-                        <>
-                            {wishlist.length > 0 ? (<div className="notice-wrapper">
-                                <div className="shopping-cart-outer-container">
-                                    <div className="shopping-cart-new-container">
-                                        <div className="cart-container-outer">
-                                            <div className="cart-container-inner"></div>
-                                            <div className="cart-container-inner"
-                                            >
-                                                <button className="remove-from-cart-button">
-                                                    <IoCloseSharp size={20} onClick={() => dispatch2({
-                                                        type: 'REMOVE_FROM_WISHLIST',
-                                                        payload: item,
-                                                    })}/>
-                                                    -
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div className="cart-container-outer">
-                                            <div className="cart-container-inner"></div>
-                                            <div className="cart-container-inner">
-                                                {wishlistItems.image != null ? (wishlistItems.image) :
-                                                    <GrDocumentMissing size={30}/>}</div>
-                                        </div>
-                                        <div className="cart-container-outer">
-                                            <div className="cart-container-inner">Naam</div>
-                                            <div className="cart-container-inner"></div>
-                                        </div>
-                                        <div className="cart-container-outer">
-                                            <div className="cart-container-inner"></div>
+                    </div>
+                ) : (
+                    <div className="wishlist-outer-outer-container">
+                        {wishlistItems.map((item, index) => {
+                            return <WishlistComponent
+                                key={index}
+                                index={index}
+                                handleRemove={handleRemove}
+                                item={item}
+                            />
+                        })}
+                        <div className="wishlist-outer-outer-container">
+                            <div>
+                                {wishlistItems.length > 0 ? (
+                                    <button className="cart-checkout-button"
+                                                                     onClick={handleSaveWishlist}
+                                                                     disabled={loading}>
+                                    <BsBookmarkHeart size={22}/>&nbsp;<p>Opslaan</p>
+                                    </button>) : (<span>
+                                <div>
+                                    <div className="warning-icon"><BiMessageError size={40}/></div>
+                                    <p className="click-to-shop">Je wishlist is leeg</p>
+                                    <div className="to-shop-link-container">
+                                        <div className="click-to-shop">
+                                            Klik&nbsp;
+                                            <span>
+                                                <Link to="/#shop">
+                                                    <FcShop className="shop-icon"
+                                                            size={25}/>
+                                                </Link>
+                                            </span>
+                                            &nbsp;om verder te winkelen
                                         </div>
                                     </div>
                                 </div>
-                            </div>) : (
-                                <span>
-                                    <div>
-                                        <div className="warning-icon"><BiMessageError size={40}/></div>
-                                        <p className="click-to-shop">Je wishlist is leeg</p>
-                                         <div className="to-shop-link-container">
-                                    <p className="click-to-shop">
-                                        Klik&nbsp;
-                                        <span>
-                                        <NavLink to="/shop">
-                                            <FcShop className="shop-icon"
-                                                    size={25}/>
-                                        </NavLink>
-                                </span>&nbsp;om verder te winkelen
-                                    </p>
-                                </div>
-                                    </div>
-                                </span>
-                            )}
-                        </>
-                    )}
-                </div>
-            )}
+                            </span>)}
+                            </div>
+                            {addSucces === true &&
+                                <p>Wishlist is opgeslagen</p>}
+                        </div>
+                    </div>
+                )}
+            </div>
         </>
     )
 }

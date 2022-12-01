@@ -1,5 +1,6 @@
-import React, {useContext, useState} from 'react';
 import "./AdminLogIn.css";
+
+import React, {useContext, useState} from 'react';
 import axios from 'axios';
 import {AuthContext} from "../../context/AuthContext";
 import {NavLink, useHistory} from "react-router-dom";
@@ -29,15 +30,9 @@ function AdminLogIn() {
             console.log(response.data);
             login(response.data.jwt);
 
-            if (response.data.authorities[0].authority === 'ROLE_ADMIN') {
-                login(response.data.jwt);
-
-                setTimeout(() => {
+            setTimeout(() => {
                     history.push("/admin/profile");
                 }, 1500)
-            } else {
-                history.push("/admin");
-            }
         } catch (e) {
             console.error(e);
             toggleError(true);

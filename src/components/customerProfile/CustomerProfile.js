@@ -9,10 +9,7 @@ import UserProfile from "../userProfile/UserProfile";
 import Cart from "../../pages/cart/Cart";
 import WishList from "../../pages/wishList/WishList";
 import UserInfoForm from "../userInfoForm/UserInfoForm";
-import NavBar from "../../layout/navBar/NavBar";
-import {HashLink as Link} from "react-router-hash-link";
 import CustomerNavBar from "../../layout/customerNavBar/CustomerNavBar";
-
 
 
 function CustomerProfile() {
@@ -40,12 +37,7 @@ function CustomerProfile() {
                 console.error(e);
             }
         }
-
         fetchProfileData();
-
-        return function cleanup() {
-            token.cancel();
-        }
     }, [token])
 
     return(
@@ -68,7 +60,7 @@ function CustomerProfile() {
                     <WishList/>
                 </section>
                 <section>
-                    <button type="button" onClick={userEmail.logout}>
+                    <button type="button" onClick={logout}>
                         Uitloggen
                     </button>
                 </section>

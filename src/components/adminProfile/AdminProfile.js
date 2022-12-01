@@ -12,7 +12,7 @@ function AdminProfile() {
             <div>
                 <section id="admin-profile">
                     <h2>Gegevens</h2>
-                    <p><strong>GebruikersEmail</strong> {user.userEmail}</p>
+                    <p><strong>Admin Email:</strong> {user.userEmail}</p>
                 </section>
                 <section>
                     <p> hier uitloggen</p>

@@ -81,11 +81,6 @@ function AuthContextProvider({children}) {
 
         } catch (e) {
             console.error('Er is iets misgegaan', e);
-            toggleIsAuth({
-                isAuth: false,
-                user: null,
-                status: 'done',
-            });
             localStorage.clear();
         }
     }

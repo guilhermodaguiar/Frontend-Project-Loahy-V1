@@ -27,19 +27,14 @@ function CustomerLogIn() {
             });
 
             console.log(response.data);
-            if (response.data.authorities[1].authority === 'ROLE_USER') {
-                login(response.data.jwt);
+            login(response.data.jwt);
 
-                setTimeout(() => {
-                    history.push("/customer/profile");
+            setTimeout(() => {
+                history.push("/customer/profile");
                 }, 1500)
-            } else {
-                history.push("/customer/login");
-            }
 
-
-        } catch (e) {
-            console.error(e);
+        } catch (error) {
+            console.error("E~r is iets misgegaan met inloggen",error);
             toggleError(true);
         }
     }
@@ -60,14 +55,11 @@ function CustomerLogIn() {
                                 Meld je aan met je e-mailadres en wachtwoord
                             </div>
                             <div className="customer-inner-container">
-
                                 <div className="login-body">
                                     <section className="block-login-costumer">
                                         <form
                                             className="form-container-login"
                                             onSubmit={userLoginRequest}>
-
-
                                             <label htmlFor="email-field">
                                                 E-mailadres:
                                                 <input

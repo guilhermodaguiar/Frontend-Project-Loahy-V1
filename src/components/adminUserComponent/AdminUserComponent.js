@@ -26,7 +26,7 @@ function AdminUserComponent() {
     useEffect(() => {
         async function fetchUsers() {
             try {
-                const response = await axios.get(`http://localhost:8080/users`,
+                const response = await axios.get(`http://localhost:8080/users/all`,
                     {
                         headers: {
                             "Content-Type": "application/json",
@@ -40,11 +40,7 @@ function AdminUserComponent() {
             }
         }
         fetchUsers();
-        return function cleanup() {
-            token.cancel();
-        }
-
-    }, [token, users]);
+    }, [users]);
 
 
     return(
@@ -92,14 +88,6 @@ function AdminUserComponent() {
                                         </td>
                                         <td>{user.userId}</td>
                                         <td>{user.userEmail}</td>
-                                        <td>{user.customer.customerFirstName}</td>
-                                        <td>{user.customer.customerLastName}</td>
-                                        <td>{user.customer.customerStreetName}</td>
-                                        <td>{user.customer.customerHouseNumber}</td>
-                                        <td>{user.customer.customerHouseNumberAddition}</td>
-                                        <td>{user.customer.customerZipcode}</td>
-                                        <td>{user.customer.customerCity}</td>
-                                        <td>{user.customer.customerPhone}</td>
                                     </tr>
                                 })}
                                 </tbody>

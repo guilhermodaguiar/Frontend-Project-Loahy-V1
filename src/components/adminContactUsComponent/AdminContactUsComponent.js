@@ -44,12 +44,7 @@ function AdminContactUsComponent() {
             }
         }
         fetchContactUsData();
-
-        return function cleanup() {
-            token.cancel();
-        }
-
-    }, [token]);
+    }, []);
 
     return(
         <>

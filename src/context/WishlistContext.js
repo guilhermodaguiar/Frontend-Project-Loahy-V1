@@ -1,42 +1,32 @@
-import {createContext, useEffect, useReducer, useState} from "react";
-import axios from "axios";
-import {wishlistReducer} from "./Reducers";
+import React, { useReducer, useContext, createContext } from "react";
 
-export const WishlistContext = createContext({});
+const WishlistStateContext = createContext();
+const WishlistDispatchContext = createContext();
 
-function WishlistProvider({children}) {
-    const [wishlistItems, setWishlistItems] = useState([]);
+const wishlistReducer = (state, action) => {
+    switch (action.type) {
+        case "ADD_TO_WISHLIST":
+            return [...state, action.item];
+        case "REMOVE_FROM_WISHLIST":
+            const newArr = [...state];
+            newArr.splice(action.index, 1);
+            return newArr;
+        default:
+            throw new Error(`unknown action ${action.type}`);
+    }
+};
 
-
-    useEffect(() => {
-        async function getItemData() {
-            try {
-                const itemData = await axios.get(`http://localhost:8080/products`);
-                console.log(itemData.data)
-                setWishlistItems(itemData.data);
-                dispatch2({
-                    type: "SET_WISHLIST_ITEMS",
-                    payload: itemData.data,
-                })
-            } catch (e) {
-                console.error('er is iets misgegaan', e);
-            }
-        }
-        getItemData();
-    }, []);
-
-    console.log(wishlistItems);
-
-    const [state2,dispatch2] = useReducer(wishlistReducer, {
-        wishlistItems: [],
-        wishlist: [],
-    })
+export const WishlistProvider = ({ children }) => {
+    const [state3, dispatch3] = useReducer(wishlistReducer, []);
 
     return (
-        <WishlistContext.Provider value={{state2, dispatch2}}>
-            {children}
-        </WishlistContext.Provider>
-    )
-}
+        <WishlistDispatchContext.Provider value={dispatch3}>
+            <WishlistStateContext.Provider value={state3}>
+                {children}
+            </WishlistStateContext.Provider>
+        </WishlistDispatchContext.Provider>
+    );
+};
 
-export default WishlistProvider;
+export const useWishlist = () => useContext(WishlistStateContext);
+export const useDispatchWishlist = () => useContext(WishlistDispatchContext);

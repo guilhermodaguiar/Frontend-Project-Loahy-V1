@@ -1,33 +1,34 @@
 import './CartDropDown.css';
 
-import React, {useContext} from "react";
-import {CartContext} from "../../context/CartContext";
+import React from "react";
+import {useCart, useDispatchCart} from "../../context/CartContext";
 import {BiMessageError} from "react-icons/bi";
 import {AiFillDelete} from "react-icons/ai";
 import {formatCurrency} from "../../helpers/formatCurrency/FormatCurrency";
 import {Link} from "react-router-dom";
 
 function CartDropDown() {
-    const {state: {cart}, dispatch,} = useContext(CartContext);
+    const cartItems = useCart();
+    const dispatch = useDispatchCart();
 
     return (
         <>
             <div>
                 <div className="inner-container">
                     <div className="container-shopping-cart">
-                        {cart.length === 0 ?
+                        {cartItems.length === 0 ?
                             (<div className="content-for-shopping-cart" id="shopping-cart">
                                 <p className="click-to-shop">Je winkelwagen is
                                     momenteel leeg&nbsp;<BiMessageError size={30}/></p>
                             </div>)
                             :
                             (
-                                <>
-                                    {cart.map((item) => (
+                                <div>
+                                    {cartItems.map((item) => (
                                         <span className="cart-item" key={item.productId}>
-                                            <img src={item.url}
+                                            <img src={item.image.url}
                                                  className="cartItemImg"
-                                                 alt={item.fileName}/>
+                                                 alt={item.image.fileName}/>
                                             <div className="cartItemDetail">
                                                 <span>{item.productName}</span>
                                                 <span><p>{formatCurrency(item.productPrice)}</p></span>
@@ -38,7 +39,7 @@ function CartDropDown() {
                                                 onClick={() =>
                                                     dispatch({
                                                         type: "REMOVE_FROM_CART",
-                                                        payload: item,
+                                                        item,
                                                     })
                                             }/>
                                         </span>))
@@ -52,7 +53,7 @@ function CartDropDown() {
                                          Naar winkelwagen!
                                         </button>
                                     </Link>
-                                </>
+                                </div>
                             )
                         }
                     </div>

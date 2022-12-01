@@ -143,28 +143,10 @@ main {
     width: 300px;
     height: 300px;
     object-fit: contain;
-    padding: 10px;
-    background: khaki;
 }
 
 .product-price{
     display: flex;
-}
-
-.wishlist-heart {
-    border-radius: 50% !important;
-    color: darkcyan;
-    width: 24px;
-    height: 24px;
-    position: unset;
-    bottom: 64px;
-    right: 260px;
-    transform: translate(16%, 13%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: wheat;
-    border: ridge;
 }
 
 .main-container-product {

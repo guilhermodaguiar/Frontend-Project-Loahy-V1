@@ -1,6 +1,6 @@
-import React, {useContext} from "react";
-
 import './AdminNavBar.css';
+
+import React, {useContext} from "react";
 import {HashLink as Link} from "react-router-hash-link";
 import {AuthContext} from "../../context/AuthContext";
 
@@ -9,60 +9,42 @@ const {logout} = useContext(AuthContext);
 
     return(
         <>
-            <div className="inner-container">
-            <nav className="admin-nav">
-                <ul>
-                    <li>
-                        <Link to="/#admin-profile">
-                            Profiel
-                        </Link>
-                    </li>
-                    <li>
+            <section className="admin-nav-bar-outer-container">
+                <div className="admin-nav-bar-inner-container">
+                    <div className="container-for-padding">
                         <Link to="/#admin-product-overview">
-                            Mijn Producten
+                            Mijn producten
                         </Link>
-                    </li>
-                    <li>
+                    </div>
+                    <div className="container-for-padding">
                         <Link to="/#admin-add-new-product">
-                            Product toevoegen
+                            Product aanpassen
                         </Link>
-                    </li>
-                    <li>
-                        <Link to="/#admin-new-products-update">
-                            Producten updaten
-                        </Link>
-                    </li>
-                    {/*<li>*/}
-                    {/*    <Link to="/#new-products-update">*/}
-                    {/*        Producten bewerken*/}
-                    {/*    </Link>*/}
-                    {/*</li>*/}
-                    <li>
+                    </div>
+                    <div className="container-for-padding">
                         <Link to="/#all-costumers">
                             Klanten
                         </Link>
-                    </li>
-                    <li>
+                    </div>
+                    <div className="container-for-padding">
                         <Link to="/#all-orders">
                             Orders
                         </Link>
-                    </li>
-                    <li>
+                    </div>
+                    <div className="container-for-padding">
                         <Link to="/#all-contact-remarks">
                             Contact Opmerkingen
                         </Link>
-                    </li>
-                    <li>
+                    </div>
+                    <div className="container-for-button">
                         <button className="logout-button"
                                 type="button"
                                 onClick={logout} >
-
                             Uitloggen
                         </button>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+                    </div>
+                </div>
+            </section>
         </>
     )
 }

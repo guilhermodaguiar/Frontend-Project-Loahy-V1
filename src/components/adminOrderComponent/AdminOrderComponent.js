@@ -41,10 +41,7 @@ function AdminOrderComponent() {
         }
 
         fetchOrders();
-        return function cleanup() {
-            token.cancel();
-        }
-    }, [orders, token]);
+    }, [orders]);
 
     return (
         <>

@@ -4,19 +4,19 @@ import './index.css';
 import App from './App';
 
 import {BrowserRouter as Router} from 'react-router-dom';
-import WishlistProvider from "./context/WishlistContext";
+import {WishlistProvider} from "./context/WishlistContext";
 import AuthContextProvider from "./context/AuthContext";
-import CartContextProvider from "./context/CartContext";
+import {CartProvider} from "./context/CartContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Router>
         <AuthContextProvider>
-            <CartContextProvider>
+            <CartProvider>
                 <WishlistProvider>
                     <App/>
                 </WishlistProvider>
-            </CartContextProvider>
+            </CartProvider>
         </AuthContextProvider>
     </Router>
 );
