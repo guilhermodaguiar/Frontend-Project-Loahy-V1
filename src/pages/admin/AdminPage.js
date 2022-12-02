@@ -7,6 +7,8 @@ import ScrollToTop from "../../helpers/scrollToTop/ScrollToTop";
 import {AuthContext} from "../../context/AuthContext";
 import AdminNavBar from "../../layout/adminNavBar/AdminNavBar";
 import AdminProductOverview from "../../components/adminProductOverview/AdminProductOverview";
+import AdminUser from "../../components/adminUser/AdminUser";
+import AdminContactUs from "../../components/adminContactUs/AdminContactUs";
 
 
 function AdminPage() {
@@ -49,15 +51,15 @@ function AdminPage() {
                         <section id="admin-new-products-update">
                             <AdminUpdateProduct/>
                         </section>
-                        {/*<section id="all-costumers">*/}
-                        {/*    <AdminUser/>*/}
-                        {/*</section>*/}
+                        <section id="all-costumers">
+                            <AdminUser/>
+                        </section>
                         {/*<section id="all-orders">*/}
                         {/*    <AdminOrder/>*/}
                         {/*</section>*/}
-                        {/*<section id="all-contact-remarks">*/}
-                        {/*    <AdminContactUs/>*/}
-                        {/*</section>*/}
+                        <section id="all-contact-remarks">
+                            <AdminContactUs/>
+                        </section>
                         <div>
                             <button
                                 className="logout-button"

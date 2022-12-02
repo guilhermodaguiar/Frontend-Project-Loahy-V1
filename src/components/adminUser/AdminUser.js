@@ -4,12 +4,36 @@ import React, {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
 import {FaUserCircle} from "react-icons/fa";
+import {useHistory} from "react-router-dom";
+import {IoCloseSharp} from "react-icons/io5";
 
 function AdminUser() {
-
+    const history = useHistory();
     const token = localStorage.getItem('token');
     const {user} = useContext(AuthContext);
     const [users, setUsers] = useState([]);
+
+
+    useEffect(() => {
+        async function fetchUsers() {
+            try {
+                const response = await axios.get(`http://localhost:8080/users/all`,
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`,
+                        }
+                    }
+                );
+                setUsers(response.data);
+                console.log(response.data);
+            } catch (e) {
+                console.error('Er is iets misgegaan!', e);
+            }
+        }
+
+        fetchUsers();
+    }, [token]);
 
     async function deleteUser(userEmail) {
         try {
@@ -23,80 +47,78 @@ function AdminUser() {
         } catch (e) {
             console.error(e);
         }
+        setTimeout(() => {
+            history.push("/admin/profile");
+        }, 300);
     }
 
-    useEffect(() => {
-        async function fetchUsers() {
-            try {
-                const response = await axios.get(`http://localhost:8080/users/all`,
-                    {
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": `Bearer ${token}`,
-                        }
-                    }
-                );
-                setUsers(response.data)
-            } catch (e) {
-                console.error('Er is iets misgegaan!', e);
-            }
-        }
-        fetchUsers();
-    }, [users]);
 
-
-    return(
+    return (
         <>
             {user.roles !== "ROLE_ADMIN" ? (
-                <div className="admin-route-container">
-                    <div className="admin-route">
-                        <h1>Moet ingelogd zijn als Admin</h1>
+                    <div className="admin-route-container">
+                        <div className="admin-route">
+                            <h1>Moet ingelogd zijn als Admin</h1>
+                        </div>
                     </div>
-                </div>
                 )
                 :
                 (
-                    <div className="users-page-admin-element" id="all_customers">
+                    <>
+                        <div className="users-page-admin-element" id="all_customers">
+                            <section className="Admin_UsersComponent">
+                                <div>
+                                    <h2 className="user-header-container">
+                                        Users&nbsp;<FaUserCircle/>
+                                    </h2>
+                                </div>
+                                <div className="table-content">
+                                    <table>
+                                        <thead>
+                                        <tr>
+                                            <th>Verwijder</th>
+                                            <th>email</th>
+                                            <th>Voornaam</th>
+                                            <th>Achternaam</th>
+                                            <th>Straatnaam</th>
+                                            <th>Huisnummer</th>
+                                            <th>Toevoeging</th>
+                                            <th>Postcode</th>
+                                            <th>Woonplaats</th>
+                                            <th>Telefoon</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody className="admin_tbody">
+                                        {users.map((user) => {
+                                            return <tr key={user.userEmail}>
+                                                <td>
+                                                    <button className="delete-button">
+                                                        <IoCloseSharp
+                                                            size={20}
+                                                            onClick={() => deleteUser(user.userEmail)}
+                                                        />
+                                                    </button>
+                                                </td>
+                                                <td>{user.userEmail}</td>
+                                                <td>{user.userFirstName}</td>
+                                                <td>{user.userLastName}</td>
+                                                <td>{user.userStreetName}</td>
+                                                <td>{user.userHouseNumber}</td>
+                                                <td>{user.userHouseNumberAddition}</td>
+                                                <td>{user.userCity}</td>
+                                                <td>{user.userZipcode}</td>
+                                                <td>{user.userPhone}</td>
+                                            </tr>
+                                        })}
+                                        </tbody>
+                                    </table>
+                                </div>
 
-                        <section className="Admin_UsersComponent">
-                            <div>
-                                <h2> Users&nbsp;<FaUserCircle/> </h2>
-                            </div>
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>user-Id</th>
-                                    <th>e-mail</th>
-                                    <th>Voornaam</th>
-                                    <th>Achternaam</th>
-                                    <th>Straatnaam</th>
-                                    <th>Huisnummer</th>
-                                    <th>Toevoeging</th>
-                                    <th>Postcode</th>
-                                    <th>Woonplaats</th>
-                                    <th>Telefoon</th>
-                                </tr>
-                                </thead>
-
-                                <tbody className="admin_tbody">
-
-                                {users.map((user) => {
-                                    return <tr key={user.userId}>
-                                        <td>
-                                            <button className="delete-button"
-                                                    onClick={() => deleteUser(user.userEmail)}>
-                                            </button>
-                                        </td>
-                                        <td>{user.userId}</td>
-                                        <td>{user.userEmail}</td>
-                                    </tr>
-                                })}
-                                </tbody>
-                            </table>
-                        </section>
-                    </div>
-                )}
+                            </section>
+                        </div>
+                    </>
+                )
+            }
         </>
     )
 }

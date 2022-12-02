@@ -44,3 +44,8 @@
     flex-direction: column;
     align-content: flex-start;
 }
+
+.update-item-header-container {
+    display: flex;
+    align-items: center;
+}

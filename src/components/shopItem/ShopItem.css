@@ -89,6 +89,10 @@ p {
     border-radius: 50% !important;
 }
 
+.remove-from-list-heart {
+    border-radius: 50% !important;
+}
+
 .click-to-cart {
     background-color: #df7c6d;
     font-family: 'Poppins', sans-serif;

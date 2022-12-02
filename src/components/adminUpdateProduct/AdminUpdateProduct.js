@@ -85,7 +85,9 @@ function AdminUpdateProduct() {
                 </div>
             ) : (
                 <div className="item-update-container" id="admin_update_product">
-                    <h2>Product Aanpassen<MdAddCircle size={25}/></h2>
+                    <h2 className="update-item-header-container">
+                        Product Aanpassen&nbsp;<MdAddCircle size={25}/>
+                    </h2>
                     <div className="update-item-container">
                         <p>Pas hier je product</p>
                         <RiErrorWarningLine/>

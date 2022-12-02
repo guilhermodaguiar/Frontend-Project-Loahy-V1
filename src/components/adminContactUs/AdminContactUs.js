@@ -3,18 +3,41 @@ import './AdminContactUs.css';
 import React, {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../context/AuthContext";
 import axios from "axios";
-import {AiTwotoneDelete} from "react-icons/ai";
+import {useHistory} from "react-router-dom";
+import {IoCloseSharp, IoListCircleSharp} from "react-icons/io5";
 
 
 function AdminContactUs() {
+    const history = useHistory();
     const token = localStorage.getItem('token');
-    const { user } = useContext(AuthContext);
-
+    const {user} = useContext(AuthContext);
     const [remarks, setRemarks] = useState([]);
 
-    async function deleteRemark(userEmail) {
+    useEffect(() => {
+
+        async function fetchContactUsData() {
+
+            try {
+                const response = await axios.get(`http://localhost:8080/contact-remarks/all`, {
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`,
+                        }
+                    }
+                );
+                setRemarks(response.data);
+                console.log(response.data);
+            } catch (e) {
+                console.error('Er is iets misgegaan!', e);
+            }
+        }
+
+        fetchContactUsData();
+    }, [token]);
+
+    async function deleteRemark(contactEmail) {
         try {
-            await axios.delete(`http://localhost:8080/contact-remarks/${userEmail}`,
+            await axios.delete(`http://localhost:8080/contact-remarks/${contactEmail}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -24,29 +47,13 @@ function AdminContactUs() {
         } catch (e) {
             console.error(e);
         }
+        setTimeout(() => {
+            history.push("/admin/profile");
+        }, 300);
     }
 
-    useEffect(() => {
 
-        async function fetchContactUsData() {
-
-            try {
-                const response = await axios.get(`http://localhost:8080/contact-remarks`, {
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": `Bearer ${token}`,
-                        }
-                    }
-                );
-                setRemarks(response.data);
-            } catch (e) {
-                console.error('Er is iets misgegaan!', e);
-            }
-        }
-        fetchContactUsData();
-    }, []);
-
-    return(
+    return (
         <>
             {user.roles !== "ROLE_ADMIN" ? (
                     <div className="admin-route-container">
@@ -57,7 +64,12 @@ function AdminContactUs() {
                 )
                 :
                 (
-                    <div className="contact-page" id="all_contact_remarks">Contact-formulier
+                    <div className="contact-page" id="all_contact_remarks">
+                        <div>
+                            <h2 className="contact-us-header-container">
+                                Contact&nbsp;<IoListCircleSharp size={30}/>
+                            </h2>
+                        </div>
                         <section>
                             <table>
                                 <thead>
@@ -71,19 +83,21 @@ function AdminContactUs() {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {remarks.map((contact) =>{
-                                    return<tr key={contact.contactName}>
+                                {remarks.map((contact) => {
+                                    return <tr key={contact.contactEmail}>
                                         <td>
-                                            <button className="delete-button"
-                                                    onClick={() => deleteRemark(contact.orderName)}>
-                                                Verwijder<AiTwotoneDelete/>
+                                            <button className="delete-button">
+                                                <IoCloseSharp
+                                                    size={20}
+                                                    onClick={() => deleteRemark(contact.contactEmail)}
+                                                />
                                             </button>
                                         </td>
                                         <td>{contact.contactName}</td>
                                         <td>{contact.contactEmail}</td>
                                         <td>{contact.contactPhone}</td>
                                         <td>{contact.contactOrganisation}</td>
-                                        <td>{contact.remark}</td>
+                                        <td>{contact.contactRemark}</td>
                                     </tr>
                                 })}
                                 </tbody>

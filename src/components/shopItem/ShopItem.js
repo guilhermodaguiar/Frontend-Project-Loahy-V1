@@ -21,7 +21,7 @@ function ShopItem({item}) {
         })
     }
 
-    const removeFromWishlist = (item) => {
+    const removeFromWishlist = ({item}) => {
         dispatch3({
             type: "REMOVE_FROM_WISHLIST",
             item
@@ -57,7 +57,7 @@ function ShopItem({item}) {
                             ) : (
                                 <div className="wishlist-heart">
                                     <HiHeart size={22}
-                                             className="add-to-list-heart"
+                                             className="remove-from-list-heart"
                                              onClick={() => addToWishlist(item)}/>
                                 </div>
                             )}

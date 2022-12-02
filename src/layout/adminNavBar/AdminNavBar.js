@@ -27,7 +27,7 @@ const {logout} = useContext(AuthContext);
                         </Link>
                     </div>
                     <div className="container-for-padding">
-                        <Link to="/admin/profile/#all_costumers">
+                        <Link to="/admin/profile/#all_customers">
                             Klanten
                         </Link>
                     </div>

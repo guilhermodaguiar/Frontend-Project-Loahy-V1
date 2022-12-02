@@ -5,6 +5,7 @@ import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
 import {useHistory} from "react-router-dom";
 import {IoCloseSharp} from "react-icons/io5";
+import {FaProductHunt} from "react-icons/fa";
 
 function AdminProductOverview() {
     const history = useHistory();
@@ -12,7 +13,7 @@ function AdminProductOverview() {
     const token = localStorage.getItem('token');
     const [items, setItems] = useState([]);
 
-    //GET ALL PRODUCTS
+
     useEffect(() => {
             async function fetchItems() {
                 try {
@@ -31,13 +32,12 @@ function AdminProductOverview() {
             }
             fetchItems();
         }
-        , []);
+        , [token]);
 
 
-    //DELETEPRODUCTS
-    async function deleteItem(id) {
+    async function deleteItem(productId) {
         try {
-            await axios.delete(`http://localhost:8080/products/delete/${id}`,
+            await axios.delete(`http://localhost:8080/products/delete/${productId}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -47,11 +47,9 @@ function AdminProductOverview() {
         } catch (e) {
             console.error(e)
         }
-
         setTimeout(() => {
-            history.push("/admin/profile/#admin_product_overview");
+            history.push("/admin/profile");
         }, 300)
-
     }
 
 
@@ -69,12 +67,14 @@ function AdminProductOverview() {
                 :
                 (<>
                         <div className="products-overview" id="admin_product_overview">
-                            <h2 className="my-products-container">Mijn Producten</h2>
+                            <h2 className="my-products-container">
+                                Mijn Producten&nbsp;<FaProductHunt/>
+                            </h2>
                             <table>
                                 <thead>
                                 <tr>
                                     <th>Verwijder</th>
-                                    <th>ProductNummer</th>
+                                    <th>Product nummer</th>
                                     <th>Afbeelding</th>
                                     <th>Naam</th>
                                     <th>Informatie</th>
@@ -88,7 +88,7 @@ function AdminProductOverview() {
                                             <button className="remove-from-cart-button">
                                                 <IoCloseSharp
                                                     size={20}
-                                                    onClick={deleteItem(product.productId)}/>
+                                                    onClick={() => deleteItem(product.productId)}/>
                                             </button>
                                         </td>
                                         <td>{product.productId}</td>

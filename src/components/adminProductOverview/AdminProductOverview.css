@@ -53,6 +53,8 @@
 
 .my-products-container {
     color: white;
+    display: flex;
+    align-items: center;
 }
 
 thead {
@@ -65,14 +67,16 @@ tbody {
 
 th {
     justify-content: start;
-    padding: 10px
+    padding: 10px;
+    border: ridge;
 }
 
 td {
     padding: 10px;
+    border: ridge;
 }
 
 table {
     flex-wrap: wrap;
-    padding: 20px 0;
+    padding-bottom: 20px;
 }

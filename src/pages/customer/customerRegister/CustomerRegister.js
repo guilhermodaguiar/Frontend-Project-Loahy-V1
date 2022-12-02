@@ -16,11 +16,42 @@ const EMAIL_REGEX = /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@(
 
 function CustomerRegister() {
 
-    const [toggleLoading] = useState(false);
     const history = useHistory();
 
     const userRef = useRef();
     const errRef = useRef();
+
+    const [firstName, setFirstName] = useState('');
+    const [validFirstName, setValidFirstName] = useState(false);
+    const [firstNameFocus, setFirstNameFocus] = useState(false);
+
+    const [lastName, setLastName] = useState('');
+    const [validLastName, setValidLastName] = useState(false);
+    const [lastNameFocus, setLastNameFocus] = useState(false);
+
+    const [street, setStreet] = useState('');
+    const [validStreet, setValidStreet] = useState(false);
+    const [streetFocus, setStreetFocus] = useState(false);
+
+    const [houseNumber, setHouseNumber] = useState('');
+    const [validHouseNumber, setValidHouseNumber] = useState(false);
+    const [houseNumberFocus, setHouseNumberFocus] = useState(false);
+
+    const [houseNumberAdd, setHouseNumberAdd] = useState('');
+    const [validHouseNumberAdd, setValidHouseNumberAdd] = useState(false);
+    const [houseNumberAddFocus, setHouseNumberAddFocus] = useState(false);
+
+    const [city, setCity] = useState('');
+    const [validCity, setValidCity] = useState(false);
+    const [cityFocus, setCityFocus] = useState(false);
+
+    const [zipcode, setZipcode] = useState('');
+    const [validZipcode, setValidZipcode] = useState(false);
+    const [zipcodeFocus, setZipcodeFocus] = useState(false);
+
+    const [phone, setPhone] = useState();
+    const [validPhone, setValidPhone] = useState(false);
+    const [phoneFocus, setPhoneFocus] = useState(false);
 
     const [email, setEmail] = useState('');
     const [validUserEmail, setValidUserEmail] = useState(false);
@@ -42,7 +73,6 @@ function CustomerRegister() {
         userRef.current.focus();
     }, [])
 
-
     useEffect(() => {
         setValidPassword(PASSWORD_REGEX.test(password));
         setValidConfirmPassword(password === confirmPassword);
@@ -53,8 +83,40 @@ function CustomerRegister() {
     }, [email])
 
     useEffect(() => {
+        setValidFirstName(EMAIL_REGEX.test(firstName));
+    }, [firstName])
+
+    useEffect(() => {
+        setValidLastName(EMAIL_REGEX.test(lastName));
+    }, [lastName])
+
+    useEffect(() => {
+        setValidStreet(EMAIL_REGEX.test(street));
+    }, [street])
+
+    useEffect(() => {
+        setValidHouseNumber(EMAIL_REGEX.test(houseNumber));
+    }, [houseNumber])
+
+    useEffect(() => {
+        setValidHouseNumberAdd(EMAIL_REGEX.test(houseNumberAdd));
+    }, [houseNumberAdd])
+
+    useEffect(() => {
+        setValidCity(EMAIL_REGEX.test(city));
+    }, [city])
+
+    useEffect(() => {
+        setValidZipcode(EMAIL_REGEX.test(zipcode));
+    }, [zipcode])
+
+    useEffect(() => {
+        setValidPhone(EMAIL_REGEX.test(phone));
+    }, [phone])
+
+    useEffect(() => {
         setErrorMessage('');
-    }, [email, password, confirmPassword])
+    }, [email, password, confirmPassword, firstName, lastName, street, houseNumber, houseNumberAdd, city, zipcode, phone])
 
     async function registerUser(e) {
         e.preventDefault();
@@ -67,9 +129,17 @@ function CustomerRegister() {
         }
 
         try {
-            const response = await axios.post("http://localhost:8080/users", {
+            const response = await axios.post("http://localhost:8080/users/create", {
                 userEmail: email,
                 password: password,
+                userFirstName: firstName,
+                userLastName: lastName,
+                userStreetName: street,
+                userHouseNumber: houseNumber,
+                userHouseNumberAddition: houseNumberAdd,
+                userCity: city,
+                userZipcode: zipcode,
+                userPhone: phone,
             });
 
             console.log(response.data);
@@ -208,6 +278,250 @@ function CustomerRegister() {
                                             <FontAwesomeIcon icon={faInfoCircle}/>
                                             Wachtwoorden moeten overeenkomen.
                                         </p>
+
+
+
+
+                                        <label>
+                                            Voornaam:
+                                            <FontAwesomeIcon icon={faCheck}
+                                                             className={validFirstName ? "valid" : "hide"}/>
+                                            <FontAwesomeIcon icon={faTimes}
+                                                             className={validFirstName || !firstName ? "hide" : "invalid"}/>
+                                        </label>
+
+
+                                        <input
+                                            type="text"
+                                            id="firstname"
+                                            ref={userRef}
+                                            autoComplete="off"
+                                            onChange={(e) => setFirstName(e.target.value)}
+                                            value={firstName}
+                                            required
+                                            aria-invalid={validFirstName ? "false" : "true"}
+                                            aria-describedby="user-firstname-note"
+                                            onFocus={() => setFirstNameFocus(true)}
+                                            onBlur={() => setFirstNameFocus(false)}
+                                        />
+
+                                        <p id="firstname-note"
+                                           className={firstNameFocus && firstName && !validFirstName ? "instructions" : "offscreen"}>
+                                            <FontAwesomeIcon icon={faInfoCircle}/>
+                                            Voornaam is verplicht!<br/>
+                                        </p>
+
+                                        <label>
+                                            Achternaam:
+                                            <FontAwesomeIcon icon={faCheck}
+                                                             className={validLastName ? "valid" : "hide"}/>
+                                            <FontAwesomeIcon icon={faTimes}
+                                                             className={validLastName || !lastName ? "hide" : "invalid"}/>
+                                        </label>
+
+
+                                        <input
+                                            type="text"
+                                            id="lastname"
+                                            ref={userRef}
+                                            autoComplete="off"
+                                            onChange={(e) => setLastName(e.target.value)}
+                                            value={lastName}
+                                            required
+                                            aria-invalid={validLastName ? "false" : "true"}
+                                            aria-describedby="user-lastname-note"
+                                            onFocus={() => setLastNameFocus(true)}
+                                            onBlur={() => setLastNameFocus(false)}
+                                        />
+
+                                        <p id="lastname-note"
+                                           className={lastNameFocus && lastName && !validLastName ? "instructions" : "offscreen"}>
+                                            <FontAwesomeIcon icon={faInfoCircle}/>
+                                            Achternaam is verplicht!<br/>
+                                        </p>
+
+                                        <label>
+                                            Straatnaam:
+                                            <FontAwesomeIcon icon={faCheck}
+                                                             className={validStreet ? "valid" : "hide"}/>
+                                            <FontAwesomeIcon icon={faTimes}
+                                                             className={validStreet || !street ? "hide" : "invalid"}/>
+                                        </label>
+
+
+                                        <input
+                                            type="text"
+                                            id="street-name"
+                                            ref={userRef}
+                                            autoComplete="off"
+                                            onChange={(e) => setStreet(e.target.value)}
+                                            value={street}
+                                            required
+                                            aria-invalid={validStreet ? "false" : "true"}
+                                            aria-describedby="user-street-name-note"
+                                            onFocus={() => setStreetFocus(true)}
+                                            onBlur={() => setStreetFocus(false)}
+                                        />
+
+                                        <p id="street-name-note"
+                                           className={streetFocus && street && !validStreet ? "instructions" : "offscreen"}>
+                                            <FontAwesomeIcon icon={faInfoCircle}/>
+                                            Straatnaam is verplicht!<br/>
+                                        </p>
+
+                                        <label>
+                                            Huisnummer:
+                                            <FontAwesomeIcon icon={faCheck}
+                                                             className={validHouseNumber ? "valid" : "hide"}/>
+                                            <FontAwesomeIcon icon={faTimes}
+                                                             className={validHouseNumber || !houseNumber ? "hide" : "invalid"}/>
+                                        </label>
+
+
+                                        <input
+                                            type="text"
+                                            id="house-number"
+                                            ref={userRef}
+                                            autoComplete="off"
+                                            onChange={(e) => setHouseNumber(e.target.value)}
+                                            value={houseNumber}
+                                            required
+                                            aria-invalid={validHouseNumber ? "false" : "true"}
+                                            aria-describedby="user-house-number-note"
+                                            onFocus={() => setHouseNumberFocus(true)}
+                                            onBlur={() => setHouseNumberFocus(false)}
+                                        />
+
+                                        <p id="house-number-note"
+                                           className={houseNumberFocus && houseNumber && !validHouseNumber ? "instructions" : "offscreen"}>
+                                            <FontAwesomeIcon icon={faInfoCircle}/>
+                                            Huisnummer is verplicht!<br/>
+                                        </p>
+
+                                        <label>
+                                            Toevoeging:
+                                            <FontAwesomeIcon icon={faCheck}
+                                                             className={validHouseNumberAdd ? "valid" : "hide"}/>
+                                            <FontAwesomeIcon icon={faTimes}
+                                                             className={validHouseNumberAdd || !houseNumberAdd ? "hide" : "invalid"}/>
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            id="house-number-add"
+                                            ref={userRef}
+                                            autoComplete="off"
+                                            onChange={(e) => setHouseNumberAdd(e.target.value)}
+                                            value={houseNumberAdd}
+                                            required
+                                            aria-invalid={validHouseNumberAdd ? "false" : "true"}
+                                            aria-describedby="user-house-number-add-note"
+                                            onFocus={() => setHouseNumberAddFocus(true)}
+                                            onBlur={() => setHouseNumberAddFocus(false)}
+                                        />
+
+                                        <p id="house-number-add-note"
+                                           className={houseNumberAddFocus && houseNumberAdd && !validHouseNumberAdd ? "instructions" : "offscreen"}>
+                                            <FontAwesomeIcon icon={faInfoCircle}/>
+                                            Toevoeging is niet verplicht!<br/>
+                                        </p>
+
+
+                                        <label>
+                                            Postcode:
+                                            <FontAwesomeIcon icon={faCheck}
+                                                             className={validZipcode ? "valid" : "hide"}/>
+                                            <FontAwesomeIcon icon={faTimes}
+                                                             className={validZipcode || !houseNumber ? "hide" : "invalid"}/>
+                                        </label>
+
+
+                                        <input
+                                            type="text"
+                                            id="zipcode"
+                                            ref={userRef}
+                                            autoComplete="off"
+                                            onChange={(e) => setZipcode(e.target.value)}
+                                            value={zipcode}
+                                            required
+                                            aria-invalid={validZipcode ? "false" : "true"}
+                                            aria-describedby="user-email-note"
+                                            onFocus={() => setZipcodeFocus(true)}
+                                            onBlur={() => setZipcodeFocus(false)}
+                                        />
+
+                                        <p id="zipcode-note"
+                                           className={zipcodeFocus && zipcode && !validZipcode ? "instructions" : "offscreen"}>
+                                            <FontAwesomeIcon icon={faInfoCircle}/>
+                                            Postcode is verplicht!<br/>
+                                        </p>
+
+
+                                        <label>
+                                            Stad:
+                                            <FontAwesomeIcon icon={faCheck}
+                                                             className={validCity ? "valid" : "hide"}/>
+                                            <FontAwesomeIcon icon={faTimes}
+                                                             className={validCity || !city ? "hide" : "invalid"}/>
+                                        </label>
+
+
+                                        <input
+                                            type="text"
+                                            id="city"
+                                            ref={userRef}
+                                            autoComplete="off"
+                                            onChange={(e) => setCity(e.target.value)}
+                                            value={city}
+                                            required
+                                            aria-invalid={validCity ? "false" : "true"}
+                                            aria-describedby="user-email-note"
+                                            onFocus={() => setCityFocus(true)}
+                                            onBlur={() => setCityFocus(false)}
+                                        />
+
+                                        <p id="city-note"
+                                           className={cityFocus && city && !validCity ? "instructions" : "offscreen"}>
+                                            <FontAwesomeIcon icon={faInfoCircle}/>
+                                            Stad is verplicht!<br/>
+                                        </p>
+
+
+                                        <label>
+                                            Mobielnummer:
+                                            <FontAwesomeIcon icon={faCheck}
+                                                             className={validPhone ? "valid" : "hide"}/>
+                                            <FontAwesomeIcon icon={faTimes}
+                                                             className={validPhone || !phone ? "hide" : "invalid"}/>
+                                        </label>
+
+
+                                        <input
+                                            type="number"
+                                            id="phone-number"
+                                            ref={userRef}
+                                            autoComplete="off"
+                                            onChange={(e) => setPhone(e.target.value)}
+                                            value={phone}
+                                            required
+                                            aria-invalid={validPhone ? "false" : "true"}
+                                            aria-describedby="user-email-note"
+                                            onFocus={() => setPhoneFocus(true)}
+                                            onBlur={() => setPhoneFocus(false)}
+                                        />
+
+                                        <p id="email-note"
+                                           className={phoneFocus && phone && !validPhone ? "instructions" : "offscreen"}>
+                                            <FontAwesomeIcon icon={faInfoCircle}/>
+                                            Mobielnummer is verplicht!<br/>
+                                        </p>
+
+
+
+
+
+
+
                                         <button
                                             type="submit"
                                             className="form-button"
