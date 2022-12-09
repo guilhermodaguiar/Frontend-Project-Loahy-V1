@@ -15,8 +15,8 @@ const NUMBER_REGEX = /^[0-9]+$/;
 const DUTCH_PHONE_REGEX = /^\(?([+]31|0031|0)-?6(\s?|-)([0-9]\s{0,3}){8}$/;
 const DUTCH_ZIPCODE_REGEX = /^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i;
 
+
 function CustomerRegister({user}) {
-    const token = localStorage.getItem('token');
     const history = useHistory();
 
     const userRef = useRef();
@@ -91,10 +91,11 @@ function CustomerRegister({user}) {
         setErrorMessage('');
     }, [firstName, lastName, street, houseNumber, houseNumberAdd, city, zipcode, phone]);
 
+
     async function assignCustomerToUser(user_email) {
 
         try {
-            const response = await axios.post(`http://localhost:8080/customers/create`, {
+            const response = await axios.post(`http://localhost:8080/users/${user_email}/customer`, {
                 customerFirstName: firstName,
                 customerLastName: lastName,
                 customerStreetName: street,
@@ -103,12 +104,7 @@ function CustomerRegister({user}) {
                 customerCity: city,
                 customerZipcode: zipcode,
                 customerPhone: phone,
-            }, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                    "Authorization": `Bearer ${token}`,
-                },
-            });
+            })
 
             console.log(response.data);
             toggleSuccess(true);
@@ -123,7 +119,8 @@ function CustomerRegister({user}) {
         }
     }
 
-    return(
+
+    return (
         <>
             <>
                 {success ? (

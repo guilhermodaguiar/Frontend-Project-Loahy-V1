@@ -12,7 +12,7 @@ import CheckOut from "../pages/checkout/CheckOut";
 import CustomerSignUp from "../pages/customer/customerSignUp/CustomerSignUp";
 import CustomerLogIn from "../pages/customer/customerLogIn/CustomerLogIn";
 import AdminUploadImage from "../components/adminUploadImage/AdminUploadImage";
-import CustomerRegister from "../components/customerRegister/CustomerRegister";
+import CustomerRegister from "../pages/customer/customerRegister/CustomerRegister";
 
 
 function Routes() {
