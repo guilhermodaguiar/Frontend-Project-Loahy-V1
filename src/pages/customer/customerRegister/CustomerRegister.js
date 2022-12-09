@@ -16,7 +16,7 @@ const DUTCH_PHONE_REGEX = /^\(?([+]31|0031|0)-?6(\s?|-)([0-9]\s{0,3}){8}$/;
 const DUTCH_ZIPCODE_REGEX = /^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i;
 
 
-function CustomerRegister({user}) {
+function CustomerRegister({props}) {
     const history = useHistory();
 
     const userRef = useRef();
@@ -92,10 +92,10 @@ function CustomerRegister({user}) {
     }, [firstName, lastName, street, houseNumber, houseNumberAdd, city, zipcode, phone]);
 
 
-    async function assignCustomerToUser(user_email) {
+    async function assignCustomerToUser(customer_email) {
 
         try {
-            const response = await axios.post(`http://localhost:8080/users/${user_email}/customer`, {
+            const response = await axios.post(`http://localhost:8080/users/${customer_email}/customer`, {
                 customerFirstName: firstName,
                 customerLastName: lastName,
                 customerStreetName: street,
@@ -111,7 +111,7 @@ function CustomerRegister({user}) {
 
             setTimeout(() => {
 
-                history.push('/customer/profile');
+                history.push('/customer/login');
             }, 2000);
 
         } catch (e) {
@@ -153,7 +153,7 @@ function CustomerRegister({user}) {
 
                                         <form
                                             className="form-container-register"
-                                            onSubmit={assignCustomerToUser}>
+                                            onSubmit={assignCustomerToUser(props.customer_email)}>
 
 
                                             <section className="first-name">

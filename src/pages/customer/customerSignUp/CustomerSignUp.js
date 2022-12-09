@@ -8,6 +8,7 @@ import {NavLink, useHistory} from "react-router-dom";
 import {BsFillPencilFill} from "react-icons/bs";
 import {MdAccountCircle} from "react-icons/md";
 import {IoMdLogIn} from "react-icons/io";
+import CustomerRegister from "../customerRegister/CustomerRegister";
 
 
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -15,7 +16,7 @@ const EMAIL_REGEX = /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@(
 
 
 function CustomerSignUp() {
-    const history = useHistory();
+    // const history = useHistory();
 
     const userRef = useRef();
     const errRef = useRef();
@@ -72,11 +73,11 @@ function CustomerSignUp() {
             console.log(response.data);
             toggleSuccess(true);
 
-            setTimeout(() => {
-
-                history.push('/customer/register/step2');
-
-            }, 2000);
+            // setTimeout(() => {
+            //
+            //     history.push('/customer/register/step2');
+            //
+            // }, 2000);
 
 
         } catch (e) {
@@ -100,11 +101,16 @@ function CustomerSignUp() {
                         Gelukt met het creëren van een Loahy account: stap 1 !!!
                     </h1>
                     <h3>
-                        Ga naar stap twee van registreren.
+                        Ga naar stap 2 van registreren.
                     </h3>
-                    <p>Mocht u niet automatisch doorgestuurd worden<br/>
-                        <NavLink to="/customer/register/step2">klik dan hier!</NavLink>
-                    </p>
+                    <div>
+                        <CustomerRegister
+                            customer_email= {email}
+                        />
+                    </div>
+                    {/*<p>Mocht u niet automatisch doorgestuurd worden<br/>*/}
+                    {/*    <NavLink to="/customer/register/step2">klik dan hier!</NavLink>*/}
+                    {/*</p>*/}
                 </section>) : (
                 <div>
                     <div className="customer-register-page">
