@@ -41,13 +41,13 @@ const {logout} = useContext(AuthContext);
                             Contact
                         </Link>
                     </div>
-                    <div className="container-for-button">
-                        <button className="logout-button"
-                                type="button"
-                                onClick={logout} >
-                            Uitloggen
-                        </button>
-                    </div>
+                </div>
+                <div className="container-for-button">
+                    <button className="logout-button"
+                            type="button"
+                            onClick={logout} >
+                        Uitloggen
+                    </button>
                 </div>
             </section>
         </>

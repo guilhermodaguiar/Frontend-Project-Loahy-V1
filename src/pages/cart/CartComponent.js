@@ -1,14 +1,19 @@
 import './CartComponent.css';
 
-import React from "react";
+import React, {useState} from "react";
 import {BiMessageError} from "react-icons/bi";
 import {IoCloseSharp} from "react-icons/io5";
 import {formatCurrency} from "../../helpers/formatCurrency/FormatCurrency";
-import {useCart, useDispatchCart} from "../../context/CartContext";
+import {useCart} from "../../context/CartContext";
 
-function CartComponent({item, index, handleRemove}) {
+function  CartComponent({item, index, handleRemove}) {
     const cartItems = useCart();
-    const dispatch = useDispatchCart();
+    const [quantity, setQuantity] = useState(1);
+
+    function subtotal() {
+        formatCurrency(item.productPrice * quantity)
+    }
+
 
     return (
         <>
@@ -53,14 +58,8 @@ function CartComponent({item, index, handleRemove}) {
                                             <div className="cart-container-outer">
                                                 <div className="cart-container-inner">
                                                     <input
-                                                        value={item.qty}
-                                                        onChange={(e) => dispatch({
-                                                            type: "CHANGE_CART_QTY",
-                                                            payload: {
-                                                                id:item.productId,
-                                                                qty:e.target.value,
-                                                            },
-                                                        })}
+                                                        value={quantity}
+                                                        onChange={(e) => setQuantity(e.target.value)}
                                                         type="number"
                                                         defaultValue={1}
                                                         min="1"
@@ -72,7 +71,7 @@ function CartComponent({item, index, handleRemove}) {
                                             </div>
                                             <div className="cart-container-outer">
                                                 <div className="cart-container-inner">
-                                                    {formatCurrency(item.productPrice )}
+                                                    {subtotal}
                                                 </div>
                                             </div>
                                         </div>

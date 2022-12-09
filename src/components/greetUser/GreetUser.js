@@ -15,7 +15,7 @@ function GreetUser() {
                     </div>
                     <div>
                         <h1 className="greet-email">
-                            &nbsp; {user.user_email}
+                            &nbsp; {user.customer_firstname}&nbsp;{user.customer_lastname}
                         </h1><
                     /div>
                 </div>

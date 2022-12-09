@@ -8,7 +8,6 @@ import {FiSend} from "react-icons/fi";
 
 
 function ContactUs() {
-
     const [remark, setRemark] = useState('');
     const [contactName, setContactName] = useState('');
     const [contactEmail, setContactEmail] = useState('');
@@ -37,8 +36,7 @@ function ContactUs() {
             toggleAddSucces(true);
 
         } catch (e) {
-            console.error(e);
-            console.log(e.response);
+            console.error(e, "er is iets misgegaan");
         }
         toggleLoading(false);
     }

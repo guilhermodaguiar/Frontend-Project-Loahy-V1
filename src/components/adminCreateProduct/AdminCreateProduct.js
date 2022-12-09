@@ -3,73 +3,40 @@ import "./AdminCreateProduct.css"
 import React, {useContext, useState} from "react";
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
-import {useHistory, useParams} from "react-router-dom";
-import {FaFileUpload} from "react-icons/fa";
+import {useHistory} from "react-router-dom";
 import {MdAddCircle} from "react-icons/md";
-import {RiErrorWarningLine} from "react-icons/ri";
 import {IoIosAddCircle} from "react-icons/io";
 
 
 function AdminCreateProduct() {
     const history = useHistory();
     const {user} = useContext(AuthContext);
-    const token = localStorage.getItem('token');
     const [loading, toggleLoading] = useState(false);
 
-    const {id} = useParams();
-
-    const [productNumber, setProductNumber] = useState();
     const [productName, setProductName] = useState('');
     const [productInfo, setProductInfo] = useState('');
     const [productPrice, setProductPrice] = useState();
 
-    const [file, setFile] = useState([]);
-    const [previewUrl, setPreviewUrl] = useState('');
 
 //POST Product
     async function sendItemData() {
         toggleLoading(true);
         try {
-            await axios.post(`http://localhost:8080/products/create`,
+            const response = await axios.post(`http://localhost:8080/products/create`,
                 {
-                    productId: productNumber,
                     productName: productName,
                     productInformation: productInfo,
                     productPrice: productPrice,
-                }).then(addedNewProduct)
+                }).then(addedNewProduct);
+            console.log(response.data);
 
         } catch (e) {
-            console.error(e);
+            console.error(e, "er is iets misgegaan");
         }
     }
 
     function addedNewProduct() {
-        history.push('/#shop')
-    }
-
-    async function sendImageData(e) {
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append("file", file);
-
-        try {
-            const result = await axios.post(`http://localhost:8080/products/${id}/image`, formData,
-                {
-                    headers: {
-                        "Content-Type": "multipart/form-data"
-                    },
-                })
-            console.log(result.data);
-        } catch (e) {
-            console.error(e)
-        }
-    }
-
-    function handleImageChange(e) {
-        const uploadedFile = e.target.files[0];
-        console.log(uploadedFile);
-        setFile(uploadedFile);
-        setPreviewUrl(URL.createObjectURL(uploadedFile));
+        history.push('/admin/profile/#admin_product_overview');
     }
 
     return (
@@ -84,58 +51,18 @@ function AdminCreateProduct() {
                     </div>
                 </div>
             ) : (
-                <div
-                    className="item-add-container"
-                    id="admin_add_new_product"
-                >
+                <div className="item-add-container" id="admin_add_new_product">
                     <h2>Product Toevoegen<MdAddCircle size={25}/></h2>
                     <div className="add-item-container">
-                        <p>Voeg hier je product</p>
+                        <p>Voeg hier je product:</p>
                         <p>Een product Id wordt automatisch gegenereerd, deze is terug te vinden in: Mijn producten
                         </p>
+                        <p> Een afbeelding kan geupload worden in Mijn producten</p>
                     </div>
                     <div className="form-container">
                         <form className="update-item-form-"
-                              onSubmit={sendItemData()}>
-                            <label htmlFor="itemId-field">
-                                Product id:
-                                <input
-                                    type="number"
-                                    id="itemId-field"
-                                    name="id"
-                                    value={productNumber}
-                                    onChange={(e) => setProductNumber(e.target.value)}
-                                />
-                            </label>
-                            <div>
-                                <form onSubmit={sendImageData}>
-                                    <label htmlFor="itemImage-field">
-                                        Kies Afbeelding
-                                        <input
-                                            type="file"
-                                            id="itemImage-field"
-                                            name="image"
-                                            onChange={handleImageChange}
-                                        />
-                                    </label>
-                                    {previewUrl &&
-                                        <label>
-                                            Preview:
-                                            <img src={previewUrl}
-                                                 alt="Voorbeeld van de afbeelding die zojuist gekozen is"
-                                                 className="image-preview"/>
-                                        </label>
-                                    }
-                                    <button
-                                        type="submit"
-                                        className="form-submit-image-button"
-                                    >
-                                        <FaFileUpload size={22}/>
-                                        Upload
-                                    </button>
-                                </form>
-                            </div>
-                            <label htmlFor="itemName-field">
+                              onSubmit={sendItemData}>
+                            <label className="label-container" htmlFor="itemName-field">
                                 Product Naam
                                 <input
                                     type="text"
@@ -145,33 +72,44 @@ function AdminCreateProduct() {
                                     onChange={(e) => setProductName(e.target.value)}
                                 />
                             </label>
-                            <label htmlFor="itemDescription-field">
+                            <label className="label-container" htmlFor="itemDescription-field">
                                 product Informatie
-                                <input
-                                    type="text"
+                                <textarea
                                     id="itemDescription-field"
                                     name="description"
                                     value={productInfo}
                                     onChange={(e) => setProductInfo(e.target.value)}
+                                    rows={4}
+                                    cols={50}
+                                    placeholder="max 250 karakters"
+                                    maxLength="150"
+                                    required
                                 />
                             </label>
-                            <label htmlFor="itemPrice-field">
-                                Product Prijs
+                            <label className="label-container" htmlFor="itemPrice-field">
+                                Product Prijs in €
                                 <input
+                                    placeholder="verander komma naar punt 0.00"
                                     type="number"
                                     id="itemPrice-field"
-                                    name="price"
+                                    required name="price"
+                                    min="0"
+                                    step="0.01"
+                                    title="Currency"
                                     value={productPrice}
                                     onChange={(e) => setProductPrice(e.target.value)}
                                 />
                             </label>
-                            <button
-                                type="submit"
-                                className="form-update-product-button"
-                                disabled={loading}
-                            >
-                                <IoIosAddCircle/> Voeg producten toe
-                            </button>
+                            <div className="button-container">
+                                <button
+                                    type="submit"
+                                    className="form-create-product-button"
+                                    disabled={loading}
+                                >
+                                    <IoIosAddCircle/> Voeg producten toe
+                                </button>
+                            </div>
+
                         </form>
                     </div>
                 </div>)

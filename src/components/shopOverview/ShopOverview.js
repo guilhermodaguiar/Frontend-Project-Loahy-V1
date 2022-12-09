@@ -1,4 +1,5 @@
 import './ShopOverview.css';
+
 import React, {useEffect, useState} from "react";
 import ShopItem from "../shopItem/ShopItem";
 import axios from "axios";

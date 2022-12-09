@@ -21,7 +21,7 @@
 }
 
 .customer-nav-bar-inner-container {
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -31,4 +31,8 @@
     display: flex;
     flex-wrap: wrap;
     padding-right: 40px;
+}
+
+.test-underline p:hover {
+    text-decoration: underline;
 }

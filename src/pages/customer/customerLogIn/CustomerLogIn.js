@@ -7,6 +7,9 @@ import axios from "axios";
 import {RiLoginCircleFill} from "react-icons/ri";
 import {MdAccountCircle} from "react-icons/md";
 import {AiOutlineForm} from "react-icons/ai";
+import {Icon} from 'react-icons-kit';
+import {eye} from 'react-icons-kit/feather/eye';
+import {eyeOff} from 'react-icons-kit/feather/eyeOff';
 
 function CustomerLogIn() {
     const history = useHistory();
@@ -16,6 +19,19 @@ function CustomerLogIn() {
     const [password, setPassword] = useState('');
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
+
+    const [type, setType] = useState('password');
+    const [icon, setIcon] = useState(eyeOff);
+
+    const handleToggle = () => {
+        if (type === 'password') {
+            setIcon(eye);
+            setType('text');
+        } else {
+            setIcon(eyeOff);
+            setType('password');
+        }
+    }
 
     async function userLoginRequest(e) {
         e.preventDefault();
@@ -73,13 +89,18 @@ function CustomerLogIn() {
                                             </label>
                                             <label htmlFor="password-field">
                                                 Wachtwoord:
-                                                <input
-                                                    type="password"
-                                                    id="password-field"
-                                                    onChange={(e) => setPassword(e.target.value)}
-                                                    value={password}
-                                                    required
-                                                />
+                                                <div className="password-container">
+                                                    <input
+                                                        type={type}
+                                                        id="password-field"
+                                                        onChange={(e) => setPassword(e.target.value)}
+                                                        value={password}
+                                                        required
+                                                    />
+                                                    <span className="show-hide-password" onClick={handleToggle}><Icon
+                                                        icon={icon} size={25}/>
+                                                    </span>
+                                                </div>
                                             </label>
                                             {error &&
                                                 <p className="error-customer-login"> Combinatie van email-adres en

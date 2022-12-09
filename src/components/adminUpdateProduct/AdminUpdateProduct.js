@@ -2,33 +2,28 @@ import "./AdminUpdateProduct.css"
 
 import React, {useContext, useState} from "react";
 import {AuthContext} from "../../context/AuthContext";
-import {useHistory, useParams} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import axios from "axios";
-import {MdAddCircle} from "react-icons/md";
 import {RiErrorWarningLine} from "react-icons/ri";
-import {FaFileUpload} from "react-icons/fa";
+import {GrUpdate} from "react-icons/gr";
 
 function AdminUpdateProduct() {
     const {user} = useContext(AuthContext);
     const history = useHistory();
-    const {id} = useParams();
 
     const [productNumber, setProductNumber] = useState()
     const [productName, setProductName] = useState('');
     const [productInfo, setProductInfo] = useState('');
     const [productPrice, setProductPrice] = useState();
 
-    const [file, setFile] = useState([]);
-    const [previewUrl, setPreviewUrl] = useState('');
 
-
-    async function sendItemData() {
+    async function sendItemData(id) {
         try {
-            await axios.put(`http://localhost:8080/products/${id}`,
+            await axios.put(`http://localhost:8080/products/update/${id}`,
                 {
                     productId: productNumber,
                     productName: productName,
-                    productDescription: productInfo,
+                    productInformation: productInfo,
                     productPrice: productPrice,
                 },
                 {
@@ -47,31 +42,6 @@ function AdminUpdateProduct() {
         history.push('/')
     }
 
-    async function sendUpdatedImageData(e) {
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append("file", file);
-
-        try {
-            const result = await axios.post(`http://localhost:8080/products/${id}/image`, formData,
-                {
-                    headers: {
-                        "Content-Type": "multipart/form-data"
-                    },
-                })
-            console.log(result.data);
-        } catch (e) {
-            console.error(e)
-        }
-    }
-
-    function handleImageChange(e) {
-        const uploadedFile = e.target.files[0];
-        console.log(uploadedFile);
-        setFile(uploadedFile);
-        setPreviewUrl(URL.createObjectURL(uploadedFile));
-    }
-
     return (
         <>
             {user.roles !== "ROLE_ADMIN" ? (
@@ -86,7 +56,7 @@ function AdminUpdateProduct() {
             ) : (
                 <div className="item-update-container" id="admin_update_product">
                     <h2 className="update-item-header-container">
-                        Product Aanpassen&nbsp;<MdAddCircle size={25}/>
+                        Product Aanpassen
                     </h2>
                     <div className="update-item-container">
                         <p>Pas hier je product</p>
@@ -98,35 +68,6 @@ function AdminUpdateProduct() {
                     <div className="form-update-container">
                         <form className="update-item-form"
                               onSubmit={sendItemData}>
-                            <div className="form-container-all">
-                                <form onSubmit={sendUpdatedImageData}>
-                                    <label htmlFor="itemImage-field">
-                                        Kies Afbeelding
-                                        <input
-                                            className="input-container-all"
-                                            type="file"
-                                            id="itemImage-field"
-                                            name="image"
-                                            onChange={handleImageChange}
-                                        />
-                                    </label>
-                                    {previewUrl &&
-                                        <label className="label-container">
-                                            Preview:
-                                            <img src={previewUrl}
-                                                 alt="Voorbeeld van de afbeelding die zojuist gekozen is"
-                                                 className="image-preview"/>
-                                        </label>
-                                    }
-                                    <button
-                                        type="submit"
-                                        className="form-submit-image-button"
-                                    >
-                                        <FaFileUpload size={22}/>
-                                        Upload Image
-                                    </button>
-                                </form>
-                            </div>
                             <label className="label-container" htmlFor="itemName-field">
                                 Product Nummer
                                 <input
@@ -185,7 +126,6 @@ function AdminUpdateProduct() {
                                     Product bijwerken
                                 </button>
                             </div>
-
                         </form>
                     </div>
                 </div>)

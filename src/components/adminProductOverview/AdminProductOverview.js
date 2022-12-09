@@ -6,6 +6,7 @@ import {AuthContext} from "../../context/AuthContext";
 import {useHistory} from "react-router-dom";
 import {IoCloseSharp} from "react-icons/io5";
 import {FaProductHunt} from "react-icons/fa";
+import AdminUploadImage from "../adminUploadImage/AdminUploadImage";
 
 function AdminProductOverview() {
     const history = useHistory();
@@ -18,18 +19,19 @@ function AdminProductOverview() {
             async function fetchItems() {
                 try {
                     const response = await axios.get(`http://localhost:8080/products`, {
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": `Bearer ${token}`,
+                            headers: {
+                                "Content-Type": "application/json",
+                                "Authorization": `Bearer ${token}`,
+                            }
                         }
-                    }
-                );
+                    );
                     setItems(response.data);
                     console.log(response.data);
                 } catch (e) {
                     console.error('Er is iets misgegaan!', e);
                 }
             }
+
             fetchItems();
         }
         , [token]);
@@ -43,13 +45,14 @@ function AdminProductOverview() {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`,
                     }
-                })
+                }).then(deletedProduct);
         } catch (e) {
             console.error(e)
         }
-        setTimeout(() => {
-            history.push("/admin/profile");
-        }, 300)
+    }
+
+    function deletedProduct() {
+        history.push('/admin/profile/#admin_product_overview');
     }
 
 
@@ -92,10 +95,20 @@ function AdminProductOverview() {
                                             </button>
                                         </td>
                                         <td>{product.productId}</td>
-                                        <td>{product.image &&
-                                            <img className="item-image"
-                                                 src={product.image.url}
-                                                 alt={product.fileName}/>}</td>
+                                        <td>
+                                            {product.image ?
+                                                <img className="item-image"
+                                                     src={product.image.url}
+                                                     alt={product.fileName}/>
+                                                :
+                                                <div>
+                                                    <AdminUploadImage
+                                                        key={product.productId}
+                                                        product={product}
+                                                    />
+                                                </div>
+                                            }
+                                        </td>
                                         <td>{product.productName}</td>
                                         <td>{product.productInformation}</td>
                                         <td>{product.productPrice}</td>

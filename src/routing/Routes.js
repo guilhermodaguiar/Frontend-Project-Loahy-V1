@@ -9,8 +9,10 @@ import CustomerPage from "../pages/customer/CustomerPage";
 import AdminPage from "../pages/admin/AdminPage";
 import AdminLogIn from "../pages/admin/AdminLogIn";
 import CheckOut from "../pages/checkout/CheckOut";
-import CustomerRegister from "../pages/customer/customerRegister/CustomerRegister";
+import CustomerSignUp from "../pages/customer/customerSignUp/CustomerSignUp";
 import CustomerLogIn from "../pages/customer/customerLogIn/CustomerLogIn";
+import AdminUploadImage from "../components/adminUploadImage/AdminUploadImage";
+import CustomerRegister from "../components/customerRegister/CustomerRegister";
 
 
 function Routes() {
@@ -23,6 +25,9 @@ function Routes() {
                         <CustomerLogIn/>
                     </Route>
                     <Route exact path="/customer/register">
+                        <CustomerSignUp/>
+                    </Route>
+                    <Route exact path="/customer/register/step2">
                         <CustomerRegister/>
                     </Route>
                     <PrivateRoute path="/customer/profile">
@@ -42,6 +47,9 @@ function Routes() {
                     </Route>
                     <PrivateRoute path="/admin/profile">
                         <AdminPage/>
+                    </PrivateRoute>
+                    <PrivateRoute path="/admin/products/images">
+                        <AdminUploadImage/>
                     </PrivateRoute>
                     <Route exact path="/">
                         <Home/>

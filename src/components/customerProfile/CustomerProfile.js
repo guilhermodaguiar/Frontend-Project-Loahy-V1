@@ -1,62 +1,48 @@
-import React, {useContext, useEffect, useState} from "react";
-
 import "./CustomerProfile.css";
+
+import React, {useContext} from "react";
 import GreetUser from "../greetUser/GreetUser";
 import {AuthContext} from "../../context/AuthContext";
-import axios from "axios";
-import {useHistory} from "react-router-dom";
-import UserProfile from "../userProfile/UserProfile";
+import CustomerInformation from "../customerInformation/CustomerInformation";
 import Cart from "../../pages/cart/Cart";
 import WishList from "../../pages/wishList/WishList";
-import UserInfoForm from "../userInfoForm/UserInfoForm";
+import CustomerUpdate from "../customerUpdate/CustomerUpdate";
 import CustomerNavBar from "../../layout/customerNavBar/CustomerNavBar";
+import CustomerChangePassword from "../customerChangePassword/CustomerChangePassword";
 
 
 function CustomerProfile() {
-    const history = useHistory();
+    const {user, logout} = useContext(AuthContext);
 
-    const token = localStorage.getItem('token');
-    const {user: {userEmail}, logout} = useContext(AuthContext);
-
-    const [userData, setUserData] = useState({});
-
-
-    useEffect(() =>{
-        async function fetchProfileData() {
-            const token = localStorage.getItem('token');
-
-            try {
-                const response = await axios.get(`http://localhost:8080/users`, {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-                setUserData(response.data)
-            } catch (e) {
-                console.error(e);
-            }
-        }
-        fetchProfileData();
-    }, [token])
-
-    return(
+    return (
         <>
-            <div>
+            {user.roles !== "ROLE_USER" ? (
+                <div className="user-route-container">
+                    <div className="user-route">
+                        <h1>U moet ingelogd zijn als
+                            <br/> CUSTOMER
+                            <br/>om deze content te mogen zien..
+                        </h1>
+                    </div>
+                </div>
+            ) : (<div>
                 <section>
                     <GreetUser/>
                 </section>
                 <CustomerNavBar/>
-                <section>
-                    <UserProfile/>
+                <section id="customer_user_profile">
+                    <CustomerInformation/>
                 </section>
-                <section>
-                    <UserInfoForm/>
+                <section id="customer_change_password">
+                    <CustomerChangePassword/>
                 </section>
-                <section>
+                <section id="customer_user_update">
+                    <CustomerUpdate/>
+                </section>
+                <section id="customer_shopping_cart">
                     <Cart/>
                 </section>
-                <section>
+                <section id="customer_wishlist">
                     <WishList/>
                 </section>
                 <section>
@@ -64,7 +50,7 @@ function CustomerProfile() {
                         Uitloggen
                     </button>
                 </section>
-            </div>
+            </div>)}
         </>
     )
 }

@@ -1,0 +1,13 @@
+.userprofile-page{
+    display: flex;
+    flex-direction: column;
+}
+
+.info-container {
+
+}
+
+.customer-page-outer-container {
+    padding: 30px 90px;
+    background-color: wheat;
+}

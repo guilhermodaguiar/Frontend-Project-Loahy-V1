@@ -9,6 +9,7 @@ import AdminNavBar from "../../layout/adminNavBar/AdminNavBar";
 import AdminProductOverview from "../../components/adminProductOverview/AdminProductOverview";
 import AdminUser from "../../components/adminUser/AdminUser";
 import AdminContactUs from "../../components/adminContactUs/AdminContactUs";
+import AdminCreateProduct from "../../components/adminCreateProduct/AdminCreateProduct";
 
 
 function AdminPage() {
@@ -45,9 +46,9 @@ function AdminPage() {
                         <section id="admin-product-overview">
                             <AdminProductOverview/>
                         </section>
-                        {/*<section id="admin-add-new-product">*/}
-                        {/*    <AdminAddProductComponent/>*/}
-                        {/*</section>*/}
+                        <section>
+                            <AdminCreateProduct/>
+                        </section>
                         <section id="admin-new-products-update">
                             <AdminUpdateProduct/>
                         </section>

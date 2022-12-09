@@ -151,7 +151,7 @@ body {
 
 textarea {
     width: 100%;
-    padding: 6px 0px;
+    padding: 6px 0;
     margin: 10px 0;
     border: 1px solid #ddd;
     box-sizing: border-box;
@@ -184,7 +184,7 @@ textarea {
     flex-wrap: wrap;
     flex-direction: column;
     align-content: flex-start;
-    padding: 0px;
+    padding: 0;
 
 }
 

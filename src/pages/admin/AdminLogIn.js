@@ -83,7 +83,7 @@ function AdminLogIn() {
                                         <button
                                             disabled={loading}
                                             type="submit"
-                                            className="form-button"
+                                            className="form-button-login-admin"
                                         >
                                             Inloggen&nbsp;<RiLoginCircleFill size={22}/>
                                         </button>

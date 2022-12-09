@@ -26,7 +26,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: url('../../../assets/winkel_wagen_background.jpg') no-repeat center center fixed;
+    background: url('../../../assets/gieter_top_background.jpg') no-repeat center center fixed;
     background-size: cover;
 }
 
@@ -162,6 +162,10 @@ input {
     cursor: pointer;
 }
 
+.form-container-register button:hover {
+    background-color: #b4422f;
+}
+
 .instructions {
     font-size: 0.75rem;
     border-radius: 0.5rem;
@@ -253,12 +257,16 @@ input {
     color: #b9b9b9;
     background: #cbe0bf;
 
-    -moz-box-shadow:    inset 0 0 20px #707070;
+    -moz-box-shadow: inset 0 0 20px #707070;
     -webkit-box-shadow: inset 0 0 20px #646464;
-    box-shadow:         inset 0 0 20px #8f8f8f;
+    box-shadow: inset 0 0 20px #8f8f8f;
 
     transform: scale(1.05);
     transition: transform 200ms ease-in;
+}
+
+.label-register-container {
+    width: 100%;
 }
 
 
@@ -279,6 +287,7 @@ input {
         transform: translateY(100px);
     }
 }
+
 @keyframes succes-slide-bottom {
     0% {
         -webkit-transform: translateY(0);

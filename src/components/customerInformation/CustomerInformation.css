@@ -9,3 +9,8 @@
     flex-wrap: wrap;
     background: wheat;
 }
+
+.profile-header-container {
+    display: flex;
+    align-items: center;
+}

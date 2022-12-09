@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import './Cart.css';
 import {NavLink, useHistory} from "react-router-dom";
 import {useCart, useDispatchCart} from "../../context/CartContext";
@@ -25,6 +25,7 @@ function Cart() {
     function handleRemove(index) {
         dispatch({type: "REMOVE_FROM_CART", index});
     }
+
 
     return (
         <>
