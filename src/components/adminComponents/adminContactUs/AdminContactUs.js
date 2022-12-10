@@ -1,7 +1,7 @@
 import './AdminContactUs.css';
 
 import React, {useContext, useEffect, useState} from "react";
-import {AuthContext} from "../../context/AuthContext";
+import {AuthContext} from "../../../context/AuthContext";
 import axios from "axios";
 import {useHistory} from "react-router-dom";
 import {IoCloseSharp, IoListCircleSharp} from "react-icons/io5";

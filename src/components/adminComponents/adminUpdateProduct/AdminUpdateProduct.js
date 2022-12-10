@@ -1,42 +1,45 @@
-import "./AdminCreateProduct.css"
+import "./AdminUpdateProduct.css"
 
 import React, {useContext, useState} from "react";
-import axios from "axios";
-import {AuthContext} from "../../context/AuthContext";
+import {AuthContext} from "../../../context/AuthContext";
 import {useHistory} from "react-router-dom";
-import {MdAddCircle} from "react-icons/md";
-import {IoIosAddCircle} from "react-icons/io";
+import axios from "axios";
+import {RiErrorWarningLine} from "react-icons/ri";
+import {GrUpdate} from "react-icons/gr";
 
-
-function AdminCreateProduct() {
-    const history = useHistory();
+function AdminUpdateProduct() {
     const {user} = useContext(AuthContext);
-    const [loading, toggleLoading] = useState(false);
+    const history = useHistory();
 
+    const [productNumber, setProductNumber] = useState()
     const [productName, setProductName] = useState('');
     const [productInfo, setProductInfo] = useState('');
     const [productPrice, setProductPrice] = useState();
 
 
-//POST Product
-    async function sendItemData() {
-        toggleLoading(true);
+    async function sendItemData(id) {
         try {
-            const response = await axios.post(`http://localhost:8080/products/create`,
+            await axios.put(`http://localhost:8080/products/update/${id}`,
                 {
+                    productId: productNumber,
                     productName: productName,
                     productInformation: productInfo,
                     productPrice: productPrice,
-                }).then(addedNewProduct);
-            console.log(response.data);
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                }
+            ).then(addedNewProduct)
 
         } catch (e) {
-            console.error(e, "er is iets misgegaan");
+            console.error(e);
         }
     }
 
     function addedNewProduct() {
-        history.push('/admin/profile/#admin_product_overview');
+        history.push('/')
     }
 
     return (
@@ -51,17 +54,32 @@ function AdminCreateProduct() {
                     </div>
                 </div>
             ) : (
-                <div className="item-add-container" id="admin_add_new_product">
-                    <h2>Product Toevoegen<MdAddCircle size={25}/></h2>
-                    <div className="add-item-container">
-                        <p>Voeg hier je product:</p>
-                        <p>Een product Id wordt automatisch gegenereerd, deze is terug te vinden in: Mijn producten
-                        </p>
-                        <p> Een afbeelding kan geupload worden in Mijn producten</p>
+                <div className="item-update-container" id="admin_update_product">
+                    <h2 className="update-item-header-container">
+                        Product Aanpassen
+                    </h2>
+                    <div className="update-item-container">
+                        <p>Pas hier je product</p>
+                        <RiErrorWarningLine/>
+                        <p>Alle velden moeten verplicht ingevuld worden!! </p>
+                        <p>Vul het Product nummer Product nummer vindt je in Mijn
+                            producten(link) </p>
                     </div>
-                    <div className="form-container">
-                        <form className="update-item-form-"
+                    <div className="form-update-container">
+                        <form className="update-item-form"
                               onSubmit={sendItemData}>
+                            <label className="label-container" htmlFor="itemName-field">
+                                Product Nummer
+                                <input
+                                    type="number"
+                                    id="itemName-field"
+                                    placeholder="voorbeeld 1010"
+                                    name="name"
+                                    value={productNumber}
+                                    onChange={(e) => setProductNumber(e.target.value)}
+                                    required
+                                />
+                            </label>
                             <label className="label-container" htmlFor="itemName-field">
                                 Product Naam
                                 <input
@@ -70,6 +88,7 @@ function AdminCreateProduct() {
                                     name="name"
                                     value={productName}
                                     onChange={(e) => setProductName(e.target.value)}
+                                    required
                                 />
                             </label>
                             <label className="label-container" htmlFor="itemDescription-field">
@@ -79,10 +98,8 @@ function AdminCreateProduct() {
                                     name="description"
                                     value={productInfo}
                                     onChange={(e) => setProductInfo(e.target.value)}
-                                    rows={4}
-                                    cols={50}
-                                    placeholder="max 250 karakters"
-                                    maxLength="150"
+                                    rows={3}
+                                    cols={20}
                                     required
                                 />
                             </label>
@@ -97,19 +114,18 @@ function AdminCreateProduct() {
                                     step="0.01"
                                     title="Currency"
                                     value={productPrice}
+                                    lang="en-US"
                                     onChange={(e) => setProductPrice(e.target.value)}
                                 />
                             </label>
                             <div className="button-container">
                                 <button
                                     type="submit"
-                                    className="form-create-product-button"
-                                    disabled={loading}
+                                    className="form-update-product-button"
                                 >
-                                    <IoIosAddCircle/> Voeg producten toe
+                                    Product bijwerken
                                 </button>
                             </div>
-
                         </form>
                     </div>
                 </div>)
@@ -118,4 +134,4 @@ function AdminCreateProduct() {
     )
 }
 
-export default AdminCreateProduct;
+export default AdminUpdateProduct;

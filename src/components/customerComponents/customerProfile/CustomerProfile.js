@@ -1,13 +1,13 @@
 import "./CustomerProfile.css";
 
 import React, {useContext} from "react";
-import GreetUser from "../greetUser/GreetUser";
-import {AuthContext} from "../../context/AuthContext";
+import GreetCustomer from "../greetCustomer/GreetCustomer";
+import {AuthContext} from "../../../context/AuthContext";
 import CustomerInformation from "../customerInformation/CustomerInformation";
-import Cart from "../../pages/cart/Cart";
-import WishList from "../../pages/wishList/WishList";
+import Cart from "../../../pages/cart/Cart";
+import WishList from "../../../pages/wishList/WishList";
 import CustomerUpdate from "../customerUpdate/CustomerUpdate";
-import CustomerNavBar from "../../layout/customerNavBar/CustomerNavBar";
+import CustomerNavBar from "../../../layout/customerNavBar/CustomerNavBar";
 import CustomerChangePassword from "../customerChangePassword/CustomerChangePassword";
 
 
@@ -27,7 +27,7 @@ function CustomerProfile() {
                 </div>
             ) : (<div>
                 <section>
-                    <GreetUser/>
+                    <GreetCustomer/>
                 </section>
                 <CustomerNavBar/>
                 <section id="customer_user_profile">

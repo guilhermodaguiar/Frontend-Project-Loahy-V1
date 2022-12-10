@@ -3,7 +3,7 @@ import "./CustomerChangePassword.css";
 import React, {useContext, useEffect, useRef, useState} from "react";
 import {useHistory} from "react-router-dom";
 import axios from "axios";
-import {AuthContext} from "../../context/AuthContext";
+import {AuthContext} from "../../../context/AuthContext";
 import {MdAccountCircle} from "react-icons/md";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck, faInfoCircle, faTimes} from "@fortawesome/free-solid-svg-icons";

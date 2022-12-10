@@ -105,7 +105,7 @@ function CustomerSignUp() {
                     </h3>
                     <div>
                         <CustomerRegister
-                            customer_email= {email}
+                            customer= {email}
                         />
                     </div>
                     {/*<p>Mocht u niet automatisch doorgestuurd worden<br/>*/}

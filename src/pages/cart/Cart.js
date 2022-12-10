@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext} from "react";
 import './Cart.css';
 import {NavLink, useHistory} from "react-router-dom";
 import {useCart, useDispatchCart} from "../../context/CartContext";
@@ -53,7 +53,7 @@ function Cart() {
                     })}
                     <div className="total-and-price-container">
                         <div className="aantal-producten">
-                            Totaal aantal: {cartItems.length} producten
+                            Totaal aantal: {Object.keys(cartItems).length} producten
                         </div>
                         <div className="total-price2">
                             <strong>Totaal prijs: {formatCurrency(totalPrice.toFixed(2))}</strong>

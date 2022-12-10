@@ -16,7 +16,7 @@ const DUTCH_PHONE_REGEX = /^\(?([+]31|0031|0)-?6(\s?|-)([0-9]\s{0,3}){8}$/;
 const DUTCH_ZIPCODE_REGEX = /^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i;
 
 
-function CustomerRegister({props}) {
+function CustomerRegister({customer}) {
     const history = useHistory();
 
     const userRef = useRef();
@@ -153,7 +153,7 @@ function CustomerRegister({props}) {
 
                                         <form
                                             className="form-container-register"
-                                            onSubmit={assignCustomerToUser(props.customer_email)}>
+                                            onSubmit={assignCustomerToUser}>
 
 
                                             <section className="first-name">

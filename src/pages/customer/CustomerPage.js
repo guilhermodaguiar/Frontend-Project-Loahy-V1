@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 
 import './CostumorPage.css';
-import CustomerProfile from "../../components/customerProfile/CustomerProfile";
+import CustomerProfile from "../../components/customerComponents/customerProfile/CustomerProfile";
 import ScrollIndicator from "../../helpers/scrollIndicator/ScrollIndicator";
 import ScrollToTop from "../../helpers/scrollToTop/ScrollToTop";
 import {AuthContext} from "../../context/AuthContext";

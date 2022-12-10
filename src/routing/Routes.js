@@ -11,7 +11,7 @@ import AdminLogIn from "../pages/admin/AdminLogIn";
 import CheckOut from "../pages/checkout/CheckOut";
 import CustomerSignUp from "../pages/customer/customerSignUp/CustomerSignUp";
 import CustomerLogIn from "../pages/customer/customerLogIn/CustomerLogIn";
-import AdminUploadImage from "../components/adminUploadImage/AdminUploadImage";
+import AdminUploadImage from "../components/adminComponents/adminUploadImage/AdminUploadImage";
 import CustomerRegister from "../pages/customer/customerRegister/CustomerRegister";
 
 

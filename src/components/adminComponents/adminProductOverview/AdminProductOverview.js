@@ -2,7 +2,7 @@ import "./AdminProductOverview.css"
 
 import React, {useContext, useEffect, useState} from "react";
 import axios from "axios";
-import {AuthContext} from "../../context/AuthContext";
+import {AuthContext} from "../../../context/AuthContext";
 import {useHistory} from "react-router-dom";
 import {IoCloseSharp} from "react-icons/io5";
 import {FaProductHunt} from "react-icons/fa";

@@ -1,15 +1,15 @@
 import './AdminPage.css';
 
 import React, {useContext} from "react";
-import AdminUpdateProduct from "../../components/adminUpdateProduct/AdminUpdateProduct";
+import AdminUpdateProduct from "../../components/adminComponents/adminUpdateProduct/AdminUpdateProduct";
 import ScrollIndicator from "../../helpers/scrollIndicator/ScrollIndicator";
 import ScrollToTop from "../../helpers/scrollToTop/ScrollToTop";
 import {AuthContext} from "../../context/AuthContext";
 import AdminNavBar from "../../layout/adminNavBar/AdminNavBar";
-import AdminProductOverview from "../../components/adminProductOverview/AdminProductOverview";
-import AdminUser from "../../components/adminUser/AdminUser";
-import AdminContactUs from "../../components/adminContactUs/AdminContactUs";
-import AdminCreateProduct from "../../components/adminCreateProduct/AdminCreateProduct";
+import AdminProductOverview from "../../components/adminComponents/adminProductOverview/AdminProductOverview";
+import AdminUser from "../../components/adminComponents/adminUser/AdminUser";
+import AdminContactUs from "../../components/adminComponents/adminContactUs/AdminContactUs";
+import AdminCreateProduct from "../../components/adminComponents/adminCreateProduct/AdminCreateProduct";
 
 
 function AdminPage() {

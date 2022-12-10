@@ -2,7 +2,7 @@ import "./AdminUser.css"
 
 import React, {useContext, useEffect, useState} from "react";
 import axios from "axios";
-import {AuthContext} from "../../context/AuthContext";
+import {AuthContext} from "../../../context/AuthContext";
 import {FaUserCircle} from "react-icons/fa";
 import {useHistory} from "react-router-dom";
 import {IoCloseSharp} from "react-icons/io5";

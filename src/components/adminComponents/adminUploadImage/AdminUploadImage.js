@@ -2,7 +2,7 @@ import "./AdminUploadImage.css"
 
 import React, {useContext, useState} from "react";
 import axios from "axios";
-import {AuthContext} from "../../context/AuthContext";
+import {AuthContext} from "../../../context/AuthContext";
 import {FaFileUpload} from "react-icons/fa";
 import {useHistory} from "react-router-dom";
 

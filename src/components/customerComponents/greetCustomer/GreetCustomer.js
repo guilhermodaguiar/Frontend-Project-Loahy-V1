@@ -1,9 +1,9 @@
-import './GreetUser.css';
+import './GreetCustomer.css';
 
-import React, {AuthContext} from "../../context/AuthContext";
+import React, {AuthContext} from "../../../context/AuthContext";
 import {useContext} from "react";
 
-function GreetUser() {
+function GreetCustomer() {
     const {user} = useContext(AuthContext);
 
     return (
@@ -24,4 +24,4 @@ function GreetUser() {
     )
 }
 
-export default GreetUser;
+export default GreetCustomer;

@@ -2,7 +2,7 @@ import './AdminOrder.css';
 
 import React, {useContext, useEffect, useState} from "react";
 import axios from "axios";
-import {AuthContext} from "../../context/AuthContext";
+import {AuthContext} from "../../../context/AuthContext";
 import {IoCloseCircleSharp} from "react-icons/io5";
 import {FaRegListAlt} from "react-icons/fa";
 import {useHistory} from "react-router-dom";
