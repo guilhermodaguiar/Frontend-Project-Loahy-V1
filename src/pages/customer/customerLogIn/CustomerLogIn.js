@@ -33,6 +33,7 @@ function CustomerLogIn() {
         }
     }
 
+
     async function userLoginRequest(e) {
         e.preventDefault();
         toggleLoading(false);
@@ -81,6 +82,7 @@ function CustomerLogIn() {
                                                 E-mailadres:
                                                 <input
                                                     type="email"
+                                                    autoComplete="off"
                                                     id="email-field"
                                                     value={email}
                                                     onChange={(e) => setEmail(e.target.value)}
@@ -92,6 +94,7 @@ function CustomerLogIn() {
                                                 <div className="password-container">
                                                     <input
                                                         type={type}
+                                                        autoComplete="off"
                                                         id="password-field"
                                                         onChange={(e) => setPassword(e.target.value)}
                                                         value={password}

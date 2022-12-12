@@ -85,3 +85,52 @@ body {
     border-right: solid black;
 }
 
+.order-header {
+    display: flex;
+    align-items: center;
+}
+
+.second-box-container {
+    display: flex;
+    justify-content: flex-start;
+    height: fit-content;
+    width: 60%;
+    flex-direction: row;
+}
+
+.order-cart-summary {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: wheat;
+    flex-wrap: wrap;
+    height: fit-content;
+}
+
+.price-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: wheat;
+    flex-wrap: wrap;
+    height: fit-content;
+    width: 700px;
+    align-items: center;
+    border-top: solid black;
+
+}
+
+.check-cart-checkout {
+    display: flex;
+    padding: 10px;
+}
+
+.success-updated-shipping {
+    display: flex;
+}
+
+.block-shipping-address-success {
+    padding-right: 10px;
+    border-right: solid black;
+}
+

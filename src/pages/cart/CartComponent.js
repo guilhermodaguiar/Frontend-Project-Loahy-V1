@@ -10,10 +10,6 @@ function  CartComponent({item, index, handleRemove}) {
     const cartItems = useCart();
     const [quantity, setQuantity] = useState(1);
 
-    function subtotal() {
-        formatCurrency(item.productPrice * quantity)
-    }
-
 
     return (
         <>
@@ -61,7 +57,6 @@ function  CartComponent({item, index, handleRemove}) {
                                                         value={quantity}
                                                         onChange={(e) => setQuantity(e.target.value)}
                                                         type="number"
-                                                        defaultValue={1}
                                                         min="1"
                                                         max="10"
                                                         id="item-quantity"
@@ -71,7 +66,7 @@ function  CartComponent({item, index, handleRemove}) {
                                             </div>
                                             <div className="cart-container-outer">
                                                 <div className="cart-container-inner">
-                                                    {subtotal}
+                                                    {formatCurrency(item.productPrice * quantity)}
                                                 </div>
                                             </div>
                                         </div>

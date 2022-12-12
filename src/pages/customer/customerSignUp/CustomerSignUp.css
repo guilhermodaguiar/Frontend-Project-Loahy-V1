@@ -38,8 +38,8 @@ body {
 
 .register-body {
     display: flex;
-    flex-direction: row;
-    justify-content: start;
+    padding: 10px 10px;
+    margin: 0 10px;
 }
 
 input {
@@ -60,7 +60,7 @@ input {
 
 .customer-inner-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     padding: 30px;
     flex-wrap: wrap;
@@ -92,18 +92,6 @@ input {
     align-items: center;
 }
 
-.form-container-register {
-    padding: 37px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    flex-grow: 1;
-    align-items: flex-start;
-    background-size: cover;
-    flex-wrap: wrap;
-    min-width: 500px;
-    background-color: chocolate;
-}
 
 .valid-green-check {
     color: limegreen;

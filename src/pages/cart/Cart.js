@@ -53,7 +53,7 @@ function Cart() {
                     })}
                     <div className="total-and-price-container">
                         <div className="aantal-producten">
-                            Totaal aantal: {Object.keys(cartItems).length} producten
+                            Totaal aantal: {cartItems.length} producten
                         </div>
                         <div className="total-price2">
                             <strong>Totaal prijs: {formatCurrency(totalPrice.toFixed(2))}</strong>
@@ -61,6 +61,7 @@ function Cart() {
                     </div>
                 </div>
                 <div className={"shopping-cart-container"}>
+
                     {!isAuth ? (
                         <div>
                             <div>

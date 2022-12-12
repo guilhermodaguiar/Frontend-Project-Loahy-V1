@@ -1,14 +1,15 @@
 import "./WishlistComponent.css"
 
 import React from "react";
-import {useWishlist} from "../../context/WishlistContext";
+import {useWishlist} from "../../../context/WishlistContext";
 import {BiMessageError} from "react-icons/bi";
 import {NavLink} from "react-router-dom";
 import {IoCloseSharp} from "react-icons/io5";
 import {FcShop} from "react-icons/fc";
 
-function WishlistComponent({item, wishlistItem, index, handleRemove}) {
+function WishlistComponent({item, index, handleRemove}) {
     const wishlistItems = useWishlist();
+
 
     return (
         <>

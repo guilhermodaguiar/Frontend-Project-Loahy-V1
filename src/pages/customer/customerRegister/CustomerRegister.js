@@ -7,7 +7,7 @@ import {MdAccountCircle} from "react-icons/md";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck, faInfoCircle, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {BsFillPencilFill} from "react-icons/bs";
-import {IoMdLogIn} from "react-icons/io";
+import {IoIosAddCircle, IoMdLogIn} from "react-icons/io";
 
 
 const NAME_REGEX = /^[a-z ,.'-]+$/i;
@@ -18,6 +18,11 @@ const DUTCH_ZIPCODE_REGEX = /^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i;
 
 function CustomerRegister({customer}) {
     const history = useHistory();
+    const email = customer
+
+    const [successWishlist, toggleSuccessWishlist] = useState(false);
+
+    const [wishlistName, setWishlistName] = useState('');
 
     const userRef = useRef();
     const errRef = useRef();
@@ -48,7 +53,7 @@ function CustomerRegister({customer}) {
     const [validZipcode, setValidZipcode] = useState(false);
     const [zipcodeFocus, setZipcodeFocus] = useState(false);
 
-    const [phone, setPhone] = useState();
+    const [phone, setPhone] = useState(0);
     const [validPhone, setValidPhone] = useState(false);
     const [phoneFocus, setPhoneFocus] = useState(false);
 
@@ -92,10 +97,26 @@ function CustomerRegister({customer}) {
     }, [firstName, lastName, street, houseNumber, houseNumberAdd, city, zipcode, phone]);
 
 
-    async function assignCustomerToUser(customer_email) {
+    async function createNewWishlist(e) {
+        e.preventDefault();
+        try {
+            const response = await axios.post(`http://localhost:8080/users/${email}/wishlist`,
+                {
+                    wishlistName: wishlistName,
+                })
+            console.log(response.data);
+            toggleSuccessWishlist(true);
+
+        } catch (e) {
+            console.error(e, "er is iets misgegaan");
+        }
+    }
+
+    async function assignCustomerToUser() {
+
 
         try {
-            const response = await axios.post(`http://localhost:8080/users/${customer_email}/customer`, {
+            const response = await axios.post(`http://localhost:8080/users/${email}/customer`, {
                 customerFirstName: firstName,
                 customerLastName: lastName,
                 customerStreetName: street,
@@ -125,15 +146,10 @@ function CustomerRegister({customer}) {
             <>
                 {success ? (
                     <section className="block-new-user-created-with-succes">
-                        <h1>
-                            Gelukt met het creëren van een Loahy account !!!
-                        </h1>
-                        <h3>
-                            Je kan nu inloggen...
-                        </h3>
-                        <p>Mocht u niet automatisch doorgestuurd worden<br/>
+                        <div>
+                            gelukt! je kan nu inloggen
+                        </div>
                             <NavLink to="/customer/login">klik dan hier!</NavLink>
-                        </p>
                     </section>) : (
                     <div>
                         <div className="customer-register-page">
@@ -146,6 +162,42 @@ function CustomerRegister({customer}) {
                                 </h3>
                             </div>
                             <div className="customer-inner-container">
+                                {successWishlist ? (
+                                    <>
+                                        <div>
+                                            gelukt! ga verder met registreren
+                                        </div>
+                                    </>
+                                    ) : (
+                                    <>
+                                        <div>
+                                        Creer eerst een wishlist naam om items toe te voegen aan jou wishlist.
+                                        <form
+                                            className="create-wishlist-form"
+                                            onSubmit={createNewWishlist}
+                                        >
+                                            <label className="label-wishlist" htmlFor="listName-field">
+                                                Voer een Wishlist naam in
+                                                <input
+                                                    type="text"
+                                                    id="listName-field"
+                                                    name="name"
+                                                    value={wishlistName}
+                                                    onChange={(e) => setWishlistName(e.target.value)}
+                                                />
+                                            </label>
+                                            <div className="button-container">
+                                                <button
+                                                    type="submit"
+                                                    className="form-create-product-button"
+                                                >
+                                                    <IoIosAddCircle/> Maak aan
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div></>
+                                    )}
+
                                 <div className="register-body">
                                     <section className="block-new-costumer">
                                         <p ref={errRef} className={errorMessage ? "err-msg" : "offscreen"}
@@ -377,8 +429,6 @@ function CustomerRegister({customer}) {
                                                     Mobielnummer is verplicht!<br/>
                                                 </p>
                                             </section>
-
-
                                             <button
                                                 type="submit"
                                                 className="form-button"

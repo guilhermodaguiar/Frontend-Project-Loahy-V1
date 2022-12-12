@@ -17,7 +17,7 @@ function CustomerInformation() {
     return (
         <>
             <div>
-                <div className="customer-page-outer-container">
+                <div>
                     <section className="userprofile-page">
                         <h1 className="profile-header-container"><MdAccountCircle size={40}/>Profiel</h1>
                         <div className="userprofile-container">

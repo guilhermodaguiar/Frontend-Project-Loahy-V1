@@ -37,8 +37,8 @@ function CustomerNavBar() {
                         </Link>
                     </div>
                     <div className="container-for-padding">
-                        <Link to="/customer/profile/#customer_shopping_cart">
-                            Winkelwagen
+                        <Link to="/customer/profile/#customer_order_history">
+                            Orders
                         </Link>
                     </div>
                     <div className="container-for-padding">

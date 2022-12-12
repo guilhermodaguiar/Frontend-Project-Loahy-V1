@@ -4,7 +4,7 @@ import React, {useEffect, useRef, useState} from "react";
 import axios from "axios";
 import {faCheck, faInfoCircle, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {NavLink, useHistory} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {BsFillPencilFill} from "react-icons/bs";
 import {MdAccountCircle} from "react-icons/md";
 import {IoMdLogIn} from "react-icons/io";
@@ -13,7 +13,6 @@ import CustomerRegister from "../customerRegister/CustomerRegister";
 
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const EMAIL_REGEX = /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
 
 function CustomerSignUp() {
     // const history = useHistory();
@@ -53,6 +52,7 @@ function CustomerSignUp() {
     useEffect(() => {
         setErrorMessage('');
     }, [email, password, confirmPassword])
+
 
     async function registerUser(e) {
         e.preventDefault();
@@ -97,20 +97,11 @@ function CustomerSignUp() {
         <>
             {success ? (
                 <section className="block-new-user-created-with-succes">
-                    <h1>
-                        Gelukt met het creëren van een Loahy account: stap 1 !!!
-                    </h1>
-                    <h3>
-                        Ga naar stap 2 van registreren.
-                    </h3>
                     <div>
                         <CustomerRegister
                             customer= {email}
                         />
                     </div>
-                    {/*<p>Mocht u niet automatisch doorgestuurd worden<br/>*/}
-                    {/*    <NavLink to="/customer/register/step2">klik dan hier!</NavLink>*/}
-                    {/*</p>*/}
                 </section>) : (
                 <div>
                     <div className="customer-register-page">

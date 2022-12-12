@@ -109,7 +109,6 @@ function AdminCreateProduct() {
                                     <IoIosAddCircle/> Voeg producten toe
                                 </button>
                             </div>
-
                         </form>
                     </div>
                 </div>)

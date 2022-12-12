@@ -41,10 +41,10 @@ function CustomerChangePassword() {
         setErrorMessage('');
     }, [password, confirmPassword]);
 
-    async function updatePassword(user_email) {
+    async function updatePassword() {
 
         try {
-            const response = await axios.put(`http://localhost:8080/users/${user_email}`, {
+            const response = await axios.put(`http://localhost:8080/users/${user.user_email}`, {
                 password: password,
             }).then(savedPassword);
             console.log(response.data);
@@ -70,23 +70,23 @@ function CustomerChangePassword() {
                 </div>
             ) : (
                 <>
-                    <div className="customer-page-outer-container">
+                    <div>
                         <h1 className="password-change-container"><RiLockPasswordFill size={40}/>Wachtwoord</h1>
                         <div>
                             <h3 className="password-change-text">Loahy wachtwoord wijzigen
                             </h3>
                         </div>
                         <div className="change-password-inner-container">
-                            <div className="register-body">
+                            <div>
                                 <section className="block-new-costumer">
                                     <p ref={errRef} className={errorMessage ? "err-msg" : "offscreen"}
                                        aria-live="assertive">{errorMessage}</p>
 
                                     <form
-                                        className="form-container-register"
+                                        className="form-container-update"
                                         onSubmit={updatePassword}>
 
-                                        <section className="password">
+                                        <section className="update-customer">
                                             <label htmlFor="password-field">
                                                 Wachtwoord:
                                                 <FontAwesomeIcon icon={faCheck}
@@ -115,7 +115,7 @@ function CustomerChangePassword() {
                                                 (!, @, #, $ of %)bevatten.<br/>
                                             </p>
                                         </section>
-                                        <section className="confirm-password">
+                                        <section className="update-customer">
                                             <label htmlFor="confirm-password-field">
                                                 Herhaal wachtwoord:
                                             </label>

@@ -4,11 +4,11 @@ import React, {useContext} from "react";
 import GreetCustomer from "../greetCustomer/GreetCustomer";
 import {AuthContext} from "../../../context/AuthContext";
 import CustomerInformation from "../customerInformation/CustomerInformation";
-import Cart from "../../../pages/cart/Cart";
-import WishList from "../../../pages/wishList/WishList";
+import WishList from "../../../pages/wishList/wishList/WishList";
 import CustomerUpdate from "../customerUpdate/CustomerUpdate";
 import CustomerNavBar from "../../../layout/customerNavBar/CustomerNavBar";
 import CustomerChangePassword from "../customerChangePassword/CustomerChangePassword";
+import CustomerHistory from "../customerHistory/CustomerHistory";
 
 
 function CustomerProfile() {
@@ -25,32 +25,42 @@ function CustomerProfile() {
                         </h1>
                     </div>
                 </div>
-            ) : (<div>
-                <section>
-                    <GreetCustomer/>
-                </section>
-                <CustomerNavBar/>
-                <section id="customer_user_profile">
-                    <CustomerInformation/>
-                </section>
-                <section id="customer_change_password">
-                    <CustomerChangePassword/>
-                </section>
-                <section id="customer_user_update">
-                    <CustomerUpdate/>
-                </section>
-                <section id="customer_shopping_cart">
-                    <Cart/>
-                </section>
-                <section id="customer_wishlist">
+            ) : (
+                <div>
+                    <section>
+                        <GreetCustomer/>
+                    </section>
+                    <CustomerNavBar/>
+                    <div className="customer-outer-container">
+                        <div className="first-box-container">
+                            <section id="customer_user_profile">
+                                <CustomerInformation/>
+                            </section>
+                            <section id="customer_change_password">
+                                <CustomerChangePassword/>
+                            </section>
+                        </div>
+                        <div className="second-box-container">
+                            <section id="customer_user_update">
+                                <CustomerUpdate/>
+                            </section>
+                        </div>
+
+                        <section id="customer_order_history">
+                            <CustomerHistory/>
+                        </section>
+
+                    </div>
+                    <section id="customer_wishlist">
                     <WishList/>
                 </section>
-                <section>
-                    <button type="button" onClick={logout}>
-                        Uitloggen
-                    </button>
-                </section>
-            </div>)}
+                    <section>
+                        <button type="button" onClick={logout}>
+                            Uitloggen
+                        </button>
+                    </section>
+                </div>
+            )}
         </>
     )
 }

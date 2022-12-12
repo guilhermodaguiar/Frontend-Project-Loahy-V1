@@ -126,6 +126,7 @@ main {
 
 .click-to-shop {
     display: flex;
+    align-items: center;
     flex-direction: unset;
     justify-content: start;
     flex-basis: auto;
