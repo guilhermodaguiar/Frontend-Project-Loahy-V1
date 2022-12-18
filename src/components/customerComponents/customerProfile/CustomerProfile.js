@@ -7,7 +7,6 @@ import CustomerInformation from "../customerInformation/CustomerInformation";
 import WishList from "../../../pages/wishList/wishList/WishList";
 import CustomerUpdate from "../customerUpdate/CustomerUpdate";
 import CustomerNavBar from "../../../layout/customerNavBar/CustomerNavBar";
-import CustomerChangePassword from "../customerChangePassword/CustomerChangePassword";
 
 
 function CustomerProfile() {
@@ -35,9 +34,6 @@ function CustomerProfile() {
                             <section id="customer_user_profile">
                                 <CustomerInformation/>
                             </section>
-                            <section id="customer_change_password">
-                                <CustomerChangePassword/>
-                            </section>
                         </div>
                         <div className="second-box-container">
                             <section id="customer_user_update">
@@ -45,9 +41,6 @@ function CustomerProfile() {
                             </section>
                         </div>
                     </div>
-                    <section id="customer_wishlist">
-                    <WishList/>
-                </section>
                     <section>
                         <button type="button" onClick={logout}>
                             Uitloggen

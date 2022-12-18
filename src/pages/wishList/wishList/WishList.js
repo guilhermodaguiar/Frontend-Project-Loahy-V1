@@ -1,5 +1,5 @@
 import './WishList.css';
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext} from "react";
 import WishlistComponent from "../wishlistComponent/WishlistComponent";
 import {useDispatchWishlist, useWishlist} from "../../../context/WishlistContext";
 import {NavLink} from "react-router-dom";
@@ -8,7 +8,6 @@ import {BiMessageError} from "react-icons/bi";
 import {FcShop} from "react-icons/fc";
 import {AuthContext} from "../../../context/AuthContext";
 import {BsBookmarkHeart} from "react-icons/bs";
-import axios from "axios";
 
 
 function WishList() {
