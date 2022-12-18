@@ -27,8 +27,23 @@ function CustomerNavBar() {
                         </Link>
                     </div>
                     <div className="container-for-padding">
+                        <Link to="/customer/profile/#customer_change_password">
+                            Wachtwoord
+                        </Link>
+                    </div>
+                    <div className="container-for-padding">
                         <Link to="/customer/profile/#customer_user_update">
                             Profiel aanpassen
+                        </Link>
+                    </div>
+                    <div className="container-for-padding">
+                        <Link to="/customer/profile/#customer_order_history">
+                            Orders
+                        </Link>
+                    </div>
+                    <div className="container-for-padding">
+                        <Link to="/customer/profile/#customer_wishlist">
+                            verlanglijstje
                         </Link>
                     </div>
                 </div>
