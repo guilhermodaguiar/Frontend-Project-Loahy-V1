@@ -3,7 +3,7 @@ import './AdminOrder.css';
 import React, {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {AuthContext} from "../../../context/AuthContext";
-import {IoCloseCircleSharp} from "react-icons/io5";
+import {IoCloseCircleSharp, IoCloseSharp} from "react-icons/io5";
 import {FaRegListAlt} from "react-icons/fa";
 import {useHistory} from "react-router-dom";
 
@@ -33,21 +33,23 @@ function AdminOrder() {
 
         fetchOrders();
     }, [token]);
-    async function deleteOrder(orderId) {
+
+    async function deleteOrder(id) {
         try {
-            await axios.delete(`http://localhost:8080/users/delete/${orderId}`,
+            await axios.delete(`http://localhost:8080/orders/delete/${id}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`,
                     }
-                })
+                }).then(deletedOrder);
         } catch (e) {
-            console.error(e);
+            console.error(e, 'er is iets misgegaan')
         }
-        setTimeout(() => {
-            history.push("/admin/profile");
-        }, 300);
+    }
+
+    function deletedOrder() {
+        history.push('/admin/profile/#admin_product_overview');
     }
 
 
@@ -72,29 +74,31 @@ function AdminOrder() {
                             <thead>
                             <tr>
                                 <th className="delete-container">Verwijder</th>
-                                <th className="client_name">naam</th>
+                                <th className="client_name">Voornaam</th>
                                 <th className="client-last-name">Achternaam</th>
                                 <th className="order_number">order#</th>
-                                <th className="order_field"></th>
+                                <th className="order_field">Order</th>
+                                <th className="order_field">datum</th>
                             </tr>
                             </thead>
                             <tbody className="order_tbody">
 
                             {orders.map((order) => {
-                                return <tr key={order.orderId}>
+                                return <tr key={order.id}>
                                     <td>
                                         <button className="delete-button">
-                                            <IoCloseCircleSharp
+                                            <IoCloseSharp
                                                 size={20}
-                                                onClick={() => deleteOrder(order.orderId)}
+                                                onClick={() => deleteOrder(order.id)}
                                             />
                                         </button>
                                     </td>
-                                    <td className="client_first-name">{order.userFirstName}</td>
-                                    <td className="client-last-name"></td>
-                                    <td className="order_number">{order.orderId}</td>
-                                    <td className="order_field">Back-end_data met product, en aantal en subtotaal
+                                    <td className="client_first-name">{order.customer.customerFirstName}</td>
+                                    <td className="client-last-name">{order.customer.customerLastName}</td>
+                                    <td className="order_number">{order.id}</td>
+                                    <td className="order_field">{JSON.stringify(order.productList)}
                                     </td>
+                                    <td className="order-datum">{order.orderDate}</td>
                                 </tr>
                             })}
                             </tbody>

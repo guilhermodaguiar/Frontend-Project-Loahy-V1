@@ -13,7 +13,6 @@ import CustomerSignUp from "../pages/customer/customerSignUp/CustomerSignUp";
 import CustomerLogIn from "../pages/customer/customerLogIn/CustomerLogIn";
 import AdminUploadImage from "../components/adminComponents/adminUploadImage/AdminUploadImage";
 import CustomerRegister from "../pages/customer/customerRegister/CustomerRegister";
-import CheckoutSummary from "../pages/checkout/checkoutSummary/CheckoutSummary";
 import WishlistLogin from "../pages/wishList/wishlistLogin/WishlistLogin";
 
 
@@ -43,9 +42,6 @@ function Routes() {
                     </Route>
                     <Route exact path="/customer/checkout">
                         <CheckOut/>
-                    </Route>
-                    <Route exact path="customer/checkout/thankyou">
-                        <CheckoutSummary/>
                     </Route>
                     <Route path="/wishlist">
                         <WishlistLogin/>

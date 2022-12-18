@@ -1,7 +1,7 @@
 .shopping-cart-container {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     padding: 30px 90px;
     background-color: wheat;
     flex-wrap: wrap;
@@ -31,7 +31,7 @@
 .name-price-qty-container {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 0px 90px;
     background-color: wheat;
     flex-wrap: wrap;

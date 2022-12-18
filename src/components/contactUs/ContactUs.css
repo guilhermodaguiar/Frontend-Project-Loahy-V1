@@ -114,11 +114,14 @@ body {
     justify-content: flex-start;
     flex-wrap: wrap;
     flex-direction: column;
+    padding-right: 10px;
 }
 
 .contact-us-contact-us {
     display: flex;
     justify-content: start;
+    padding-right: 10px;
+    border-right: groove;
 }
 
 .just_a-p {
@@ -132,6 +135,8 @@ body {
     flex-direction: column;
     justify-content: start;
     padding-left: 10px;
+    border-left: groove;
+    height: 415px;
 }
 
 .flex-container {

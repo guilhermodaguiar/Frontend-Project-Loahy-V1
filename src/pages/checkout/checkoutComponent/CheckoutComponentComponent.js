@@ -1,14 +1,10 @@
 import "./CheckoutComponent.css";
 
-import React, {useState} from "react";
+import React from "react";
 import {formatCurrency} from "../../../helpers/formatCurrency/FormatCurrency";
 
 
-function CheckoutComponentComponent({item, index}) {
-    const [quantity, setQuantity] = useState(1);
-    const [totalPrice, setTotalPrice] = useState();
-
-
+function CheckoutComponentComponent({item}) {
 
     return(
         <>
@@ -29,24 +25,6 @@ function CheckoutComponentComponent({item, index}) {
                         <div className="cart-container-outer">
                             <div className="cart-container-inner">
                                 <p>{formatCurrency(item.productPrice)}</p></div>
-                        </div>
-                        <div className="cart-container-outer">
-                            <div className="cart-container-inner">
-                                <input
-                                    value={quantity}
-                                    onChange={(e) => setQuantity(e.target.value)}
-                                    type="number"
-                                    min="1"
-                                    max="10"
-                                    id="item-quantity"
-                                    name="items"
-                                />
-                            </div>
-                        </div>
-                        <div className="cart-container-outer">
-                            <div className="cart-container-inner">
-                                {formatCurrency(item.productPrice * quantity)}
-                            </div>
                         </div>
                     </div>
                 </div>

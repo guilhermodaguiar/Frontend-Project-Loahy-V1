@@ -32,13 +32,8 @@ function CustomerNavBar() {
                         </Link>
                     </div>
                     <div className="container-for-padding">
-                        <Link to="/customer/profile/customer_user_update">
+                        <Link to="/customer/profile/#customer_user_update">
                             Profiel aanpassen
-                        </Link>
-                    </div>
-                    <div className="container-for-padding">
-                        <Link to="/customer/profile/#customer_order_history">
-                            Orders
                         </Link>
                     </div>
                     <div className="container-for-padding">

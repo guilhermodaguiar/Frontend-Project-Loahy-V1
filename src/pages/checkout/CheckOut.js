@@ -1,7 +1,7 @@
 import "./CheckOut.css";
 
 import React, {useContext, useEffect, useState} from "react";
-import {NavLink, useHistory} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {FcShop} from "react-icons/fc";
 import {FaShoppingCart} from "react-icons/fa";
 import {AuthContext} from "../../context/AuthContext";
@@ -12,12 +12,14 @@ import {BsFillPencilFill} from "react-icons/bs";
 import CheckoutComponentComponent from "./checkoutComponent/CheckoutComponentComponent";
 import {formatCurrency} from "../../helpers/formatCurrency/FormatCurrency";
 import {IoListCircle} from "react-icons/io5";
+import {HiEmojiHappy} from "react-icons/hi";
 
 function CheckOut() {
-    const history = useHistory();
     const [success, toggleSuccess] = useState();
     const token = localStorage.getItem('token');
     const cartItems = useCart();
+    const [addSuccess, toggleAddSuccess] = useState(false);
+
     const {
         user,
         user: {
@@ -29,8 +31,10 @@ function CheckOut() {
     } = useContext(AuthContext);
 
     const totalPrice = cartItems.reduce((acc, cart) => acc + cart.productPrice, 0);
-
     const [itemList, setItemList] = useState([]);
+    const [orderList, setOrderList] = useState([]);
+    const [comment, setComment] = useState('');
+
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [street, setStreet] = useState('');
@@ -41,28 +45,38 @@ function CheckOut() {
     const [phone, setPhone] = useState(0);
 
 
+
     useEffect(() => {
-        setItemList(cartItems.map(product => {
-            return product.product_id
+        setItemList(cartItems.map(item => {
+            return item.productId
         }))
     }, [cartItems])
 
     async function sendOrder(e) {
         e.preventDefault();
         try {
-            await axios.post(`http://localhost:8080/order/create`, {
-                products: itemList,
-                userId: user.customer_id
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    "Authorization": `Bearer ${token}`
+            const response = await axios.post(`http://localhost:8080/orders/create`, {
+                productList: itemList,
+                comment: comment,
+                customer: user.customer_id,
+                orderDate: Date().toLocaleString(),
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        "Authorization": `Bearer ${token}`
+                    }
                 }
-            }).then(toOrderThankYou);
+            );
+            setOrderList(response.data);
+            toggleAddSuccess(true);
         } catch (e) {
             console.error(e);
         }
     }
+
+    console.log(Date().toLocaleString());
+
+
 
     async function handleUpdateCustomer(e) {
         e.preventDefault();
@@ -86,10 +100,6 @@ function CheckOut() {
         } catch (e) {
             console.error(e);
         }
-    }
-
-    function toOrderThankYou() {
-        history.push('customer/checkout/thankyou')
     }
 
 
@@ -140,7 +150,8 @@ function CheckOut() {
                         ) : (
                             <div className="first-box-container">
                                 <div className="shipping-information-container">
-                                    <h3><MdLocalShipping size={25}/>Verzend gegevens</h3>
+                                    <h3 className="shipping-details-container"><MdLocalShipping size={25}/>&nbsp;Verzend
+                                        gegevens</h3>
                                     <div className="info-container">
                                         <div><strong>Voornaam:</strong> {customer_firstname}</div>
                                         <div><strong>Achternaam:</strong> {customer_lastname}</div>
@@ -315,7 +326,7 @@ function CheckOut() {
                         <div className="second-box-container">
                             <div>
                                 <div>
-                                    <h3 className="order-header"><IoListCircle size={25}/>Order</h3>
+                                    <h3 className="order-header"><IoListCircle size={25}/>&nbsp;Bestelling</h3>
                                 </div>
                                 <div className="order-cart-summary">
                                     {cartItems.map((item, index) => {
@@ -332,13 +343,36 @@ function CheckOut() {
                                     </div>
                                 </div>
                                 <div className="check-cart-checkout">
-                                    <button
-                                        type="submit"
-                                        className="form-button"
-                                        onSubmit={sendOrder}
-                                    >
-                                        Order
-                                    </button>
+                                    Nog enkele wensen? of gewoon even groeten?
+                                    <form
+                                        className="form-cart-checkout"
+                                        onSubmit={sendOrder}>
+                                        <section>
+                                            <textarea
+                                                maxLength={240}
+                                                name="remark"
+                                                id="remark-field"
+                                                value={comment}
+                                                onChange={(e) => setComment(e.target.value)}
+                                                rows={6}
+                                                cols={40}
+                                            />
+                                        </section>
+
+                                        <button
+                                            type="submit"
+                                            className="form-button"
+                                        >
+                                            Order
+                                        </button>
+                                        {addSuccess === true &&
+                                            <div>
+                                                <h3><HiEmojiHappy size={30}/>Bedankt voor je bestelling </h3>
+                                                <p> Je bestelling wordt zo snel verwerkt. Je krijgt van ons een e-mail
+                                                    bericht</p>
+                                            </div>
+                                        }
+                                    </form>
 
                                 </div>
                             </div>

@@ -30,7 +30,7 @@ body {
     color: white;
 }
 
-.checkout-out-outer-container{
+.checkout-out-outer-container {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -123,6 +123,8 @@ body {
 .check-cart-checkout {
     display: flex;
     padding: 10px;
+    flex-wrap: wrap;
+    flex-direction: column;
 }
 
 .success-updated-shipping {
@@ -132,5 +134,10 @@ body {
 .block-shipping-address-success {
     padding-right: 10px;
     border-right: solid black;
+}
+
+.shipping-details-container {
+    display: flex;
+    align-items: center;
 }
 

@@ -47,7 +47,7 @@ function AdminProductOverview() {
                     }
                 }).then(deletedProduct);
         } catch (e) {
-            console.error(e)
+            console.error(e, 'er is iets misgegaan')
         }
     }
 

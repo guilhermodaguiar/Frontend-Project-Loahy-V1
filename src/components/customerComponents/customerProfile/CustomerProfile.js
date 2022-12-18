@@ -8,7 +8,6 @@ import WishList from "../../../pages/wishList/wishList/WishList";
 import CustomerUpdate from "../customerUpdate/CustomerUpdate";
 import CustomerNavBar from "../../../layout/customerNavBar/CustomerNavBar";
 import CustomerChangePassword from "../customerChangePassword/CustomerChangePassword";
-import CustomerHistory from "../customerHistory/CustomerHistory";
 
 
 function CustomerProfile() {
@@ -45,11 +44,6 @@ function CustomerProfile() {
                                 <CustomerUpdate/>
                             </section>
                         </div>
-
-                        <section id="customer_order_history">
-                            <CustomerHistory/>
-                        </section>
-
                     </div>
                     <section id="customer_wishlist">
                     <WishList/>

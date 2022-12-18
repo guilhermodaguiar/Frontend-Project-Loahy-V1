@@ -36,6 +36,7 @@ function AdminUser() {
     }, [token]);
 
     async function deleteUser(userEmail) {
+
         try {
             await axios.delete(`http://localhost:8080/users/delete/${userEmail}`,
                 {
@@ -69,7 +70,7 @@ function AdminUser() {
                             <section className="Admin_UsersComponent">
                                 <div>
                                     <h2 className="user-header-container">
-                                        Users&nbsp;<FaUserCircle/>
+                                        Klanten&nbsp;<FaUserCircle/>
                                     </h2>
                                 </div>
                                 <div className="table-content">
@@ -100,14 +101,14 @@ function AdminUser() {
                                                     </button>
                                                 </td>
                                                 <td>{user.userEmail}</td>
-                                                <td>{user.userFirstName}</td>
-                                                <td>{user.userLastName}</td>
-                                                <td>{user.userStreetName}</td>
-                                                <td>{user.userHouseNumber}</td>
-                                                <td>{user.userHouseNumberAddition}</td>
-                                                <td>{user.userCity}</td>
-                                                <td>{user.userZipcode}</td>
-                                                <td>{user.userPhone}</td>
+                                                <td>{user.customer.customerFirstName}</td>
+                                                <td>{user.customer.customerLastName}</td>
+                                                <td>{user.customer.customerStreetName}</td>
+                                                <td>{user.customer.customerHouseNumber}</td>
+                                                <td>{user.customer.customerHouseNumberAddition}</td>
+                                                <td>{user.customer.customerCity}</td>
+                                                <td>{user.customer.customerZipcode}</td>
+                                                <td>{user.customer.customerPhone}</td>
                                             </tr>
                                         })}
                                         </tbody>

@@ -16,10 +16,19 @@ const cartReducer = (state, action) => {
             newArr3.map((c) =>
                 c.item === action.item ? (c.qty = action.qty) : c.qty, 1)
             return newArr3;
+        case "CHANGE_CART_QTY2":
+            return {
+                ...state,
+                cart: state.cart.filter((c) =>
+                    c.id === action.payload.id ? (c.qty = action.payload.qty) : c.qty
+                ),
+            };
         default:
             throw new Error(`unknown action ${action.type}`);
     }
 };
+
+
 
 
 export const CartProvider = ({ children }) => {

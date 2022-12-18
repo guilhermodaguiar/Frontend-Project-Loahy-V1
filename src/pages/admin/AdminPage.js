@@ -10,6 +10,7 @@ import AdminProductOverview from "../../components/adminComponents/adminProductO
 import AdminUser from "../../components/adminComponents/adminUser/AdminUser";
 import AdminContactUs from "../../components/adminComponents/adminContactUs/AdminContactUs";
 import AdminCreateProduct from "../../components/adminComponents/adminCreateProduct/AdminCreateProduct";
+import AdminOrder from "../../components/adminComponents/adminOrder/AdminOrder";
 
 
 function AdminPage() {
@@ -55,9 +56,9 @@ function AdminPage() {
                         <section id="all-costumers">
                             <AdminUser/>
                         </section>
-                        {/*<section id="all-orders">*/}
-                        {/*    <AdminOrder/>*/}
-                        {/*</section>*/}
+                        <section id="all-orders">
+                            <AdminOrder/>
+                        </section>
                         <section id="all-contact-remarks">
                             <AdminContactUs/>
                         </section>

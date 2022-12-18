@@ -58,6 +58,7 @@ function AdminLogIn() {
                                             <input
                                                 className="admin-input"
                                                 type="email"
+                                                autoComplete="off"
                                                 id="email-field"
                                                 name="email"
                                                 value={email}
@@ -70,6 +71,7 @@ function AdminLogIn() {
                                             <input
                                                 className="admin-input"
                                                 type="password"
+                                                autoComplete="off"
                                                 id="password-field"
                                                 name="password"
                                                 value={password}

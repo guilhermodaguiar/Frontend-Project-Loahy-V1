@@ -43,18 +43,22 @@ function NavBar() {
                     <li>
                         <NavLink to="/shopping-cart" className="navbar-icon">
                             <div className="hover-icon">
-                                <HiOutlineShoppingCart
-                                    className="cart-icon"
-                                    size={22}/>
+                                <div>
+                                    <HiOutlineShoppingCart
+                                        className="cart-icon"
+                                        size={22}/>
+                                </div>
                                 <div className="dropdown-content">
                                     <div className="cart-component-background">
                                         <CartDropDown/>
                                     </div>
                                 </div>
                             </div>
-                            {cartItems.length > 0 && (<div className="rounded-circle">
-                                {cartItems.length}
-                            </div>)}
+                            <div>
+                                {cartItems.length > 0 && (<div className="rounded-circle">
+                                    {cartItems.length}
+                                </div>)}
+                            </div>
                         </NavLink>
                     </li>
                     <li>

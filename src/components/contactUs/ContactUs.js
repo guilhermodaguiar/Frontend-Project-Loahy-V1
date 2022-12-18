@@ -25,7 +25,7 @@ function ContactUs() {
         toggleLoading(true);
 
         try {
-            const response = await axios.post('http://localhost:8080/contact-remarks/post', {
+            const response = await axios.post('http://localhost:8080/contact-remarks/create', {
                 contactName: contactName,
                 contactEmail: contactEmail,
                 contactPhone: contactPhone,
@@ -58,7 +58,9 @@ function ContactUs() {
                                 <div>
                                     <h3>Stuur ons een bericht</h3>
                                     <p className="just-a-p">Stuur ons een bericht en we reageren binnen 24 uur</p>
-                                    <form className="container-contact-form" onSubmit={handleContactSubmit}>
+                                    <form
+                                        className="container-contact-form"
+                                        onSubmit={handleContactSubmit}>
                                         <div>
                                             <div className="contact-us-section-containers">
                                                 <section>
@@ -67,6 +69,7 @@ function ContactUs() {
                                                         className="input-containers"
                                                         type="text"
                                                         id="contact-fullName"
+                                                        autoComplete="off"
                                                         placeholder="Naam en achternaam"
                                                         value={contactName}
                                                         onChange={(e) => setContactName(e.target.value)}
@@ -77,6 +80,7 @@ function ContactUs() {
                                                     <div>E-mailadres:</div>
                                                     <input
                                                         className="input-containers"
+                                                        autoComplete="off"
                                                         type="email"
                                                         id="contact-email"
                                                         value={contactEmail}
@@ -90,6 +94,7 @@ function ContactUs() {
                                                     <div>Telefoonnummer:</div>
                                                     <input
                                                         className="input-containers"
+                                                        autoComplete="off"
                                                         type="tel"
                                                         id="contact-phone"
                                                         value={contactPhone}
@@ -103,6 +108,7 @@ function ContactUs() {
                                                     <input
                                                         className="input-containers"
                                                         type="text"
+                                                        autoComplete="off"
                                                         id="contact-fullName"
                                                         placeholder="Optioneel"
                                                         value={contactOrg}
@@ -117,6 +123,7 @@ function ContactUs() {
                                                 name="remark"
                                                 id="remark-field"
                                                 placeholder="Type hier je bericht"
+                                                autoComplete="off"
                                                 value={remark}
                                                 onChange={(e) => setRemark(e.target.value)}
                                                 rows={7}

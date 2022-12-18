@@ -8,8 +8,6 @@ import {useCart} from "../../context/CartContext";
 
 function  CartComponent({item, index, handleRemove}) {
     const cartItems = useCart();
-    const [quantity, setQuantity] = useState(1);
-
 
     return (
         <>
@@ -53,20 +51,6 @@ function  CartComponent({item, index, handleRemove}) {
                                             </div>
                                             <div className="cart-container-outer">
                                                 <div className="cart-container-inner">
-                                                    <input
-                                                        value={quantity}
-                                                        onChange={(e) => setQuantity(e.target.value)}
-                                                        type="number"
-                                                        min="1"
-                                                        max="10"
-                                                        id="item-quantity"
-                                                        name="items"
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="cart-container-outer">
-                                                <div className="cart-container-inner">
-                                                    {formatCurrency(item.productPrice * quantity)}
                                                 </div>
                                             </div>
                                         </div>
