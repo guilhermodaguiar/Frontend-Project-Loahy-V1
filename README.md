@@ -78,11 +78,11 @@ Een eigen **account** kan gemaakt worden om producten toe te voegen aan een *wis
 
 >#### ADMIN_ROLE
 > - gebruikersnaam: admin@test.nl
-> - wachtwoord: admin1234
+> - wachtwoord: admin123
 >
 > #### USER_ROLE
 > - gebruikersnaam: user@test.nl
-> - wachtwoord: test1234
+> - wachtwoord: test123
 
 
 ###### Eindopdracht Full-Stack Developer NOVI College | Guilhermo d'Aguiar | Copyright © 2022 Loahy | Alle Rechten Voorbehouden.
