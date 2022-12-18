@@ -3,15 +3,17 @@ import './AdminOrder.css';
 import React, {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {AuthContext} from "../../../context/AuthContext";
-import {IoCloseCircleSharp, IoCloseSharp} from "react-icons/io5";
+import {IoCloseSharp} from "react-icons/io5";
 import {FaRegListAlt} from "react-icons/fa";
 import {useHistory} from "react-router-dom";
+import {BsFillPatchCheckFill} from "react-icons/bs";
 
 function AdminOrder() {
     const history = useHistory();
     const token = localStorage.getItem('token');
     const {user} = useContext(AuthContext);
     const [orders, setOrders] = useState([]);
+    const [addSuccess, toggleAddSuccess] = useState(false);
 
 
     useEffect(() => {
@@ -42,15 +44,14 @@ function AdminOrder() {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`,
                     }
-                }).then(deletedOrder);
+                });
+            toggleAddSuccess(true);
+            history.push('/admin/profile/#admin_product_overview');
         } catch (e) {
             console.error(e, 'er is iets misgegaan')
         }
     }
 
-    function deletedOrder() {
-        history.push('/admin/profile/#admin_product_overview');
-    }
 
 
     return (
@@ -92,6 +93,7 @@ function AdminOrder() {
                                                 onClick={() => deleteOrder(order.id)}
                                             />
                                         </button>
+                                        {addSuccess === true && <p><BsFillPatchCheckFill size={25}/> Gelukt met het verwijderen, refresh pagina</p>}
                                     </td>
                                     <td className="client_first-name">{order.customer.customerFirstName}</td>
                                     <td className="client-last-name">{order.customer.customerLastName}</td>

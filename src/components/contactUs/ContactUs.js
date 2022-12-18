@@ -16,7 +16,7 @@ function ContactUs() {
 
     //state voor functionaliteiten
     const [loading, toggleLoading] = useState(false);
-    const [addSucces, toggleAddSucces] = useState(false);
+    const [addSuccess, toggleAddSuccess] = useState(false);
     const [contactInput, setContactInput] = useState([]);
 
 
@@ -33,7 +33,7 @@ function ContactUs() {
                 remark: remark,
             });
             setContactInput(response.data);
-            toggleAddSucces(true);
+            toggleAddSuccess(true);
 
         } catch (e) {
             console.error(e, "er is iets misgegaan");
@@ -138,7 +138,7 @@ function ContactUs() {
                                             disabled={loading}
                                         ><FiSend/>&nbsp;verzend
                                         </button>
-                                        {addSucces === true &&
+                                        {addSuccess === true &&
                                             <p>Bedankt voor je bericht! Wij reageren binnen 24 uur </p>}
                                     </form>
                                 </div>
